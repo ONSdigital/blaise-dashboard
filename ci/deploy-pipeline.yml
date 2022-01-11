@@ -1,0 +1,17 @@
+resources:
+  - name: dashboard-git
+    type: git
+    source: {uri: "https://github.com/ONSdigital/blaise-dashboard.git"}
+
+jobs:
+  - name: deploy
+    plan:
+      - get: dashboard-git
+        trigger: true
+      - task: build
+        file: dashboard-git/ci/tasks/build/task.yml
+      - task: deploy
+        file: dashboard-git/ci/tasks/deploy/task.yml
+        params:
+          GOOGLE_CREDENTIALS: ((gcp.service_account_json))
+          GCP_PROJECT: ((gcp_project))
