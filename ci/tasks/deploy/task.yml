@@ -9,7 +9,7 @@ inputs:
   - name: dashboard
 
 run:
-  path: ./dashboard-git/ci/tasks/deploy/task.sh
+  path: ./blaise-dashboard-git/ci/tasks/deploy/task.sh
 params:
   GOOGLE_CREDENTIALS:
   GCP_PROJECT:

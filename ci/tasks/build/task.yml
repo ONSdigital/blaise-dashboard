@@ -11,4 +11,4 @@ outputs:
   - name: dashboard
 
 run:
-  path: ./dashboard-git/ci/tasks/build/task.sh
+  path: ./blaise-dashboard-git/ci/tasks/build/task.sh
