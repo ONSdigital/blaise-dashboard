@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "client": "react-scripts start"
+    "client": "react-scripts start",
+     "gcp-build": "react-scripts build && tsc --project tsconfig.server.json"
   },
   "dependencies": {
     "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#v0.9.5",
