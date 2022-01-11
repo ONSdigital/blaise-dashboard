@@ -1,0 +1,15 @@
+---
+platform: linux
+image_resource:
+  type: docker-image
+  source:
+    repository: gcr.io/cloud-builders/gcloud-slim
+inputs:
+  - name: dashboard-git
+  - name: dashboard
+
+run:
+  path: ./dashboard-git/ci/tasks/deploy/task.sh
+params:
+  GOOGLE_CREDENTIALS:
+  GCP_PROJECT:
