@@ -7,6 +7,7 @@
     "server": "tsc --project tsconfig.server.json && node ./dist/index.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "lint-fix": "node_modules/.bin/eslint . --fix",
+    "test": "jest --coverage --watchAll=false --detectOpenHandles --config=jest.config.js",
     "gcp-build": "react-scripts build && tsc --project tsconfig.server.json"
   },
   "pre-commit": [
@@ -23,10 +24,17 @@
     "typescript": "^4.5.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.8",
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/jest": "^27.4.0",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
+    "@types/supertest": "^2.0.11",
+    "babel-jest": "^27.4.6",
     "concurrently": "^7.0.0",
-    "eslint": "^8.6.0"
+    "eslint": "^8.6.0",
+    "supertest": "^6.2.1"
   },
   "browserslist": {
     "production": [
