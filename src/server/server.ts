@@ -1,9 +1,9 @@
-import express, {Request, Response} from "express";
+import express, { Request, Response, Express } from "express";
 import path from "path";
 import ejs from "ejs";
 import HealthCheckHandler from "./handlers/healthCheckHandler";
 
-function NewServer(): any {
+function NewServer(): Express {
     const server = express();
     const buildFolder = "../build";
     server.set("views", path.join(__dirname, buildFolder));
