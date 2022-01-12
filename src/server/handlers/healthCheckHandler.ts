@@ -8,3 +8,4 @@ export default function HealthCheckHandler(): Router {
 
 export async function healthCheck(req: Request, res: Response): Promise<Response> {
     return res.status(200).json({healthy: true});
+}

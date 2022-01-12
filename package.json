@@ -5,6 +5,7 @@
     "lint-fix": "node_modules/.bin/eslint . --fix"
   },
   "dependencies": {
+    "@types/ejs": "^3.1.0",
     "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#v0.9.5",
     "ejs": "^3.1.6",
     "react": "^17.0.2",
