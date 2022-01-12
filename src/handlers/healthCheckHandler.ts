@@ -3,7 +3,7 @@ import express, {Request, Response, Router} from "express";
 export default function HealthCheckHandler(): Router {
     const router = express.Router();
 
-    return router.get("/bus-ui/:version/health", healthCheck);
+    return router.get("/dashboard-ui/:version/health", healthCheck);
 }
 
 export async function healthCheck(req: Request, res: Response): Promise<Response> {
