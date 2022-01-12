@@ -29,8 +29,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-# other stuff and things
-.eslintrc.json
-
 # IDE Metadata
 .idea/
