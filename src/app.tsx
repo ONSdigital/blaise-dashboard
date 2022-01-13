@@ -4,7 +4,7 @@ import {Footer, Header, BetaBanner, NotProductionWarning} from "blaise-design-sy
 import "./style.css";
 
 const divStyle = {
-    minHeight: "calc(67vh)"
+    minHeight: "calc(67vh)",
 };
 
 function App(): ReactElement {
@@ -15,9 +15,9 @@ function App(): ReactElement {
                 (window.location.hostname.includes("dev")) && <NotProductionWarning/>
             }
             <BetaBanner/>
-            <Header title={"This is your dashboard!"}/>
+            <Header title={"TO Dashboard"}/>
             <div style={divStyle} className="page__container container">
-                <main id="main-content" className="page__main">
+                <main id="main-content" className="page__main u-mt-no">
                 </main>
             </div>
             <Footer/>
