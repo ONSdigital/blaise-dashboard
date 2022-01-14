@@ -1,7 +1,11 @@
+import BlaiseApiClient from "blaise-api-node-client";
+import { GetConfigFromEnv } from "./config";
 import NewServer from "./server";
 
 const port: string = process.env.PORT || "5000";
-const app = NewServer();
+const config = GetConfigFromEnv();
+const blaiseApiClient = new BlaiseApiClient(config.BlaiseApiUrl);
+const app = NewServer(blaiseApiClient, config);
 
 app.listen(port);
 
