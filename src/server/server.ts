@@ -2,6 +2,7 @@ import express, { Request, Response, Express } from "express";
 import path from "path";
 import ejs from "ejs";
 import HealthCheckHandler from "./handlers/healthCheckHandler";
+import InstrumentListHandler from "./handlers/instrumentListHandler";
 
 function NewServer(): Express {
     const server = express();
@@ -15,6 +16,7 @@ function NewServer(): Express {
 
     //define handlers
     server.use("/", HealthCheckHandler());
+    server.use("/", InstrumentListHandler());
 
     //define entry point
     server.get("*", function (req: Request, res: Response) {

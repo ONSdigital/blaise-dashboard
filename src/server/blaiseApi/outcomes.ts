@@ -36,7 +36,6 @@ const completedOutcomes: Outcome[] = [
     Outcome.QuestionProblem
 ]
 
-
 export function isCompleted(outcome: Outcome): Boolean {
     return completedOutcomes.includes(outcome)
 }

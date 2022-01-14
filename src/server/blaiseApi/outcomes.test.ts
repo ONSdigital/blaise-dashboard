@@ -50,3 +50,4 @@ describe("Test the outcome codes are completed codes", () => {
         expect(isCompleted(outcome)).toBeFalsy();
     });
 });
+
