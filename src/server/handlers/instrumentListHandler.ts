@@ -1,6 +1,7 @@
 import express, { Request, Response, Router } from "express";
 import BlaiseApiClient from "blaise-api-node-client";
 import {Config} from "../config";
+import {getInstruments} from "../blaiseApi/instrument"
 
 export default function NewInstrumentListHandler(blaiseApiClient: BlaiseApiClient, config: Config): Router {
     const router = express.Router();
@@ -21,7 +22,8 @@ export class InstrumentListHandler {
 
     async GetListOfInstruments(req: Request, res: Response): Promise<Response> {
         try {
-            let instruments = await this.blaiseApiClient.getInstruments(this.config.ServerPark)
+            let instruments = await getInstruments(this.blaiseApiClient, this.config)
+
             return res.status(200).json(instruments);
             } catch (error: any) {
           console.error(`Response: ${error}`);
