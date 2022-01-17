@@ -25,7 +25,7 @@ export class InstrumentListHandler {
             let instruments = await getInstruments(this.blaiseApiClient, this.config)
 
             return res.status(200).json(instruments);
-            } catch (error: any) {
+        } catch (error: any) {
           console.error(`Response: ${error}`);
           return res.status(500).json(`Failed to get instruments installed on server park ${this.config.ServerPark}`);
         }

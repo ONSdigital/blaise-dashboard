@@ -12,6 +12,10 @@ const server = NewServer(blaiseApiClient, config);
 const request = supertest(server);
 
 
+jest.mock("../blaiseAPI/instrument");
+const getInstrumentsMock = getInstruments as jest.MockedFunction<typeof getInstruments>
+
+
 describe("BlaiseAPI Get all instruments from API", () => {
     afterEach(() => {
             getInstrumentsMock.mockClear();
