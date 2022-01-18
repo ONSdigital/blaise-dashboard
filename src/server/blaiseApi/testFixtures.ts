@@ -20,7 +20,7 @@ export const mockInstrumentList = [
             fieldPeriod: "210122"
         }]
 
-export const mockCaselist = [
+export const mockCaseList = [
             {
                 primaryKey: "1000001" ,
                 outcome: Outcome.Completed

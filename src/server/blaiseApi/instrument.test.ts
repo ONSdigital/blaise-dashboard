@@ -1,7 +1,7 @@
 import {filterInstruments, getInstruments} from "./instrument"
 import BlaiseApiClient from "blaise-api-node-client";
 import {GetConfigFromEnv} from "../config";
-import {mockInstrumentList} from "./fixtures.test";
+import {mockInstrumentList} from "./testFixtures";
 
 jest.mock("blaise-api-node-client")
 const config = GetConfigFromEnv();

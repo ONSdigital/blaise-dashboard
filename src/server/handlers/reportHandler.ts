@@ -29,7 +29,7 @@ export class CaseReportHandler {
             return res.status(200).json(caseCompletionReport);
         } catch (error: any) {
             console.error(`Response: ${error}`);
-            return res.status(500).json(`Failed to get instruments installed on server park ${this.config.ServerPark}`);
+            return res.status(500).json(`Failed to get case report for instrument ${req.params.instrumentName}`);
         }
     }
 }

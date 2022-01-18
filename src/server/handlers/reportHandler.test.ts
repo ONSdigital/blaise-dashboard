@@ -1,40 +1,47 @@
 import NewServer from "../server";
 import supertest, {Response} from "supertest";
 import BlaiseApiClient from "blaise-api-node-client";
-import {getInstruments} from "../blaiseApi/instrument";
 import {GetConfigFromEnv} from "../config";
+import {mockCaseList} from "../blaiseApi/testFixtures";
 
+
+jest.mock("blaise-api-node-client")
 const config = GetConfigFromEnv();
+
+const mockGetCaseStatus = jest.fn()
+BlaiseApiClient.prototype.getCaseStatus = mockGetCaseStatus
 const blaiseApiClient = new BlaiseApiClient(config.BlaiseApiUrl);
 
-const {InstrumentListMockObject} = jest.requireActual("blaise-api-node-client");
 const server = NewServer(blaiseApiClient, config);
 const request = supertest(server);
 
 
-jest.mock("../blaiseAPI/instrument");
-const getInstrumentsMock = getInstruments as jest.MockedFunction<typeof getInstruments>
+describe("Build a case report", () => {
+    beforeEach(() => {
+        mockGetCaseStatus.mockClear()
+    })
 
+    it("should return a 200 status and a case report", async () => {
+        mockGetCaseStatus.mockImplementation(async () => {
+            return Promise.resolve(mockCaseList)
+        })
 
-describe("BlaiseAPI Get all instruments from API", () => {
-    afterEach(() => {
-            getInstrumentsMock.mockClear();
-    });
-
-    it("should return a 200 status and a json list of 3 items when API returns a 3 item list", async () => {
-        getInstrumentsMock.mockReturnValue(InstrumentListMockObject);
-
-        const response: Response = await request.get("/api/instruments");
+        const response: Response = await request.get("/api/reports/cases/completions/dst2101a");
 
         expect(response.status).toEqual(200);
-        expect(response.body).toStrictEqual(InstrumentListMockObject);
-        expect(response.body.length).toStrictEqual(3);
+        expect(response.body).toStrictEqual({
+            Total: 7,
+            Complete: 3,
+            NotComplete: 4,
+            CompletePercentage: 42.86
+        })
     });
 
     it("should return a 500 status direct from the API", async () => {
-        getInstrumentsMock.mockRejectedValue(null)
-
-        const response: Response = await request.get("/api/instruments");
+        mockGetCaseStatus.mockImplementation(async () => {
+            return Promise.reject()
+        })
+        const response: Response = await request.get("/api/reports/cases/completions/dst2101a");
 
         expect(response.status).toEqual(500);
     });
