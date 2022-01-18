@@ -5,6 +5,7 @@ import HealthCheckHandler from "./handlers/healthCheckHandler";
 import InstrumentListHandler from "./handlers/instrumentListHandler";
 import { Config } from "./config";
 import BlaiseApiClient from "blaise-api-node-client";
+import caseReportHandler from "./handlers/reportHandler";
 
 function NewServer(blaiseApiClient: BlaiseApiClient, config: Config): Express {
     const server = express();
@@ -19,6 +20,7 @@ function NewServer(blaiseApiClient: BlaiseApiClient, config: Config): Express {
     //define handlers
     server.use("/", HealthCheckHandler());
     server.use("/", InstrumentListHandler(blaiseApiClient, config));
+    server.use("/", caseReportHandler(blaiseApiClient, config));
 
     //define entry point
     server.get("*", function (req: Request, res: Response) {
