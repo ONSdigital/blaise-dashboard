@@ -1,4 +1,3 @@
-
 import dotenv from "dotenv";
 export interface Config {
     BlaiseApiUrl: string,

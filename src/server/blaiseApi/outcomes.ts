@@ -36,6 +36,17 @@ const completedOutcomes: Outcome[] = [
     Outcome.QuestionProblem
 ]
 
+const notCompletedOutcomes: Outcome[] = [
+    Outcome.None,
+    Outcome.Partial,
+    Outcome.AppointmentMade,
+    Outcome.NonContact
+]
+
 export function isCompleted(outcome: Outcome): Boolean {
     return completedOutcomes.includes(outcome)
+}
+
+export function isNotCompleted(outcome: Outcome): Boolean {
+    return notCompletedOutcomes.includes(outcome)
 }
