@@ -30,6 +30,9 @@ export function calculateCaseTotals(cases: CaseStatus[]): CaseTotals {
 }
 
 export function calculatePercentComplete(caseTotals: CaseTotals): number {
+    if (caseTotals.Total === 0) {
+        return 0.00
+    }
     const percentCompleted = caseTotals.Complete / caseTotals.Total * 100
     return round2DP(percentCompleted)
 }

@@ -22,7 +22,7 @@ export class InstrumentListHandler {
 
     async GetListOfInstruments(req: Request, res: Response): Promise<Response> {
         try {
-            let instruments = await getInstruments(this.blaiseApiClient, this.config)
+            let instruments = await getInstruments(this.blaiseApiClient, this.config, "OPN")
 
             return res.status(200).json(instruments);
         } catch (error: any) {

@@ -1,7 +1,17 @@
-import React, { ReactElement} from "react";
+import React, {ReactElement, useState, useEffect, Component} from "react";
+import {Instrument} from "blaise-api-node-client";
 //import { Switch, Route, Link } from "react-router-dom";
-import {Footer, Header, BetaBanner, NotProductionWarning} from "blaise-design-system-react-components";
+import {
+    Footer,
+    Header,
+    BetaBanner,
+    NotProductionWarning,
+    ONSLoadingPanel,
+    ONSPanel
+} from "blaise-design-system-react-components";
 import "./style.css";
+import {getInstruments} from "./client/instruments";
+import InstrumentCaseReportTable from "./components/instrumentCaseReportTable";
 
 const divStyle = {
     minHeight: "calc(67vh)",

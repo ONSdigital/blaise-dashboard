@@ -10,13 +10,15 @@
     "test": "jest --coverage --watchAll=false --detectOpenHandles --config=jest.config.js",
     "gcp-build": "react-scripts build && tsc --project tsconfig.server.json"
   },
+  "proxy": "http://localhost:5000",
   "pre-commit": [
     "lint-fix"
   ],
   "dependencies": {
     "@types/ejs": "^3.1.0",
+    "axios": "^0.25.0",
     "blaise-api-node-client": "https://github.com/ONSdigital/blaise-api-node-client.git",
-    "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#v0.9.5",
+    "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#v0.9.7",
     "ejs": "^3.1.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
