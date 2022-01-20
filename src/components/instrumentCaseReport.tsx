@@ -44,7 +44,7 @@ export default class InstrumentCaseReport extends Component<InstrumentCaseReport
                 <td className="table__cell" data-testid={`instrument-case-report-complete-${this.props.instrumentName}`}>
                     {this.props.caseCompletionReport.Complete} ({this.props.caseCompletionReport.CompletePercentage}%)
                 </td>
-                <td className="table__cell" data-testid={"instrument-case-percentage"}>
+                <td className="table__cell" data-testid={`instrument-case-report-complete-percentage-${this.props.instrumentName}`}>
                     <progress id="file"
                               value={this.props.caseCompletionReport.CompletePercentage}
                               max="100"

@@ -79,4 +79,16 @@ describe("Test that the backend calculations are correct", () => {
 
         expect(calculatePercentComplete(testData)).toEqual(58.33)
     });
+
+   it("calculates shows 0% when there are no cases", () => {
+        // Unknown status codes count as completed
+        const testData = {
+        Total: 0,
+        Complete: 0,
+        NotComplete: 0,
+    }
+
+        expect(calculatePercentComplete(testData)).toEqual(0.00)
+    });
+
 })
