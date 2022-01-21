@@ -1,5 +1,5 @@
 import {buildCaseCompletionReport} from "./caseCompletionReport";
-import {mockCaseList} from "./testFixtures"
+import {mockCaseList} from "./testFixtures";
 
 describe("build a case report", () => {
     it("should return a case report with information from all cases in that instrument", () => {
@@ -9,6 +9,6 @@ describe("build a case report", () => {
             Complete: 3,
             NotComplete: 4,
             CompletePercentage: 42.86
-        })
+        });
     });
 });

@@ -12,9 +12,9 @@ describe("Test that the backend calculations are correct", () => {
                 {
                     primaryKey: "987654321",
                     outcome: Outcome.Completed
-                }]
+                }];
 
-            expect(calculateCaseTotals(testData).Total).toBe(2)
+            expect(calculateCaseTotals(testData).Total).toBe(2);
         });
     });
 
@@ -49,13 +49,13 @@ describe("Test that the backend calculations are correct", () => {
                 primaryKey: "1000007" ,
                 outcome: 999 // Unkown status code
             },
-        ]
+        ];
 
-        const testInfo = calculateCaseTotals(testData)
+        const testInfo = calculateCaseTotals(testData);
 
-        expect(testInfo.Total).toBe(7)
-        expect(testInfo.Complete).toBe(3)
-        expect(testInfo.NotComplete).toBe(4)
+        expect(testInfo.Total).toBe(7);
+        expect(testInfo.Complete).toBe(3);
+        expect(testInfo.NotComplete).toBe(4);
     });
 
     it("calculates the correct percentage of completed cases to 2dp", () => {
@@ -64,9 +64,9 @@ describe("Test that the backend calculations are correct", () => {
         Total: 10,
         Complete: 7,
         NotComplete: 3,
-    }
+    };
 
-        expect(calculatePercentComplete(testData)).toEqual(70.00)
+        expect(calculatePercentComplete(testData)).toEqual(70.00);
     });
 
         it("calculates the correct percentage of completed cases to 2dp when result is not an integer", () => {
@@ -75,9 +75,9 @@ describe("Test that the backend calculations are correct", () => {
         Total: 12,
         Complete: 7,
         NotComplete: 5,
-    }
+    };
 
-        expect(calculatePercentComplete(testData)).toEqual(58.33)
+        expect(calculatePercentComplete(testData)).toEqual(58.33);
     });
 
    it("calculates shows 0% when there are no cases", () => {
@@ -86,9 +86,9 @@ describe("Test that the backend calculations are correct", () => {
         Total: 0,
         Complete: 0,
         NotComplete: 0,
-    }
+    };
 
-        expect(calculatePercentComplete(testData)).toEqual(0.00)
+        expect(calculatePercentComplete(testData)).toEqual(0.00);
     });
 
-})
+});

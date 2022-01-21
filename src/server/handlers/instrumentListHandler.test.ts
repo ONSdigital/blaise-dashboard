@@ -13,7 +13,7 @@ const request = supertest(server);
 
 
 jest.mock("../blaiseAPI/instrument");
-const getInstrumentsMock = getInstruments as jest.MockedFunction<typeof getInstruments>
+const getInstrumentsMock = getInstruments as jest.MockedFunction<typeof getInstruments>;
 
 
 describe("BlaiseAPI Get all instruments from API", () => {
@@ -32,7 +32,7 @@ describe("BlaiseAPI Get all instruments from API", () => {
     });
 
     it("should return a 500 status direct from the API", async () => {
-        getInstrumentsMock.mockRejectedValue(null)
+        getInstrumentsMock.mockRejectedValue(null);
 
         const response: Response = await request.get("/api/instruments");
 

@@ -34,19 +34,19 @@ const completedOutcomes: Outcome[] = [
     Outcome.AssistanceRequested,
     Outcome.RequestForContext,
     Outcome.QuestionProblem
-]
+];
 
 const notCompletedOutcomes: Outcome[] = [
     Outcome.None,
     Outcome.Partial,
     Outcome.AppointmentMade,
     Outcome.NonContact
-]
+];
 
-export function isCompleted(outcome: Outcome): Boolean {
-    return completedOutcomes.includes(outcome)
+export function isCompleted(outcome: Outcome): boolean {
+    return completedOutcomes.includes(outcome);
 }
 
-export function isNotCompleted(outcome: Outcome): Boolean {
-    return notCompletedOutcomes.includes(outcome)
+export function isNotCompleted(outcome: Outcome): boolean {
+    return notCompletedOutcomes.includes(outcome);
 }

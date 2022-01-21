@@ -16,27 +16,27 @@ export function calculateCaseTotals(cases: CaseStatus[]): CaseTotals {
         Total: 0,
         Complete: 0,
         NotComplete: 0,
-    }
+    };
 
     for (const eachCase of cases) {
-        caseTotals.Total++
+        caseTotals.Total++;
         if (isNotCompleted(eachCase.outcome)) {
-            caseTotals.NotComplete++
+            caseTotals.NotComplete++;
         } else {
-            caseTotals.Complete++
+            caseTotals.Complete++;
         }
     }
-    return caseTotals
+    return caseTotals;
 }
 
 export function calculatePercentComplete(caseTotals: CaseTotals): number {
     if (caseTotals.Total === 0) {
-        return 0.00
+        return 0.00;
     }
-    const percentCompleted = caseTotals.Complete / caseTotals.Total * 100
-    return round2DP(percentCompleted)
+    const percentCompleted = caseTotals.Complete / caseTotals.Total * 100;
+    return round2DP(percentCompleted);
 }
 
 function round2DP(numberToRound: number): number {
-     return Math.round((numberToRound + Number.EPSILON) * 100) / 100
+     return Math.round((numberToRound + Number.EPSILON) * 100) / 100;
 }
