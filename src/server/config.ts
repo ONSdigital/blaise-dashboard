@@ -9,7 +9,7 @@ export function GetConfigFromEnv(): Config {
         dotenv.config({ path: __dirname + "/../.env" });
     }
 
-    let { BLAISE_API_URL, SERVER_PARK} = process.env;
+    let { BLAISE_API_URL, SERVER_PARK } = process.env;
 
     if (BLAISE_API_URL === undefined) {
         console.error("BLAISE_API_URL environment variable has not been set");
@@ -22,7 +22,14 @@ export function GetConfigFromEnv(): Config {
     }
 
     return {
-        BlaiseApiUrl: BLAISE_API_URL,
+        BlaiseApiUrl: fixProtocol(BLAISE_API_URL),
         ServerPark: SERVER_PARK
     };
+}
+
+function fixProtocol(blaiseApiUrl: string): string {
+    if (!blaiseApiUrl.includes("://")) {
+        blaiseApiUrl = `http://${blaiseApiUrl}`;
+    }
+    return blaiseApiUrl;
 }
