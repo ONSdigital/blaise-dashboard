@@ -22,9 +22,9 @@ export class CaseReportHandler {
 
     async GetCaseReport(req: Request, res: Response): Promise<Response> {
         try {
-            let caseStatusList = await this.blaiseApiClient.getCaseStatus(this.config.ServerPark, req.params.instrumentName);
+            const caseStatusList = await this.blaiseApiClient.getCaseStatus(this.config.ServerPark, req.params.instrumentName);
 
-            let caseCompletionReport = buildCaseCompletionReport(caseStatusList);
+            const caseCompletionReport = buildCaseCompletionReport(caseStatusList);
 
             return res.status(200).json(caseCompletionReport);
         } catch (error: any) {

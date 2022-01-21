@@ -6,11 +6,11 @@ export type CaseCompletionReport = CaseTotals & CaseCalculations
 
 export function buildCaseCompletionReport(cases: CaseStatus[]): CaseCompletionReport {
     const caseTotals = calculateCaseTotals(cases);
-    const caseCompletePercentage = calculatePercentComplete(caseTotals)
+    const caseCompletePercentage = calculatePercentComplete(caseTotals);
     return {
         Total: caseTotals.Total,
         Complete: caseTotals.Complete,
         NotComplete: caseTotals.NotComplete,
         CompletePercentage: caseCompletePercentage
-    }
+    };
 }

@@ -27,7 +27,7 @@ export default class InstrumentCaseReport extends Component<InstrumentCaseReport
 
     render(): ReactElement {
         if (!this.state.loaded) {
-            return <tr><td><ONSLoadingPanel message={"Getting cases"}/></td></tr>
+            return <tr><td><ONSLoadingPanel message={"Getting cases"}/></td></tr>;
         }
 
         // | questionnaire | cases | completed   | progress  |

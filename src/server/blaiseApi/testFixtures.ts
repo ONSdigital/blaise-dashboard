@@ -18,7 +18,7 @@ export const mockInstrumentList = [
             installDate: "210122",
             serverParkName: "gusty",
             fieldPeriod: "210122"
-        }]
+        }];
 
 export const mockCaseList = [
             {
@@ -48,4 +48,4 @@ export const mockCaseList = [
             {
                 primaryKey: "1000007" ,
                 outcome: 999
-            }]
+            }];
