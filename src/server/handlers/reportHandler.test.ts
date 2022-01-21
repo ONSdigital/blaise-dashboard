@@ -1,18 +1,20 @@
 import NewServer from "../server";
-import supertest, {Response} from "supertest";
+import supertest, { Response } from "supertest";
 import BlaiseApiClient from "blaise-api-node-client";
-import {GetConfigFromEnv} from "../config";
-import {mockCaseList} from "../blaiseApi/testFixtures";
+import { GetConfigFromEnv } from "../config";
+import { mockCaseList } from "../blaiseApi/testFixtures";
+import NodeCache from "node-cache";
 
 
 jest.mock("blaise-api-node-client");
 const config = GetConfigFromEnv();
+const cache = new NodeCache({ stdTTL: 60 });
 
 const mockGetCaseStatus = jest.fn();
 BlaiseApiClient.prototype.getCaseStatus = mockGetCaseStatus;
 const blaiseApiClient = new BlaiseApiClient(config.BlaiseApiUrl);
 
-const server = NewServer(blaiseApiClient, config);
+const server = NewServer(blaiseApiClient, cache, config);
 const request = supertest(server);
 
 
