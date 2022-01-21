@@ -12,7 +12,7 @@ const request = supertest(server);
 
 
 import { getInstruments } from "../blaiseApi/instrument";
-jest.mock("../blaiseAPI/instrument");
+jest.mock("../blaiseApi/instrument");
 const getInstrumentsMock = getInstruments as jest.MockedFunction<typeof getInstruments>;
 
 
