@@ -1,1 +1,2 @@
-export const refreshInterval = 60 * 1000; // 60 seconds
+export const refreshInterval = 10 * 1000; // 10 seconds
+export const cacheDuration = 60; // 60 seconds

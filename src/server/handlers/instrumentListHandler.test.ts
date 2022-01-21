@@ -2,12 +2,15 @@ import NewServer from "../server";
 import supertest, { Response } from "supertest";
 import BlaiseApiClient from "blaise-api-node-client";
 import { GetConfigFromEnv } from "../config";
+import NodeCache from "node-cache";
 
 const config = GetConfigFromEnv();
+const cache = new NodeCache({ stdTTL: 60 });
+
 const blaiseApiClient = new BlaiseApiClient(config.BlaiseApiUrl);
 
 const { InstrumentListMockObject } = jest.requireActual("blaise-api-node-client");
-const server = NewServer(blaiseApiClient, config);
+const server = NewServer(blaiseApiClient, cache, config);
 const request = supertest(server);
 
 
