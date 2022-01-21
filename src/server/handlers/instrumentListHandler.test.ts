@@ -1,24 +1,24 @@
 import NewServer from "../server";
-import supertest, {Response} from "supertest";
+import supertest, { Response } from "supertest";
 import BlaiseApiClient from "blaise-api-node-client";
-import {getInstruments} from "../blaiseApi/instrument";
-import {GetConfigFromEnv} from "../config";
+import { GetConfigFromEnv } from "../config";
 
 const config = GetConfigFromEnv();
 const blaiseApiClient = new BlaiseApiClient(config.BlaiseApiUrl);
 
-const {InstrumentListMockObject} = jest.requireActual("blaise-api-node-client");
+const { InstrumentListMockObject } = jest.requireActual("blaise-api-node-client");
 const server = NewServer(blaiseApiClient, config);
 const request = supertest(server);
 
 
+import { getInstruments } from "../blaiseApi/instrument";
 jest.mock("../blaiseAPI/instrument");
 const getInstrumentsMock = getInstruments as jest.MockedFunction<typeof getInstruments>;
 
 
 describe("BlaiseAPI Get all instruments from API", () => {
     afterEach(() => {
-            getInstrumentsMock.mockClear();
+        getInstrumentsMock.mockClear();
     });
 
     it("should return a 200 status and a json list of 3 items when API returns a 3 item list", async () => {
