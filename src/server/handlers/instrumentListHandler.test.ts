@@ -22,6 +22,7 @@ const getInstrumentsMock = getInstruments as jest.MockedFunction<typeof getInstr
 describe("BlaiseAPI Get all instruments from API", () => {
     afterEach(() => {
         getInstrumentsMock.mockClear();
+        cache.flushAll();
     });
 
     it("should return a 200 status and a json list of 3 items when API returns a 3 item list", async () => {

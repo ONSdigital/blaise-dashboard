@@ -34,6 +34,10 @@ describe("Test that TLA filter returns surveys of interest", () => {
 });
 
 describe("getInstruments", () => {
+    afterEach(() => {
+        cache.flushAll();
+    });
+
     describe("when an instrumentTLA is provided", () => {
         it("returns a filtered list of instruments", async () => {
             const instruments = await getInstruments(blaiseApiClient, cache, config, "OPN");
