@@ -21,6 +21,7 @@ const request = supertest(server);
 describe("Build a case report", () => {
     beforeEach(() => {
         mockGetCaseStatus.mockClear();
+        cache.flushAll();
     });
 
     it("should return a 200 status and a case report", async () => {
