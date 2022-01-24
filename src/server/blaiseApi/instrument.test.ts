@@ -8,10 +8,8 @@ jest.mock("blaise-api-node-client");
 const config = GetConfigFromEnv();
 const cache = new NodeCache({ stdTTL: 60 });
 
-BlaiseApiClient.prototype.getInstruments = jest.fn().mockImplementation(async () => {
-    return Promise.resolve(mockInstrumentList);
-});
-
+const getInsturmentsMock = jest.fn();
+BlaiseApiClient.prototype.getInstruments = getInsturmentsMock;
 const blaiseApiClient = new BlaiseApiClient(config.BlaiseApiUrl);
 
 describe("Test that TLA filter returns surveys of interest", () => {
@@ -34,8 +32,15 @@ describe("Test that TLA filter returns surveys of interest", () => {
 });
 
 describe("getInstruments", () => {
+    beforeEach(() => {
+        getInsturmentsMock.mockImplementation(async () => {
+            return Promise.resolve(mockInstrumentList);
+        });
+    });
+
     afterEach(() => {
         cache.flushAll();
+        jest.resetAllMocks();
     });
 
     describe("when an instrumentTLA is provided", () => {
@@ -49,6 +54,25 @@ describe("getInstruments", () => {
         it("returns an unfiltered list of instruments", async () => {
             const instruments = await getInstruments(blaiseApiClient, cache, config);
             expect(instruments).toHaveLength(3);
+        });
+    });
+
+    describe("when the cache is not populated", () => {
+        it("returns a list of instruments and populate the cache", async () => {
+            expect(cache.get("instruments")).toBeUndefined();
+            const instruments = await getInstruments(blaiseApiClient, cache, config);
+            expect(instruments).toHaveLength(3);
+            expect(cache.get("instruments")).toHaveLength(3);
+        });
+    });
+
+    describe("when the cache is populated", () => {
+        it("returns the list of instruments from the cache without calling blaise", async () => {
+            cache.set("instruments", mockInstrumentList);
+            const instruments = await getInstruments(blaiseApiClient, cache, config);
+            expect(instruments).toHaveLength(3);
+            expect(cache.get("instruments")).toHaveLength(3);
+            expect(getInsturmentsMock).toHaveBeenCalledTimes(0);
         });
     });
 });
