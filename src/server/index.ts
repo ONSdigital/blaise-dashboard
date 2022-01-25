@@ -1,7 +1,14 @@
+import BlaiseApiClient from "blaise-api-node-client";
+import { GetConfigFromEnv } from "./config";
 import NewServer from "./server";
+import NodeCache from "node-cache";
 
+const cacheDuration = 60; // 60 seconds
 const port: string = process.env.PORT || "5000";
-const app = NewServer();
+const config = GetConfigFromEnv();
+const blaiseApiClient = new BlaiseApiClient(config.BlaiseApiUrl);
+const cache = new NodeCache({ stdTTL: cacheDuration });
+const app = NewServer(blaiseApiClient, cache, config);
 
 app.listen(port);
 

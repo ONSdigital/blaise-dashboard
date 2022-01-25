@@ -2,8 +2,13 @@ import express, { Request, Response, Express } from "express";
 import path from "path";
 import ejs from "ejs";
 import HealthCheckHandler from "./handlers/healthCheckHandler";
+import InstrumentListHandler from "./handlers/instrumentListHandler";
+import { Config } from "./config";
+import BlaiseApiClient from "blaise-api-node-client";
+import caseReportHandler from "./handlers/reportHandler";
+import NodeCache from "node-cache";
 
-function NewServer(): Express {
+function NewServer(blaiseApiClient: BlaiseApiClient, cache: NodeCache, config: Config): Express {
     const server = express();
     const buildFolder = "../build";
     server.set("views", path.join(__dirname, buildFolder));
@@ -15,6 +20,8 @@ function NewServer(): Express {
 
     //define handlers
     server.use("/", HealthCheckHandler());
+    server.use("/", InstrumentListHandler(blaiseApiClient, cache, config));
+    server.use("/", caseReportHandler(blaiseApiClient, cache, config));
 
     //define entry point
     server.get("*", function (req: Request, res: Response) {

@@ -10,13 +10,17 @@
     "test": "jest --coverage --watchAll=false --detectOpenHandles --config=jest.config.js",
     "gcp-build": "react-scripts build && tsc --project tsconfig.server.json"
   },
+  "proxy": "http://localhost:5000",
   "pre-commit": [
     "lint-fix"
   ],
   "dependencies": {
     "@types/ejs": "^3.1.0",
-    "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#v0.9.5",
+    "axios": "^0.25.0",
+    "blaise-api-node-client": "https://github.com/ONSdigital/blaise-api-node-client.git",
+    "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#v0.9.7",
     "ejs": "^3.1.6",
+    "node-cache": "^5.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.1",
@@ -27,10 +31,12 @@
     "@babel/core": "^7.16.7",
     "@babel/preset-env": "^7.16.8",
     "@babel/preset-typescript": "^7.16.7",
+    "@testing-library/react": "^12.1.2",
     "@types/jest": "^27.4.0",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "@types/supertest": "^2.0.11",
+    "axios-mock-adapter": "^1.20.0",
     "babel-jest": "^27.4.6",
     "concurrently": "^7.0.0",
     "eslint": "^8.6.0",
