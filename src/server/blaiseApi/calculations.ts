@@ -1,5 +1,5 @@
-import {CaseStatus} from "blaise-api-node-client";
-import {isCompleted, isNotCompleted} from "./outcomes";
+import { CaseStatus } from "blaise-api-node-client";
+import { isNotCompleted } from "./outcomes";
 
 export type CaseTotals = {
     Total: number,
@@ -38,5 +38,5 @@ export function calculatePercentComplete(caseTotals: CaseTotals): number {
 }
 
 function round2DP(numberToRound: number): number {
-     return Math.round((numberToRound + Number.EPSILON) * 100) / 100;
+    return Math.round((numberToRound + Number.EPSILON) * 100) / 100;
 }

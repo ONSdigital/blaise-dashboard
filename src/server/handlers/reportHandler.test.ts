@@ -24,6 +24,11 @@ describe("Build a case report", () => {
         cache.flushAll();
     });
 
+    afterEach(() => {
+        jest.clearAllMocks();
+        jest.resetModules();
+    });
+
     it("should return a 200 status and a case report", async () => {
         mockGetCaseStatus.mockImplementation(async () => {
             return Promise.resolve(mockCaseList);
@@ -49,8 +54,55 @@ describe("Build a case report", () => {
         expect(response.status).toEqual(500);
     });
 
-    afterEach(() => {
-        jest.clearAllMocks();
-        jest.resetModules();
+    describe("when the cache is not populated", () => {
+        it("returns a list of instruments and populate the cache", async () => {
+            mockGetCaseStatus.mockImplementation(async () => {
+                return Promise.resolve(mockCaseList);
+            });
+
+
+            expect(cache.get("caseStatus:dst2101a")).toBeUndefined();
+
+            await request.get("/api/reports/cases/completions/dst2101a");
+
+            expect(cache.get("caseStatus:dst2101a")).toEqual({
+                Total: 7,
+                Complete: 3,
+                NotComplete: 4,
+                CompletePercentage: 42.86
+            });
+        });
+    });
+
+    describe("when the cache is populated", () => {
+        it("returns the list of instruments from the cache without calling blaise", async () => {
+            mockGetCaseStatus.mockImplementation(async () => {
+                return Promise.resolve(mockCaseList);
+            });
+
+            cache.set("caseStatus:dst2101a", {
+                Total: 7,
+                Complete: 3,
+                NotComplete: 4,
+                CompletePercentage: 42.86
+            });
+
+            const response = await request.get("/api/reports/cases/completions/dst2101a");
+
+            expect(response.status).toEqual(200);
+            expect(response.body).toStrictEqual({
+                Total: 7,
+                Complete: 3,
+                NotComplete: 4,
+                CompletePercentage: 42.86
+            });
+            expect(cache.get("caseStatus:dst2101a")).toEqual({
+                Total: 7,
+                Complete: 3,
+                NotComplete: 4,
+                CompletePercentage: 42.86
+            });
+            expect(mockGetCaseStatus).toHaveBeenCalledTimes(0);
+        });
     });
 });

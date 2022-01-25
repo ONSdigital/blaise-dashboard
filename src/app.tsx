@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useEffect, Component } from "react";
+import React, { ReactElement, Component } from "react";
 import { Instrument } from "blaise-api-node-client";
 //import { Switch, Route, Link } from "react-router-dom";
 import {
@@ -24,10 +24,10 @@ type AppState = {
     errored: boolean
 }
 
-export default class App extends Component<any, any> {
+export default class App extends Component<unknown, AppState> {
     interval!: ReturnType<typeof setInterval>;
 
-    constructor(props: any) {
+    constructor(props: unknown) {
         super(props);
         this.state = {
             instruments: [],
