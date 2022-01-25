@@ -1,0 +1,674 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App renders correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="phase-banner"
+      >
+        <div
+          class="container "
+        >
+          <div
+            class="grid grid--flex grid--gutterless grid--vertical-center grid--no-wrap"
+          >
+            <div
+              class="grid__col col-auto u-flex-no-grow"
+            >
+              <h3
+                class="phase-banner__badge"
+              >
+                BETA
+              </h3>
+            </div>
+            <div
+              class="grid__col col-auto u-flex-shrink"
+            >
+              <p
+                class="phase-banner__desc u-fs-s u-mb-no"
+              >
+                This is a new service – your 
+                <a
+                  href="https://ons.service-now.com/"
+                >
+                  feedback
+                </a>
+                 will help us improve it.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <header
+        class="header header--internal"
+      >
+        <div
+          class="header__top"
+          role="banner"
+        >
+          <div
+            class="container"
+          >
+            <div
+              class="header__grid-top grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap "
+            >
+              <div
+                class="grid__col col-auto"
+              >
+                <a
+                  class="header__logo-link"
+                  href="/"
+                >
+                  <picture>
+                    <img
+                      alt="Office for National Statistics logo"
+                      class="header__logo"
+                      src="https://cdn.ons.gov.uk/sdc/design-system/31.4.0/img/ons-logo-neg-en.svg"
+                    />
+                  </picture>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="header__main"
+        >
+          <div
+            class="container"
+          >
+            <div
+              class="grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap"
+            >
+              <div
+                class="grid__col col-auto u-flex-shrink"
+              >
+                <div
+                  class="header__title"
+                >
+                  Dashboard
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div
+        class="page__container container"
+        style="min-height: calc(67vh);"
+      >
+        <main
+          class="page__main u-mt-no"
+          id="main-content"
+        >
+          <h2
+            class="u-mt-m"
+          >
+            Completed case information
+          </h2>
+          <table
+            class="table"
+            data-testid="case-report-table"
+            id="case-report-table"
+          >
+            <thead
+              class="table__head"
+            >
+              <tr
+                class="table__row"
+              >
+                <th
+                  class="table__header"
+                  scope="col"
+                >
+                  Questionnaire
+                </th>
+                <th
+                  class="table__header"
+                  scope="col"
+                >
+                  Cases
+                </th>
+                <th
+                  class="table__header"
+                  scope="col"
+                >
+                  Completed
+                </th>
+                <th
+                  class="table__header"
+                  scope="col"
+                >
+                  Progress
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="table__body"
+            >
+              <tr
+                class="table__row"
+                data-testid="instrument-table-row"
+              >
+                <td
+                  class="table__cell"
+                  data-testid="instrument-case-report-questionnaire-LMS2101_CC1"
+                >
+                  LMS2101_CC1
+                </td>
+                <td
+                  class="table__cell"
+                  data-testid="instrument-case-report-total-LMS2101_CC1"
+                >
+                  7
+                </td>
+                <td
+                  class="table__cell"
+                  data-testid="instrument-case-report-complete-LMS2101_CC1"
+                >
+                  5
+                   (
+                  71.43
+                  %)
+                </td>
+                <td
+                  class="table__cell"
+                  data-testid="instrument-case-report-complete-percentage-LMS2101_CC1"
+                >
+                  <progress
+                    aria-valuemax="100"
+                    aria-valuemin="0"
+                    aria-valuenow="71.43"
+                    id="file"
+                    max="100"
+                    role="progressbar"
+                    value="71.43"
+                  >
+                    71.43
+                    %
+                  </progress>
+                </td>
+              </tr>
+              <tr
+                class="table__row"
+                data-testid="instrument-table-row"
+              >
+                <td
+                  class="table__cell"
+                  data-testid="instrument-case-report-questionnaire-OPN2101A"
+                >
+                  OPN2101A
+                </td>
+                <td
+                  class="table__cell"
+                  data-testid="instrument-case-report-total-OPN2101A"
+                >
+                  7
+                </td>
+                <td
+                  class="table__cell"
+                  data-testid="instrument-case-report-complete-OPN2101A"
+                >
+                  5
+                   (
+                  71.43
+                  %)
+                </td>
+                <td
+                  class="table__cell"
+                  data-testid="instrument-case-report-complete-percentage-OPN2101A"
+                >
+                  <progress
+                    aria-valuemax="100"
+                    aria-valuemin="0"
+                    aria-valuenow="71.43"
+                    id="file"
+                    max="100"
+                    role="progressbar"
+                    value="71.43"
+                  >
+                    71.43
+                    %
+                  </progress>
+                </td>
+              </tr>
+              <tr
+                class="table__row"
+                data-testid="instrument-table-row"
+              >
+                <td
+                  class="table__cell"
+                  data-testid="instrument-case-report-questionnaire-OPN2007T"
+                >
+                  OPN2007T
+                </td>
+                <td
+                  class="table__cell"
+                  data-testid="instrument-case-report-total-OPN2007T"
+                >
+                  7
+                </td>
+                <td
+                  class="table__cell"
+                  data-testid="instrument-case-report-complete-OPN2007T"
+                >
+                  5
+                   (
+                  71.43
+                  %)
+                </td>
+                <td
+                  class="table__cell"
+                  data-testid="instrument-case-report-complete-percentage-OPN2007T"
+                >
+                  <progress
+                    aria-valuemax="100"
+                    aria-valuemin="0"
+                    aria-valuenow="71.43"
+                    id="file"
+                    max="100"
+                    role="progressbar"
+                    value="71.43"
+                  >
+                    71.43
+                    %
+                  </progress>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </main>
+      </div>
+      <footer
+        class="footer"
+      >
+        <div
+          class="footer__body"
+          data-analytics="footer"
+        >
+          <div
+            class="container "
+          >
+            <div
+              class="grid grid--flex grid--between"
+            >
+              <div
+                class="grid__col"
+              >
+                <div
+                  class="u-mt-m u-mb-s"
+                >
+                  <img
+                    alt="Office for National Statistics"
+                    src="https://ons-design-system.netlify.app/img/ons-logo-black-en.svg"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="phase-banner"
+    >
+      <div
+        class="container "
+      >
+        <div
+          class="grid grid--flex grid--gutterless grid--vertical-center grid--no-wrap"
+        >
+          <div
+            class="grid__col col-auto u-flex-no-grow"
+          >
+            <h3
+              class="phase-banner__badge"
+            >
+              BETA
+            </h3>
+          </div>
+          <div
+            class="grid__col col-auto u-flex-shrink"
+          >
+            <p
+              class="phase-banner__desc u-fs-s u-mb-no"
+            >
+              This is a new service – your 
+              <a
+                href="https://ons.service-now.com/"
+              >
+                feedback
+              </a>
+               will help us improve it.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <header
+      class="header header--internal"
+    >
+      <div
+        class="header__top"
+        role="banner"
+      >
+        <div
+          class="container"
+        >
+          <div
+            class="header__grid-top grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap "
+          >
+            <div
+              class="grid__col col-auto"
+            >
+              <a
+                class="header__logo-link"
+                href="/"
+              >
+                <picture>
+                  <img
+                    alt="Office for National Statistics logo"
+                    class="header__logo"
+                    src="https://cdn.ons.gov.uk/sdc/design-system/31.4.0/img/ons-logo-neg-en.svg"
+                  />
+                </picture>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="header__main"
+      >
+        <div
+          class="container"
+        >
+          <div
+            class="grid grid--gutterless grid--flex grid--between grid--vertical-center grid--no-wrap"
+          >
+            <div
+              class="grid__col col-auto u-flex-shrink"
+            >
+              <div
+                class="header__title"
+              >
+                Dashboard
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div
+      class="page__container container"
+      style="min-height: calc(67vh);"
+    >
+      <main
+        class="page__main u-mt-no"
+        id="main-content"
+      >
+        <h2
+          class="u-mt-m"
+        >
+          Completed case information
+        </h2>
+        <table
+          class="table"
+          data-testid="case-report-table"
+          id="case-report-table"
+        >
+          <thead
+            class="table__head"
+          >
+            <tr
+              class="table__row"
+            >
+              <th
+                class="table__header"
+                scope="col"
+              >
+                Questionnaire
+              </th>
+              <th
+                class="table__header"
+                scope="col"
+              >
+                Cases
+              </th>
+              <th
+                class="table__header"
+                scope="col"
+              >
+                Completed
+              </th>
+              <th
+                class="table__header"
+                scope="col"
+              >
+                Progress
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class="table__body"
+          >
+            <tr
+              class="table__row"
+              data-testid="instrument-table-row"
+            >
+              <td
+                class="table__cell"
+                data-testid="instrument-case-report-questionnaire-LMS2101_CC1"
+              >
+                LMS2101_CC1
+              </td>
+              <td
+                class="table__cell"
+                data-testid="instrument-case-report-total-LMS2101_CC1"
+              >
+                7
+              </td>
+              <td
+                class="table__cell"
+                data-testid="instrument-case-report-complete-LMS2101_CC1"
+              >
+                5
+                 (
+                71.43
+                %)
+              </td>
+              <td
+                class="table__cell"
+                data-testid="instrument-case-report-complete-percentage-LMS2101_CC1"
+              >
+                <progress
+                  aria-valuemax="100"
+                  aria-valuemin="0"
+                  aria-valuenow="71.43"
+                  id="file"
+                  max="100"
+                  role="progressbar"
+                  value="71.43"
+                >
+                  71.43
+                  %
+                </progress>
+              </td>
+            </tr>
+            <tr
+              class="table__row"
+              data-testid="instrument-table-row"
+            >
+              <td
+                class="table__cell"
+                data-testid="instrument-case-report-questionnaire-OPN2101A"
+              >
+                OPN2101A
+              </td>
+              <td
+                class="table__cell"
+                data-testid="instrument-case-report-total-OPN2101A"
+              >
+                7
+              </td>
+              <td
+                class="table__cell"
+                data-testid="instrument-case-report-complete-OPN2101A"
+              >
+                5
+                 (
+                71.43
+                %)
+              </td>
+              <td
+                class="table__cell"
+                data-testid="instrument-case-report-complete-percentage-OPN2101A"
+              >
+                <progress
+                  aria-valuemax="100"
+                  aria-valuemin="0"
+                  aria-valuenow="71.43"
+                  id="file"
+                  max="100"
+                  role="progressbar"
+                  value="71.43"
+                >
+                  71.43
+                  %
+                </progress>
+              </td>
+            </tr>
+            <tr
+              class="table__row"
+              data-testid="instrument-table-row"
+            >
+              <td
+                class="table__cell"
+                data-testid="instrument-case-report-questionnaire-OPN2007T"
+              >
+                OPN2007T
+              </td>
+              <td
+                class="table__cell"
+                data-testid="instrument-case-report-total-OPN2007T"
+              >
+                7
+              </td>
+              <td
+                class="table__cell"
+                data-testid="instrument-case-report-complete-OPN2007T"
+              >
+                5
+                 (
+                71.43
+                %)
+              </td>
+              <td
+                class="table__cell"
+                data-testid="instrument-case-report-complete-percentage-OPN2007T"
+              >
+                <progress
+                  aria-valuemax="100"
+                  aria-valuemin="0"
+                  aria-valuenow="71.43"
+                  id="file"
+                  max="100"
+                  role="progressbar"
+                  value="71.43"
+                >
+                  71.43
+                  %
+                </progress>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </main>
+    </div>
+    <footer
+      class="footer"
+    >
+      <div
+        class="footer__body"
+        data-analytics="footer"
+      >
+        <div
+          class="container "
+        >
+          <div
+            class="grid grid--flex grid--between"
+          >
+            <div
+              class="grid__col"
+            >
+              <div
+                class="u-mt-m u-mb-s"
+              >
+                <img
+                  alt="Office for National Statistics"
+                  src="https://ons-design-system.netlify.app/img/ons-logo-black-en.svg"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
