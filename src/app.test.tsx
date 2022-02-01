@@ -42,6 +42,7 @@ describe("App", () => {
     );
 
     expect(screen.queryByText(/Loading/i)).toBeDefined();
+    expect(screen.queryByText(/What is a completed case/i)).toBeDefined();
 
     await act(async () => {
       await flushPromises();
@@ -62,6 +63,7 @@ describe("App", () => {
 
       await waitFor(() => {
         expect(screen.getByText("Failed to get questionnaires.")).toBeDefined();
+        expect(screen.queryByText(/What is a completed case/i)).not.toBeUndefined();
       });
     });
   });
@@ -80,6 +82,7 @@ describe("App", () => {
 
       await waitFor(() => {
         expect(screen.getByText("No questionnaires installed.")).toBeDefined();
+        expect(screen.queryByText(/What is a completed case/i)).not.toBeUndefined();
       });
     });
   });
