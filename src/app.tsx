@@ -1,18 +1,17 @@
-import React, { ReactElement, Component } from "react";
-import { Instrument } from "blaise-api-node-client";
-//import { Switch, Route, Link } from "react-router-dom";
+import React, {Component, ReactElement} from "react";
+import {Instrument} from "blaise-api-node-client";
 import {
+    BetaBanner,
+    Collapsible,
     Footer,
     Header,
-    BetaBanner,
-    NotProductionWarning,
     ONSLoadingPanel,
     ONSPanel
 } from "blaise-design-system-react-components";
 import "./style.css";
-import { getInstruments } from "./client/instruments";
+import {getInstruments} from "./client/instruments";
 import InstrumentCaseReportTable from "./components/instrumentCaseReportTable";
-import { refreshInterval } from "./client/refreshInterval";
+import {refreshInterval} from "./client/refreshInterval";
 
 const divStyle = {
     minHeight: "calc(67vh)",
@@ -58,7 +57,7 @@ export default class App extends Component<unknown, AppState> {
             });
         }).catch((reason: unknown) => {
             console.error(reason);
-            this.setState({ errored: true });
+            this.setState({errored: true});
         });
     }
 
@@ -75,7 +74,7 @@ export default class App extends Component<unknown, AppState> {
 
     loadingPanel(): ReactElement | undefined {
         if (this.state.loading && !this.state.errored) {
-            return <ONSLoadingPanel message={"Getting instruments for report"} />;
+            return <ONSLoadingPanel message={"Getting questionnaires for report"}/>;
         }
         return undefined;
     }
@@ -87,26 +86,48 @@ export default class App extends Component<unknown, AppState> {
         if (this.state.instruments.length === 0) {
             return <ONSPanel>No questionnaires installed.</ONSPanel>;
         }
-        return <InstrumentCaseReportTable instruments={this.state.instruments} />;
+        return <InstrumentCaseReportTable instruments={this.state.instruments}/>;
+    }
+
+    completedCaseDefinition(): ReactElement | undefined {
+        if (this.state.loading !== true && this.state.instruments.length !== 0) {
+            return <Collapsible title="What is a completed case?">
+                <>
+                    <p>Completed cases are cases that do <strong>NOT</strong> have any of the following outcome codes:</p>
+                    <ul className="ons-list">
+                        <li className="ons-list__item">
+                            0 - Not actioned
+                        </li>
+                        <li className="ons-list__item">
+                            210 - Partial
+                        </li>
+                        <li className="ons-list__item">
+                            300 - Appointment made
+                        </li>
+                        <li className="ons-list__item">
+                            310 - Non-contact
+                        </li>
+                    </ul>
+                </>
+            </Collapsible>;
+        }
     }
 
     render() {
         return (
             <>
-                {
-                    (window.location.hostname.includes("dev")) && <NotProductionWarning />
-                }
-                <BetaBanner />
-                <Header title={"Dashboard"} />
+                <BetaBanner/>
+                <Header title={"Dashboard"}/>
                 <div style={divStyle} className="page__container container">
                     <main id="main-content" className="page__main u-mt-no">
                         <h2 className="u-mt-m">Completed case information</h2>
                         {this.errorPanel()}
                         {this.loadingPanel()}
                         {this.reportTable()}
+                        {this.completedCaseDefinition()}
                     </main>
                 </div>
-                <Footer />
+                <Footer/>
             </>
         );
     }
