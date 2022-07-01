@@ -14,21 +14,21 @@ const server = NewServer(blaiseApiClient, cache, config);
 const request = supertest(server);
 
 
-import { getInstruments } from "../blaiseApi/instrument";
-jest.mock("../blaiseApi/instrument");
-const getInstrumentsMock = getInstruments as jest.MockedFunction<typeof getInstruments>;
+import { getQuestionnaires } from "../blaiseApi/questionnaires";
+jest.mock("../blaiseApi/questionnaires");
+const getQuestionnairesMock = getQuestionnaires as jest.MockedFunction<typeof getQuestionnaires>;
 
 
-describe("BlaiseAPI Get all instruments from API", () => {
+describe("BlaiseAPI Get all questionnaires from API", () => {
     afterEach(() => {
-        getInstrumentsMock.mockClear();
+        getQuestionnairesMock.mockClear();
         cache.flushAll();
     });
 
     it("should return a 200 status and a json list of 3 items when API returns a 3 item list", async () => {
-        getInstrumentsMock.mockReturnValue(QuestionnaireListMockObject);
+        getQuestionnairesMock.mockReturnValue(QuestionnaireListMockObject);
 
-        const response: Response = await request.get("/api/instruments");
+        const response: Response = await request.get("/api/questionnaires");
 
         expect(response.status).toEqual(200);
         expect(response.body).toStrictEqual(QuestionnaireListMockObject);
@@ -36,9 +36,9 @@ describe("BlaiseAPI Get all instruments from API", () => {
     });
 
     it("should return a 500 status direct from the API", async () => {
-        getInstrumentsMock.mockRejectedValue(null);
+        getQuestionnairesMock.mockRejectedValue(null);
 
-        const response: Response = await request.get("/api/instruments");
+        const response: Response = await request.get("/api/questionnaires");
 
         expect(response.status).toEqual(500);
     });
