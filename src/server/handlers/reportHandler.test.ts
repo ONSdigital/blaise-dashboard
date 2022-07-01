@@ -55,7 +55,7 @@ describe("Build a case report", () => {
     });
 
     describe("when the cache is not populated", () => {
-        it("returns a list of instruments and populate the cache", async () => {
+        it("returns a list of questionnaires and populate the cache", async () => {
             mockGetCaseStatus.mockImplementation(async () => {
                 return Promise.resolve(mockCaseList);
             });
@@ -75,7 +75,7 @@ describe("Build a case report", () => {
     });
 
     describe("when the cache is populated", () => {
-        it("returns the list of instruments from the cache without calling blaise", async () => {
+        it("returns the list of questionnaires from the cache without calling blaise", async () => {
             mockGetCaseStatus.mockImplementation(async () => {
                 return Promise.resolve(mockCaseList);
             });

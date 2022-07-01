@@ -8,7 +8,7 @@ export default function caseReportHandler(blaiseApiClient: BlaiseApiClient, cach
     const router = express.Router();
 
     const caseReportHandler = new CaseReportHandler(blaiseApiClient, cache, config);
-    return router.get("/api/reports/cases/completions/:instrumentName", caseReportHandler.GetCaseReport);
+    return router.get("/api/reports/cases/completions/:questionnaireName", caseReportHandler.GetCaseReport);
 }
 
 export class CaseReportHandler {
@@ -25,10 +25,10 @@ export class CaseReportHandler {
 
     async GetCaseReport(req: Request, res: Response): Promise<Response> {
         try {
-            const cacheKey = `caseStatus:${req.params.instrumentName}`;
+            const cacheKey = `caseStatus:${req.params.questionnaireName}`;
             let caseCompletionReport: CaseCompletionReport | undefined = this.cache.get(cacheKey);
             if (caseCompletionReport == undefined) {
-                const caseStatusList = await this.blaiseApiClient.getCaseStatus(this.config.ServerPark, req.params.instrumentName);
+                const caseStatusList = await this.blaiseApiClient.getCaseStatus(this.config.ServerPark, req.params.questionnaireName);
                 caseCompletionReport = buildCaseCompletionReport(caseStatusList);
                 this.cache.set(cacheKey, caseCompletionReport);
             }
@@ -36,7 +36,7 @@ export class CaseReportHandler {
             return res.status(200).json(caseCompletionReport);
         } catch (error: unknown) {
             console.error(`Response: ${error}`);
-            return res.status(500).json(`Failed to get case report for instrument ${req.params.instrumentName}`);
+            return res.status(500).json(`Failed to get case report for questionnaire ${req.params.questionnaireName}`);
         }
     }
 }

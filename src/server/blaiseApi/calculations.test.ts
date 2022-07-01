@@ -2,8 +2,8 @@ import {calculateCaseTotals, calculatePercentComplete} from "./calculations";
 import {Outcome} from "blaise-api-node-client";
 
 describe("Test that the backend calculations are correct", () => {
-    describe("When two cases are completed in an instrument", () => {
-        it("then it should return the total number of cases (2) in that instrument", () => {
+    describe("When two cases are completed in an questionnaire", () => {
+        it("then it should return the total number of cases (2) in that questionnaire", () => {
             const testData = [
                 {
                     primaryKey: "123456789",
@@ -18,7 +18,7 @@ describe("Test that the backend calculations are correct", () => {
         });
     });
 
-    it("should return the correct number of complete and incomplete cases in an instrument", () => {
+    it("should return the correct number of complete and incomplete cases in an questionnaire", () => {
         // Unknown status codes count as completed
         const testData = [
             {

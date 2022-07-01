@@ -10,7 +10,7 @@ The application is being deployed to Google App Engine.
 
 #### Completed case information
 
-Shows count, percentage, and progress bar of the cases completed for all installed questionnaire instruments. It's currently filtered to OPN only until questionnaire logic is updated for all surveys.
+Shows count, percentage, and progress bar of the cases completed for all installed questionnaires. It's currently filtered to OPN only until questionnaire logic is updated for all surveys.
 
 A collapsible element shows the definition of completed cases, as this could be misconstrued depending on the context.
 

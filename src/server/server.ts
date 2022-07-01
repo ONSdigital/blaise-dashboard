@@ -2,7 +2,7 @@ import express, { Request, Response, Express } from "express";
 import path from "path";
 import ejs from "ejs";
 import HealthCheckHandler from "./handlers/healthCheckHandler";
-import InstrumentListHandler from "./handlers/instrumentListHandler";
+import QuestionnaireListHandler from "./handlers/questionnaireListHandler";
 import { Config } from "./config";
 import BlaiseApiClient from "blaise-api-node-client";
 import caseReportHandler from "./handlers/reportHandler";
@@ -20,7 +20,7 @@ function NewServer(blaiseApiClient: BlaiseApiClient, cache: NodeCache, config: C
 
     //define handlers
     server.use("/", HealthCheckHandler());
-    server.use("/", InstrumentListHandler(blaiseApiClient, cache, config));
+    server.use("/", QuestionnaireListHandler(blaiseApiClient, cache, config));
     server.use("/", caseReportHandler(blaiseApiClient, cache, config));
 
     //define entry point
