@@ -5,20 +5,20 @@
 import React from "react";
 import { render, screen, waitFor, act } from "@testing-library/react";
 import App from "./app";
-import { mockInstrumentList } from "./server/blaiseApi/testFixtures";
+import { mockQuestionnaireList } from "./server/blaiseApi/testFixtures";
 
 jest.mock("./client/caseCompletionReport");
 import { getCaseCompletionReport } from "./client/caseCompletionReport";
 import { CaseCompletionReport } from "./server/blaiseApi/caseCompletionReport";
 
-jest.mock("./client/instruments");
-import { getInstruments } from "./client/instruments";
-import { Instrument } from "blaise-api-node-client";
+jest.mock("./client/questionnaires");
+import { getQuestionnaires } from "./client/questionnaires";
+import { Questionnaire } from "blaise-api-node-client";
 
 const flushPromises = () => new Promise(setImmediate);
 
 const getCaseCompletionReportMock = getCaseCompletionReport as jest.Mock<Promise<CaseCompletionReport>>;
-const getInstrumentsMock = getInstruments as jest.Mock<Promise<Instrument[]>>;
+const getQuestionnairesMock = getQuestionnaires as jest.Mock<Promise<Questionnaire[]>>;
 
 
 describe("App", () => {
@@ -35,7 +35,7 @@ describe("App", () => {
 
   it("renders correctly", async () => {
     getCaseCompletionReportMock.mockImplementation(() => Promise.resolve(caseCompletionReport));
-    getInstrumentsMock.mockImplementation(() => Promise.resolve(mockInstrumentList));
+    getQuestionnairesMock.mockImplementation(() => Promise.resolve(mockQuestionnaireList));
 
     const app = render(
       <App />
@@ -55,7 +55,7 @@ describe("App", () => {
 
   describe("when getting case completion reports errors", () => {
     it("renders an error panel", async () => {
-      getInstrumentsMock.mockImplementation(() => Promise.reject("Cannot get instruments"));
+      getQuestionnairesMock.mockImplementation(() => Promise.reject("Cannot get questionnaires"));
 
       render(
         <App />
@@ -69,10 +69,10 @@ describe("App", () => {
   });
 
 
-  describe("when no instruments are installed", () => {
+  describe("when no questionnaires are installed", () => {
     it("renders an info panel", async () => {
       getCaseCompletionReportMock.mockImplementation(() => Promise.resolve(caseCompletionReport));
-      getInstrumentsMock.mockImplementation(() => Promise.resolve([]));
+      getQuestionnairesMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />

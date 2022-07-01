@@ -1,30 +1,30 @@
 import React, { Component, ReactElement } from "react";
 import { CaseCompletionReport } from "../server/blaiseApi/caseCompletionReport";
 import { getCaseCompletionReport } from "../client/caseCompletionReport";
-import { Instrument } from "blaise-api-node-client";
+import { Questionnaire } from "blaise-api-node-client";
 import { ONSLoadingPanel, ONSPanel, ONSTable } from "blaise-design-system-react-components";
-import InstrumentCaseReport from "./instrumentCaseReport";
+import QuestionnaireCaseReport from "./questionnaireCaseReport";
 import { refreshInterval } from "../client/refreshInterval";
 
-type InstrumentCaseReportTableProps = {
-    instruments: Instrument[]
+type QuestionnaireCaseReportTableProps = {
+    questionnaires: Questionnaire[]
 }
 
-type InstrumentCaseReportTableState = {
+type QuestionnaireCaseReportTableState = {
     loaded: boolean,
     caseCompletionReports: Record<string, CaseCompletionReport>
-    erroredInstruments: string[]
+    erroredQuestionnaires: string[]
 }
 
-export default class InstrumentCaseReportTable extends Component<InstrumentCaseReportTableProps, InstrumentCaseReportTableState> {
+export default class QuestionnaireCaseReportTable extends Component<QuestionnaireCaseReportTableProps, QuestionnaireCaseReportTableState> {
     interval!: ReturnType<typeof setInterval>;
 
-    constructor(props: InstrumentCaseReportTableProps) {
+    constructor(props: QuestionnaireCaseReportTableProps) {
         super(props);
         this.state = {
             loaded: false,
             caseCompletionReports: {},
-            erroredInstruments: []
+            erroredQuestionnaires: []
         };
     }
 
@@ -52,16 +52,16 @@ export default class InstrumentCaseReportTable extends Component<InstrumentCaseR
 
     async getCaseCompletionReports(): Promise<Record<string, CaseCompletionReport>> {
         const caseCompletionReports: Record<string, CaseCompletionReport> = {};
-        for (const instrument of this.props.instruments) {
-            console.log(`Getting completion report for ${instrument.name}`);
+        for (const questionnaire of this.props.questionnaires) {
+            console.log(`Getting completion report for ${questionnaire.name}`);
             try {
-                caseCompletionReports[instrument.name] = await getCaseCompletionReport(instrument.name);
+                caseCompletionReports[questionnaire.name] = await getCaseCompletionReport(questionnaire.name);
             } catch (reason: unknown) {
-                console.error(`Error getting case completion report for ${instrument.name}: ${reason}`);
-                const erroredInstruments = this.state.erroredInstruments;
-                erroredInstruments.push(instrument.name);
+                console.error(`Error getting case completion report for ${questionnaire.name}: ${reason}`);
+                const erroredQuestionnaires = this.state.erroredQuestionnaires;
+                erroredQuestionnaires.push(questionnaire.name);
                 this.setState({
-                    erroredInstruments: [...new Set(erroredInstruments)]
+                    erroredQuestionnaires: [...new Set(erroredQuestionnaires)]
                 });
             }
         }
@@ -69,12 +69,12 @@ export default class InstrumentCaseReportTable extends Component<InstrumentCaseR
     }
 
     errorPanel(): ReactElement | undefined {
-        if (this.state.erroredInstruments.length === 0) {
+        if (this.state.erroredQuestionnaires.length === 0) {
             return undefined;
         }
         return (
             <ONSPanel status="error">
-                Failed to get completion reports for instruments: {this.state.erroredInstruments.join(", ")}
+                Failed to get completion reports for questionnaires: {this.state.erroredQuestionnaires.join(", ")}
             </ONSPanel>
         );
     }
@@ -85,11 +85,11 @@ export default class InstrumentCaseReportTable extends Component<InstrumentCaseR
         }
 
         const caseReportRows: ReactElement[] = [];
-        for (const instrumentName in this.state.caseCompletionReports) {
-            caseReportRows.push(<InstrumentCaseReport
-                instrumentName={instrumentName}
-                caseCompletionReport={this.state.caseCompletionReports[instrumentName]}
-                key={instrumentName}
+        for (const questionnaireName in this.state.caseCompletionReports) {
+            caseReportRows.push(<QuestionnaireCaseReport
+                questionnaireName={questionnaireName}
+                caseCompletionReport={this.state.caseCompletionReports[questionnaireName]}
+                key={questionnaireName}
             />);
         }
 

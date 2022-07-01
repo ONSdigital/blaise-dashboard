@@ -1,6 +1,6 @@
 import {Outcome} from "blaise-api-node-client";
 
-export const mockInstrumentList = [
+export const mockQuestionnaireList = [
         {
             name: "LMS2101_CC1",
             installDate: "210122",

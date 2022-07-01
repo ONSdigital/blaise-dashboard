@@ -1,5 +1,5 @@
 import React, {Component, ReactElement} from "react";
-import {Instrument} from "blaise-api-node-client";
+import {Questionnaire} from "blaise-api-node-client";
 import {
     BetaBanner,
     Collapsible,
@@ -9,8 +9,8 @@ import {
     ONSPanel
 } from "blaise-design-system-react-components";
 import "./style.css";
-import {getInstruments} from "./client/instruments";
-import InstrumentCaseReportTable from "./components/instrumentCaseReportTable";
+import {getQuestionnaires} from "./client/questionnaires";
+import QuestionnaireCaseReportTable from "./components/questionnaireCaseReportTable";
 import {refreshInterval} from "./client/refreshInterval";
 
 const divStyle = {
@@ -18,7 +18,7 @@ const divStyle = {
 };
 
 type AppState = {
-    instruments: Instrument[],
+    questionnaires: Questionnaire[],
     loading: boolean,
     errored: boolean
 }
@@ -29,17 +29,17 @@ export default class App extends Component<unknown, AppState> {
     constructor(props: unknown) {
         super(props);
         this.state = {
-            instruments: [],
+            questionnaires: [],
             loading: true,
             errored: false
         };
     }
 
     componentDidMount() {
-        console.log("Getting instrument list for mount");
-        this.loadInstruments();
+        console.log("Getting questionnaires list for mount");
+        this.loadQuestionnaires();
         this.interval = setInterval(() => {
-            this.loadInstruments();
+            this.loadQuestionnaires();
         }, refreshInterval);
     }
 
@@ -47,11 +47,11 @@ export default class App extends Component<unknown, AppState> {
         clearInterval(this.interval);
     }
 
-    loadInstruments(): void {
-        console.log("Getting instruments list");
-        this.getInstrumentList().then((instruments: Instrument[]) => {
+    loadQuestionnaires(): void {
+        console.log("Getting questionnaires list");
+        this.getQuestionnaireList().then((questionnaires: Questionnaire[]) => {
             this.setState({
-                instruments: instruments,
+                questionnaires: questionnaires,
                 loading: false,
                 errored: false,
             });
@@ -61,8 +61,8 @@ export default class App extends Component<unknown, AppState> {
         });
     }
 
-    async getInstrumentList(): Promise<Instrument[]> {
-        return await getInstruments();
+    async getQuestionnaireList(): Promise<Questionnaire[]> {
+        return await getQuestionnaires();
     }
 
     errorPanel(): ReactElement | undefined {
@@ -83,14 +83,14 @@ export default class App extends Component<unknown, AppState> {
         if (this.state.loading) {
             return undefined;
         }
-        if (this.state.instruments.length === 0) {
+        if (this.state.questionnaires.length === 0) {
             return <ONSPanel>No questionnaires installed.</ONSPanel>;
         }
-        return <InstrumentCaseReportTable instruments={this.state.instruments}/>;
+        return <QuestionnaireCaseReportTable questionnaires={this.state.questionnaires}/>;
     }
 
     completedCaseDefinition(): ReactElement | undefined {
-        if (this.state.loading !== true && this.state.instruments.length !== 0) {
+        if (this.state.loading !== true && this.state.questionnaires.length !== 0) {
             return <Collapsible title="What is a completed case?">
                 <>
                     <p>Completed cases are cases that do <strong>NOT</strong> have any of the following outcome codes:</p>
