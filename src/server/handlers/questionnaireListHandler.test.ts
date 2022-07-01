@@ -9,36 +9,36 @@ const cache = new NodeCache({ stdTTL: 60 });
 
 const blaiseApiClient = new BlaiseApiClient(config.BlaiseApiUrl);
 
-const { InstrumentListMockObject } = jest.requireActual("blaise-api-node-client");
+const { QuestionnaireListMockObject } = jest.requireActual("blaise-api-node-client");
 const server = NewServer(blaiseApiClient, cache, config);
 const request = supertest(server);
 
 
-import { getInstruments } from "../blaiseApi/instrument";
-jest.mock("../blaiseApi/instrument");
-const getInstrumentsMock = getInstruments as jest.MockedFunction<typeof getInstruments>;
+import { getQuestionnaires } from "../blaiseApi/questionnaires";
+jest.mock("../blaiseApi/questionnaires");
+const getQuestionnairesMock = getQuestionnaires as jest.MockedFunction<typeof getQuestionnaires>;
 
 
-describe("BlaiseAPI Get all instruments from API", () => {
+describe("BlaiseAPI Get all questionnaires from API", () => {
     afterEach(() => {
-        getInstrumentsMock.mockClear();
+        getQuestionnairesMock.mockClear();
         cache.flushAll();
     });
 
     it("should return a 200 status and a json list of 3 items when API returns a 3 item list", async () => {
-        getInstrumentsMock.mockReturnValue(InstrumentListMockObject);
+        getQuestionnairesMock.mockReturnValue(QuestionnaireListMockObject);
 
-        const response: Response = await request.get("/api/instruments");
+        const response: Response = await request.get("/api/questionnaires");
 
         expect(response.status).toEqual(200);
-        expect(response.body).toStrictEqual(InstrumentListMockObject);
+        expect(response.body).toStrictEqual(QuestionnaireListMockObject);
         expect(response.body.length).toStrictEqual(3);
     });
 
     it("should return a 500 status direct from the API", async () => {
-        getInstrumentsMock.mockRejectedValue(null);
+        getQuestionnairesMock.mockRejectedValue(null);
 
-        const response: Response = await request.get("/api/instruments");
+        const response: Response = await request.get("/api/questionnaires");
 
         expect(response.status).toEqual(500);
     });
