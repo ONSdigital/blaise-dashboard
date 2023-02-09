@@ -38,8 +38,8 @@ Create an .env file in the root of the project and add the following variables:
 Example .env file:
 
 ```shell
-BLAISE_API_URL="localhost:90"
-BLAISE_SERVER_PARK="gusty"
+BLAISE_API_URL="localhost:8011"
+SERVER_PARK="gusty"
 ````
 
 Install the project dependencies:
