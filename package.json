@@ -18,7 +18,7 @@
     "@types/ejs": "^3.1.0",
     "axios": "^0.25.0",
     "blaise-api-node-client": "https://github.com/ONSdigital/blaise-api-node-client",
-    "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#014a606b35c63d6fd703f7523918b8f9527bf2ff",
+    "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#0.13.2",
     "ejs": "^3.1.7",
     "node-cache": "^5.1.2",
     "react": "^17.0.2",
