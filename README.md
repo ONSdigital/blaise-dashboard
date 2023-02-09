@@ -60,7 +60,7 @@ gcloud config set project ons-blaise-v2-dev-sandbox123
 
 Open a tunnel to our Blaise RESTful API in your GCP project:
 ```shell
-gcloud compute start-iap-tunnel restapi-1 80 --local-host-port=localhost:90 --zone europe-west2-a
+gcloud compute start-iap-tunnel restapi-1 80 --local-host-port=localhost:8011 --zone europe-west2-a
 ```
 
 Run Node.js server and React.js client via the following package.json script:
