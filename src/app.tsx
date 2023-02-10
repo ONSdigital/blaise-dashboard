@@ -118,9 +118,9 @@ export default class App extends Component<unknown, AppState> {
             <>
                 <BetaBanner/>
                 <Header title={"Dashboard"}/>
-                <div style={divStyle} className="page__container container">
-                    <main id="main-content" className="page__main u-mt-no">
-                        <h2 className="u-mt-m">Completed case information</h2>
+                <div style={divStyle} className="ons-page__container ons-container">
+                    <main id="main-content" className="ons-page__main ons-u-mt-no">
+                        <h2 className="ons-u-mt-m">Completed case information</h2>
                         {this.errorPanel()}
                         {this.loadingPanel()}
                         {this.reportTable()}

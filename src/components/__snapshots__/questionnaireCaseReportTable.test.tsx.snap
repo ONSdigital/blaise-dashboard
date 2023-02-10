@@ -2,36 +2,36 @@
 
 exports[`QuestionnaireCaseReportTable renders a table row for the questionnaire case status 1`] = `
 <table
-  class="table"
+  class="ons-table"
   data-testid="case-report-table"
   id="case-report-table"
 >
   <thead
-    class="table__head"
+    class="ons-table__head"
   >
     <tr
-      class="table__row"
+      class="ons-table__row"
     >
       <th
-        class="table__header"
+        class="ons-table__header"
         scope="col"
       >
         Questionnaire
       </th>
       <th
-        class="table__header"
+        class="ons-table__header"
         scope="col"
       >
         Cases
       </th>
       <th
-        class="table__header"
+        class="ons-table__header"
         scope="col"
       >
         Completed
       </th>
       <th
-        class="table__header"
+        class="ons-table__header"
         scope="col"
       >
         Progress
@@ -39,26 +39,26 @@ exports[`QuestionnaireCaseReportTable renders a table row for the questionnaire 
     </tr>
   </thead>
   <tbody
-    class="table__body"
+    class="ons-table__body"
   >
     <tr
-      class="table__row"
+      class="ons-table__row"
       data-testid="questionnaire-table-row"
     >
       <td
-        class="table__cell"
+        class="ons-table__cell"
         data-testid="questionnaire-case-report-questionnaire-LMS2101_CC1"
       >
         LMS2101_CC1
       </td>
       <td
-        class="table__cell"
+        class="ons-table__cell"
         data-testid="questionnaire-case-report-total-LMS2101_CC1"
       >
         7
       </td>
       <td
-        class="table__cell"
+        class="ons-table__cell"
         data-testid="questionnaire-case-report-complete-LMS2101_CC1"
       >
         5
@@ -67,7 +67,7 @@ exports[`QuestionnaireCaseReportTable renders a table row for the questionnaire 
         %)
       </td>
       <td
-        class="table__cell"
+        class="ons-table__cell"
         data-testid="questionnaire-case-report-complete-percentage-LMS2101_CC1"
       >
         <progress
@@ -85,23 +85,23 @@ exports[`QuestionnaireCaseReportTable renders a table row for the questionnaire 
       </td>
     </tr>
     <tr
-      class="table__row"
+      class="ons-table__row"
       data-testid="questionnaire-table-row"
     >
       <td
-        class="table__cell"
+        class="ons-table__cell"
         data-testid="questionnaire-case-report-questionnaire-OPN2101A"
       >
         OPN2101A
       </td>
       <td
-        class="table__cell"
+        class="ons-table__cell"
         data-testid="questionnaire-case-report-total-OPN2101A"
       >
         7
       </td>
       <td
-        class="table__cell"
+        class="ons-table__cell"
         data-testid="questionnaire-case-report-complete-OPN2101A"
       >
         5
@@ -110,7 +110,7 @@ exports[`QuestionnaireCaseReportTable renders a table row for the questionnaire 
         %)
       </td>
       <td
-        class="table__cell"
+        class="ons-table__cell"
         data-testid="questionnaire-case-report-complete-percentage-OPN2101A"
       >
         <progress
@@ -128,23 +128,23 @@ exports[`QuestionnaireCaseReportTable renders a table row for the questionnaire 
       </td>
     </tr>
     <tr
-      class="table__row"
+      class="ons-table__row"
       data-testid="questionnaire-table-row"
     >
       <td
-        class="table__cell"
+        class="ons-table__cell"
         data-testid="questionnaire-case-report-questionnaire-OPN2007T"
       >
         OPN2007T
       </td>
       <td
-        class="table__cell"
+        class="ons-table__cell"
         data-testid="questionnaire-case-report-total-OPN2007T"
       >
         7
       </td>
       <td
-        class="table__cell"
+        class="ons-table__cell"
         data-testid="questionnaire-case-report-complete-OPN2007T"
       >
         5
@@ -153,7 +153,7 @@ exports[`QuestionnaireCaseReportTable renders a table row for the questionnaire 
         %)
       </td>
       <td
-        class="table__cell"
+        class="ons-table__cell"
         data-testid="questionnaire-case-report-complete-percentage-OPN2007T"
       >
         <progress
