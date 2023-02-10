@@ -34,17 +34,17 @@ export default class QuestionnaireCaseReport extends Component<QuestionnaireCase
         // | opn2101a      | 30    | 10 (33.33%) | [##     ] |
 
         return (
-            <tr className="table__row" key={this.props.questionnaireName} data-testid={"questionnaire-table-row"}>
-                <td className="table__cell" data-testid={`questionnaire-case-report-questionnaire-${this.props.questionnaireName}`}>
+            <tr className="ons-table__row" key={this.props.questionnaireName} data-testid={"questionnaire-table-row"}>
+                <td className="ons-table__cell" data-testid={`questionnaire-case-report-questionnaire-${this.props.questionnaireName}`}>
                     {this.props.questionnaireName}
                 </td>
-                <td className="table__cell" data-testid={`questionnaire-case-report-total-${this.props.questionnaireName}`}>
+                <td className="ons-table__cell" data-testid={`questionnaire-case-report-total-${this.props.questionnaireName}`}>
                     {this.props.caseCompletionReport.Total}
                 </td>
-                <td className="table__cell" data-testid={`questionnaire-case-report-complete-${this.props.questionnaireName}`}>
+                <td className="ons-table__cell" data-testid={`questionnaire-case-report-complete-${this.props.questionnaireName}`}>
                     {this.props.caseCompletionReport.Complete} ({this.props.caseCompletionReport.CompletePercentage}%)
                 </td>
-                <td className="table__cell" data-testid={`questionnaire-case-report-complete-percentage-${this.props.questionnaireName}`}>
+                <td className="ons-table__cell" data-testid={`questionnaire-case-report-complete-percentage-${this.props.questionnaireName}`}>
                     <progress id="file"
                               value={this.props.caseCompletionReport.CompletePercentage}
                               max="100"
