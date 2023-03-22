@@ -12,6 +12,9 @@ import "./style.css";
 import {getQuestionnaires} from "./client/questionnaires";
 import QuestionnaireCaseReportTable from "./components/questionnaireCaseReportTable";
 import {refreshInterval} from "./client/refreshInterval";
+import { getMonitoring } from "./client/monitoring";
+import { MonitoringDataModel } from "./server/monitoringDataModel";
+import MonitoringUptimeChecksTable from "./components/monitoringUptimeChecksTable"
 
 const divStyle = {
     minHeight: "calc(67vh)",
@@ -20,7 +23,9 @@ const divStyle = {
 type AppState = {
     questionnaires: Questionnaire[],
     loading: boolean,
-    errored: boolean
+    errored: boolean,
+    uptimeChecks: MonitoringDataModel[],
+    uptimeChecksLoading : boolean
 }
 
 export default class App extends Component<unknown, AppState> {
@@ -31,20 +36,37 @@ export default class App extends Component<unknown, AppState> {
         this.state = {
             questionnaires: [],
             loading: true,
-            errored: false
+            errored: false,
+            uptimeChecksLoading : true,
+            uptimeChecks : []
         };
     }
 
     componentDidMount() {
         console.log("Getting questionnaires list for mount");
         this.loadQuestionnaires();
+        this.loadMonitoringData();
         this.interval = setInterval(() => {
             this.loadQuestionnaires();
+            this.loadMonitoringData();
         }, refreshInterval);
     }
 
     componentWillUnmount() {
         clearInterval(this.interval);
+    }
+
+    loadMonitoringData(): void {
+        console.log("Getting Monitoring Data");
+        this.getMonitoringDataList().then((uptimeChecks: MonitoringDataModel[]) => {
+            console.log(uptimeChecks);
+            this.setState({
+                uptimeChecks: uptimeChecks,
+                uptimeChecksLoading : false
+            });
+        }).catch((reason: unknown) => {
+            console.error(reason);
+        });
     }
 
     loadQuestionnaires(): void {
@@ -65,6 +87,10 @@ export default class App extends Component<unknown, AppState> {
         return await getQuestionnaires();
     }
 
+    async getMonitoringDataList(): Promise<MonitoringDataModel[]> {
+        return await getMonitoring();
+    }
+
     errorPanel(): ReactElement | undefined {
         if (this.state.errored) {
             return <ONSPanel status="error">Failed to get questionnaires.</ONSPanel>;
@@ -75,6 +101,13 @@ export default class App extends Component<unknown, AppState> {
     loadingPanel(): ReactElement | undefined {
         if (this.state.loading && !this.state.errored) {
             return <ONSLoadingPanel message={"Getting questionnaires for report"}/>;
+        }
+        return undefined;
+    }
+
+    UptimeChecksloadingPanel(): ReactElement | undefined {
+        if (this.state.uptimeChecksLoading) {
+            return <ONSLoadingPanel message={"Getting uptime checks for services"}/>;
         }
         return undefined;
     }
@@ -113,6 +146,16 @@ export default class App extends Component<unknown, AppState> {
         }
     }
 
+    ServiceHealthCheck(): ReactElement | undefined {
+        if (this.state.uptimeChecksLoading) {
+            return undefined;
+        }
+        if (this.state.uptimeChecks.length === 0 || this.state.uptimeChecksLoading) {
+            return <ONSPanel>No Uptime checks data.</ONSPanel>;
+        }
+        return <MonitoringUptimeChecksTable monitoringData={this.state.uptimeChecks}/>;
+    }
+
     render() {
         return (
             <>
@@ -125,6 +168,9 @@ export default class App extends Component<unknown, AppState> {
                         {this.loadingPanel()}
                         {this.reportTable()}
                         {this.completedCaseDefinition()}
+                        <h2 className="ons-u-mt-m">Service Health Check Information</h2>
+                        {this.UptimeChecksloadingPanel()}
+                        {this.ServiceHealthCheck()}
                     </main>
                 </div>
                 <Footer/>
