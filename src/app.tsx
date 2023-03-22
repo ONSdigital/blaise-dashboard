@@ -14,7 +14,7 @@ import QuestionnaireCaseReportTable from "./components/questionnaireCaseReportTa
 import {refreshInterval} from "./client/refreshInterval";
 import { getMonitoring } from "./client/monitoring";
 import { MonitoringDataModel } from "./server/monitoringDataModel";
-import MonitoringUptimeChecksTable from "./components/monitoringUptimeChecksTable"
+import MonitoringUptimeChecksTable from "./components/monitoringUptimeChecksTable";
 
 const divStyle = {
     minHeight: "calc(67vh)",
