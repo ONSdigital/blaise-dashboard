@@ -1,6 +1,5 @@
 import React, { Component, ReactElement } from "react";
-import { ONSLoadingPanel, ONSPanel, ONSTable } from "blaise-design-system-react-components";
-import { refreshInterval } from "../client/refreshInterval";
+import { ONSPanel, ONSTable } from "blaise-design-system-react-components";
 import { MonitoringDataModel, UptimeCheck } from "../server/monitoringDataModel";
 import MonitoringUptimeChecks from "./monitoringUptimeChecks";
 
@@ -26,10 +25,6 @@ export default class MonitoringUptimeChecksTable extends Component<MonitoringUpt
 
     componentDidMount() {
         console.log("Getting monitoring data from google monitoring library");
-    
-        this.interval = setInterval(() => {
-        }, refreshInterval);
-        console.log("Got data for mount");
     }
 
     componentWillUnmount() {
@@ -48,15 +43,18 @@ export default class MonitoringUptimeChecksTable extends Component<MonitoringUpt
     }
 
     render(): ReactElement {
-         const uptimeChecksRows: ReactElement[] = [];
-        {this.props.monitoringData.map((obj, i) => {                  
-            // Return the element. Also pass key     
+        const uptimeChecksRows: ReactElement[] = [];
+        this.props.monitoringData.map((obj) => {     
             uptimeChecksRows.push(<MonitoringUptimeChecks
-                        key={obj.hostname}
-                        hostname={obj.hostname}
-                        eurBelgium={obj.regions[0].status}
-                        apacSingapore={obj.regions[1].status} usaOregon={obj.regions[2].status} usaVirginia={obj.regions[3].status}/>);
-         });}
+                key={obj.hostname}
+                hostname={obj.hostname}
+                eurBelgium={obj.regions[0].status}
+                apacSingapore={obj.regions[1].status}
+                usaOregon={obj.regions[2].status}
+                usaVirginia={obj.regions[3].status}
+            />);
+         });
+
         return (<>
             {this.errorPanel()}
             <ONSTable columns={["Service", "Eur-Belgium","Asia Pacific","North America", "South America"]} tableID="case-report-table">
