@@ -7,6 +7,7 @@ import { Config } from "./config";
 import BlaiseApiClient from "blaise-api-node-client";
 import caseReportHandler from "./handlers/reportHandler";
 import NodeCache from "node-cache";
+import monitoringHandler from "./handlers/monitoringHandler";
 
 function NewServer(blaiseApiClient: BlaiseApiClient, cache: NodeCache, config: Config): Express {
     const server = express();
@@ -22,6 +23,7 @@ function NewServer(blaiseApiClient: BlaiseApiClient, cache: NodeCache, config: C
     server.use("/", HealthCheckHandler());
     server.use("/", QuestionnaireListHandler(blaiseApiClient, cache, config));
     server.use("/", caseReportHandler(blaiseApiClient, cache, config));
+    server.use("/", monitoringHandler());
 
     //define entry point
     server.get("*", function (req: Request, res: Response) {
