@@ -43,17 +43,16 @@ export default class MonitoringUptimeChecksTable extends Component<MonitoringUpt
     }
 
     render(): ReactElement {
-        const uptimeChecksRows: ReactElement[] = [];
-        this.props.monitoringData.map((obj) => {     
-            uptimeChecksRows.push(<MonitoringUptimeChecks
+        const uptimeChecksRows: ReactElement[] = this.props.monitoringData.map((obj) => ( 
+            <MonitoringUptimeChecks
                 key={obj.hostname}
                 hostname={obj.hostname}
                 eurBelgium={obj.regions[0].status}
                 apacSingapore={obj.regions[1].status}
                 northAmerica={obj.regions[2].status}
                 southAmerica={obj.regions[3].status}
-            />);
-         });
+            />
+        ));
 
         return (<>
             {this.errorPanel()}
