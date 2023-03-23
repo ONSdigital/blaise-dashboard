@@ -13,7 +13,7 @@ type MonitoringUptimeChecksTableState = {
 }
 
 export default class MonitoringUptimeChecksTable extends Component<MonitoringUptimeChecksTableProps, MonitoringUptimeChecksTableState> {
-    interval!: ReturnType<typeof setInterval>;
+    //interval!: ReturnType<typeof setInterval>;
 
     constructor(props: MonitoringUptimeChecksTableProps) {
         super(props);
@@ -28,7 +28,7 @@ export default class MonitoringUptimeChecksTable extends Component<MonitoringUpt
     }
 
     componentWillUnmount() {
-        clearInterval(this.interval);
+       // clearInterval(this.interval);
     }
 
     errorPanel(): ReactElement | undefined {
@@ -50,8 +50,8 @@ export default class MonitoringUptimeChecksTable extends Component<MonitoringUpt
                 hostname={obj.hostname}
                 eurBelgium={obj.regions[0].status}
                 apacSingapore={obj.regions[1].status}
-                usaOregon={obj.regions[2].status}
-                usaVirginia={obj.regions[3].status}
+                northAmerica={obj.regions[2].status}
+                southAmerica={obj.regions[3].status}
             />);
          });
 

@@ -12,6 +12,6 @@ export type UptimeCheck = {
     hostname: string,
     eurBelgium : string , 
     apacSingapore : string,
-    usaOregon : string,
-    usaVirginia : string
+    northAmerica : string,
+    southAmerica : string
 }

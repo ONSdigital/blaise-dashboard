@@ -10,8 +10,7 @@ export default function NewMonitoringListHandler(): Router {
     return router.get("/api/monitoring", monitoringHandler.GetMonitoringData);
 }
  
-var regionsMonitored : string [] = ["eur-belgium", "apac-singapore", "usa-oregon","usa-virginia"];
-var uptimeChecksHostnames : string[];
+const regionsMonitored : string [] = ["eur-belgium", "apac-singapore", "usa-oregon","sa-brazil-sao_paulo"];
 
 export class MonitoringHandler {
     
@@ -22,7 +21,7 @@ export class MonitoringHandler {
 
     async GetMonitoringData(req: Request, res: Response): Promise<Response> {
         
-    const projectId = 'ons-blaise-v2-dev-sj01';
+    const projectId = "ons-blaise-v2-dev-sj01";
         
        try {
             const client = new monitoring.UptimeCheckServiceClient();
@@ -35,28 +34,27 @@ export class MonitoringHandler {
             const [uptimeCheckConfigs] = await client.listUptimeCheckConfigs(request);
 
             const monitoringDataResponse = uptimeCheckConfigs.map(async(uptimeCheckConfig) => {
-                var hostname = uptimeCheckConfig?.monitoredResource?.labels?.host!;
-                
+                const hostname = uptimeCheckConfig?.monitoredResource?.labels?.host!;
                 const regions = regionsMonitored.map(async (regionMonitored) => {
                     
                     //get timeSeries points
                     try{
                         const client = new monitoring.MetricServiceClient();
 
-                        var filter = 'metric.type="monitoring.googleapis.com/uptime_check/check_passed" resource.type="uptime_url" resource.label."host"="' + hostname +'" metric.label."checker_location"="' +regionMonitored+ '"';
+                        const filter = "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" resource.type=\"uptime_url\" resource.label.\"host\"=\"" + hostname +"\" metric.label.\"checker_location\"=\"" +regionMonitored+ "\"";
                         const request = {
                             name: client.projectPath(projectId),
                             filter: filter,
                             interval: {
                                 startTime: {
                                     // Limit results to the last 1 minutes
-                                    seconds: Date.now() / 1000 - 60 * 1,
+                                    seconds: Date.now() / 1000 - 60 * 1/2,
                                 },
                                 endTime: {
                                     seconds: Date.now() / 1000,
                                 }
                             }
-                        }
+                        };
             
                         // Writes time series data
                         const [timeSeries] = await client.listTimeSeries(request);
@@ -65,7 +63,7 @@ export class MonitoringHandler {
                         var region : Region = {
                             region : regionMonitored,
                             status :  timeSeries[0].points?.at(0)?.value?.boolValue == true ? "success" : "error" 
-                        }
+                        };
                         return region;
                     
                     }
@@ -76,15 +74,15 @@ export class MonitoringHandler {
                        var region : Region = {
                         region : regionMonitored,
                         status : "info"
-                    }
+                    };
                     return region;
                     }
 
                 });
-                var monitoringDataObject : MonitoringDataModel = {
+                const monitoringDataObject : MonitoringDataModel = {
                     hostname: hostname,
                     regions: await Promise.all(regions)
-                }
+                };
                 return monitoringDataObject;
 
             });
