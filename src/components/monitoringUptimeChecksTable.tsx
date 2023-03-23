@@ -13,7 +13,6 @@ type MonitoringUptimeChecksTableState = {
 }
 
 export default class MonitoringUptimeChecksTable extends Component<MonitoringUptimeChecksTableProps, MonitoringUptimeChecksTableState> {
-    //interval!: ReturnType<typeof setInterval>;
 
     constructor(props: MonitoringUptimeChecksTableProps) {
         super(props);
@@ -23,13 +22,13 @@ export default class MonitoringUptimeChecksTable extends Component<MonitoringUpt
         };
     }
 
-    componentDidMount() {
-        console.log("Getting monitoring data from google monitoring library");
-    }
+    // componentDidMount() {
+    //     console.log("Getting monitoring data from google monitoring library");
+    // }
 
-    componentWillUnmount() {
-       // clearInterval(this.interval);
-    }
+    // componentWillUnmount() {
+    //    // clearInterval(this.interval);
+    // }
 
     errorPanel(): ReactElement | undefined {
         if (this.state.loaded === false) {
