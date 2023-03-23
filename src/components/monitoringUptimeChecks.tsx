@@ -5,8 +5,8 @@ type MonitoringUptimeChecksProps = {
     hostname: string,
     eurBelgium : string,
     apacSingapore : string,
-    usaOregon : string,
-    usaVirginia : string
+    northAmerica : string,
+    southAmerica : string
 }
 
 type MonitoringUptimeChecksState = {
@@ -64,12 +64,12 @@ export default class MonitoringUptimeChecks extends Component<MonitoringUptimeCh
                 </td>
                 <td className="ons-table__cell" data-testid={`questionnaire-case-report-complete-${this.props.hostname}`}>
                 <span
-                className={`ons-status ons-status--${this.getStatusColor(this.props.usaOregon)}`}>
+                className={`ons-status ons-status--${this.getStatusColor(this.props.northAmerica)}`}>
             </span>
                 </td>
                 <td className="ons-table__cell" data-testid={`questionnaire-case-report-complete-${this.props.hostname}`}>
                 <span
-                className={`ons-status ons-status--${this.getStatusColor(this.props.usaVirginia)}`}>
+                className={`ons-status ons-status--${this.getStatusColor(this.props.southAmerica)}`}>
             </span>
                 </td>
                 
