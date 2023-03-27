@@ -28,20 +28,17 @@ export class MonitoringHandler {
                 parent: uptimeclient.projectPath(projectId)
             };
 
-            // Retrieves an uptime check config
+            // Retrieves an uptime check config with hostnames-services like dqs, bus, bum, dashboard etc
             const [uptimeCheckConfigs] = await uptimeclient.listUptimeCheckConfigs(request);
 
             const monitoringDataResponse = uptimeCheckConfigs.map(fetchHostnames);
-            console.log(process.memoryUsage());
            return res.status(200).json(await Promise.all(monitoringDataResponse));
         } catch (error: any) {
             console.error(`Response: ${error}`);
             return res.status(200).json("Failed to get monitoring uptimeChecks config data");
         }
- }// Function end
-
-
-}//Class end
+    }
+}
 
 async function fetchHostnames(uptimeCheckConfig: google.monitoring.v3.IUptimeCheckConfig) {
     const hostname = uptimeCheckConfig?.monitoredResource?.labels?.host!;
@@ -51,14 +48,12 @@ async function fetchHostnames(uptimeCheckConfig: google.monitoring.v3.IUptimeChe
         regions: await Promise.all(regions)
     };
     return monitoringDataObject;
-
 }
 
 async function fetchTimeSeriesPoints (regionMonitored : string, hostname : string) {
-        
     //get timeSeries points
     try{
-        const filter = "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" resource.type=\"uptime_url\" resource.label.\"host\"=\"" + hostname +"\" metric.label.\"checker_location\"=\"" +regionMonitored+ "\"";
+        const filter = "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" resource.type=\"uptime_url\" resource.label.\"host\"=\"" + hostname + "\" metric.label.\"checker_location\"=\"" + regionMonitored+ "\"";
         const request = {
             name: metricsClient.projectPath(projectId),
             filter: filter,
@@ -72,26 +67,23 @@ async function fetchTimeSeriesPoints (regionMonitored : string, hostname : strin
                 }
             }
         };
-
         // Writes time series data
         const [timeSeries] = await metricsClient.listTimeSeries(request);
 
-        console.log("Status: "+ JSON.stringify( timeSeries[0].points?.at(0)?.value?.boolValue));
+        console.log("Status: for "+ hostname + " in region = "+ regionMonitored + " is " + JSON.stringify( timeSeries[0].points?.at(0)?.value?.boolValue));
         var region : Region = {
             region : regionMonitored,
             status :  timeSeries[0].points?.at(0)?.value?.boolValue == true ? "success" : "error" 
         };
         return region;
     }
-
     catch (error: any) {
         console.error(`Response: ${error}`);
-       //return `Failed to get timeSeries points data`;
+        console.log("Failed to get timeSeries points data");
        var region : Region = {
         region : regionMonitored,
-        status : "info"
-    };
-    return region;
+        status : "requestFailed"
+        };
+        return region;
     }
-
 }
