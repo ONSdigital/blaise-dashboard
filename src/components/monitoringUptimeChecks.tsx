@@ -34,7 +34,7 @@ export default class MonitoringUptimeChecks extends Component<MonitoringUptimeCh
         case "error":
             return "error";    
         default:
-            return "info";
+            return "requestFailed";
         }
     }
 
