@@ -35,7 +35,7 @@ export class MonitoringHandler {
            return res.status(200).json(await Promise.all(monitoringDataResponse));
         } catch (error: any) {
             console.error(`Response: ${error}`);
-            return res.status(200).json("Failed to get monitoring uptimeChecks config data");
+            return res.status(500).json("Failed to get monitoring uptimeChecks config data");
         }
     }
 }

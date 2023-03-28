@@ -22,14 +22,6 @@ export default class MonitoringUptimeChecksTable extends Component<MonitoringUpt
         };
     }
 
-    // componentDidMount() {
-    //     console.log("Getting monitoring data from google monitoring library");
-    // }
-
-    // componentWillUnmount() {
-    //    // clearInterval(this.interval);
-    // }
-
     errorPanel(): ReactElement | undefined {
         if (this.state.loaded === false) {
             return undefined;
@@ -55,7 +47,7 @@ export default class MonitoringUptimeChecksTable extends Component<MonitoringUpt
 
         return (<>
             {this.errorPanel()}
-            <ONSTable columns={["Service", "Eur-Belgium","Asia Pacific","North America", "South America"]} tableID="case-report-table">
+            <ONSTable columns={["Service", "Eur-Belgium","Asia Pacific","North America", "South America"]} tableID="healthCheck-table">
                 <>{uptimeChecksRows}</>
             </ONSTable>
         </>);
