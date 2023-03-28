@@ -25,7 +25,8 @@ type AppState = {
     loading: boolean,
     errored: boolean,
     uptimeChecks: MonitoringDataModel[],
-    uptimeChecksLoading : boolean
+    uptimeChecksLoading : boolean,
+    uptimeChecksErrored : boolean
 }
 
 export default class App extends Component<unknown, AppState> {
@@ -38,7 +39,8 @@ export default class App extends Component<unknown, AppState> {
             loading: true,
             errored: false,
             uptimeChecksLoading : true,
-            uptimeChecks : []
+            uptimeChecks : [],
+            uptimeChecksErrored : false
         };
     }
 
@@ -66,6 +68,10 @@ export default class App extends Component<unknown, AppState> {
             });
         }).catch((reason: unknown) => {
             console.error(reason);
+            this.setState({
+                uptimeChecks: [],
+                uptimeChecksLoading : true
+            });
         });
     }
 
@@ -97,6 +103,13 @@ export default class App extends Component<unknown, AppState> {
         }
         return undefined;
     }
+    uptimeChecksErrorPanel(): ReactElement | undefined {
+        if (this.state.uptimeChecksErrored) {
+            return <ONSPanel status="error">Failed to get uptime checks.</ONSPanel>;
+        }
+        return undefined;
+    }
+
 
     loadingPanel(): ReactElement | undefined {
         if (this.state.loading && !this.state.errored) {
@@ -150,7 +163,7 @@ export default class App extends Component<unknown, AppState> {
         if (this.state.uptimeChecksLoading) {
             return undefined;
         }
-        if (this.state.uptimeChecks.length === 0 || this.state.uptimeChecksLoading) {
+        if (this.state.uptimeChecks.length === 0) {
             return <ONSPanel>No Uptime checks data.</ONSPanel>;
         }
         return <MonitoringUptimeChecksTable monitoringData={this.state.uptimeChecks}/>;
@@ -170,6 +183,7 @@ export default class App extends Component<unknown, AppState> {
                         {this.completedCaseDefinition()}
                         <h2 className="ons-u-mt-m">Service Health Check Information</h2>
                         {this.UptimeChecksloadingPanel()}
+                        {this.uptimeChecksErrorPanel()}
                         {this.ServiceHealthCheck()}
                     </main>
                 </div>

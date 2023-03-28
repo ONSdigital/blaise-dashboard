@@ -49,30 +49,29 @@ export default class MonitoringUptimeChecks extends Component<MonitoringUptimeCh
 
         return (
             <tr className="ons-table__row" key={this.props.hostname} data-testid={"questionnaire-table-row"}>
-                <td className="ons-table__cell" data-testid={`questionnaire-case-report-questionnaire-${this.props.hostname}`}>
+                <td className="ons-table__cell" data-testid={`uptimecheck-${this.props.hostname}`}>
                     {this.props.hostname}
                 </td>
-                <td className="ons-table__cell" data-testid={`questionnaire-case-report-total-${this.props.hostname}`}>
-                    <span
-                className={`ons-status ons-status--${this.getStatusColor(this.props.eurBelgium)}`}>
-            </span>
+                <td className="ons-table__cell">
+                    <span data-testid={`uptimecheck-europe`}
+                        className={`ons-status ons-status--${this.getStatusColor(this.props.eurBelgium)}`}>
+                    </span>
                 </td>
-                <td className="ons-table__cell" data-testid={`questionnaire-case-report-complete-${this.props.hostname}`}>
-                <span
-                className={`ons-status ons-status--${this.getStatusColor(this.props.apacSingapore)}`}>
-            </span>
+                <td className="ons-table__cell">
+                    <span data-testid={`uptimecheck-asia`}
+                        className={`ons-status ons-status--${this.getStatusColor(this.props.apacSingapore)}`}>
+                    </span>
                 </td>
-                <td className="ons-table__cell" data-testid={`questionnaire-case-report-complete-${this.props.hostname}`}>
-                <span
-                className={`ons-status ons-status--${this.getStatusColor(this.props.northAmerica)}`}>
-            </span>
+                <td className="ons-table__cell">
+                    <span data-testid={`uptimecheck-northAmerica`}
+                        className={`ons-status ons-status--${this.getStatusColor(this.props.northAmerica)}`}>
+                    </span>
                 </td>
-                <td className="ons-table__cell" data-testid={`questionnaire-case-report-complete-${this.props.hostname}`}>
-                <span
-                className={`ons-status ons-status--${this.getStatusColor(this.props.southAmerica)}`}>
-            </span>
+                <td className="ons-table__cell">
+                    <span data-testid={`uptimecheck-southAmerica`}
+                        className={`ons-status ons-status--${this.getStatusColor(this.props.southAmerica)}`}>
+                    </span>
                 </td>
-                
             </tr>
         );
     }

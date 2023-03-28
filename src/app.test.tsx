@@ -15,11 +15,15 @@ jest.mock("./client/questionnaires");
 import { getQuestionnaires } from "./client/questionnaires";
 import { Questionnaire } from "blaise-api-node-client";
 
+jest.mock("./client/monitoring");
+import { getMonitoring } from "./client/monitoring";
+import { MonitoringDataModel } from "./server/monitoringDataModel";
+
 const flushPromises = () => new Promise(setImmediate);
 
 const getCaseCompletionReportMock = getCaseCompletionReport as jest.Mock<Promise<CaseCompletionReport>>;
 const getQuestionnairesMock = getQuestionnaires as jest.Mock<Promise<Questionnaire[]>>;
-
+const getMonitoringMock = getMonitoring as jest.Mock<Promise<MonitoringDataModel[]>>;
 
 describe("App", () => {
   const caseCompletionReport = {
@@ -43,7 +47,8 @@ describe("App", () => {
 
     expect(screen.queryByText(/Loading/i)).toBeDefined();
     expect(screen.queryByText(/What is a completed case/i)).toBeDefined();
-
+    expect(screen.getByText("Service Health Check Information")).toBeDefined();
+    expect(screen.queryByText(/Getting uptime checks for services/i)).toBeDefined();
     await act(async () => {
       await flushPromises();
     });
@@ -56,6 +61,7 @@ describe("App", () => {
   describe("when getting case completion reports errors", () => {
     it("renders an error panel", async () => {
       getQuestionnairesMock.mockImplementation(() => Promise.reject("Cannot get questionnaires"));
+      getMonitoringMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -73,6 +79,7 @@ describe("App", () => {
     it("renders an info panel", async () => {
       getCaseCompletionReportMock.mockImplementation(() => Promise.resolve(caseCompletionReport));
       getQuestionnairesMock.mockImplementation(() => Promise.resolve([]));
+      getMonitoringMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -86,4 +93,21 @@ describe("App", () => {
       });
     });
   });
+
+  describe("when no uptime checks are returned or empty response", () => {
+    it("renders an info panel", async () => {
+      getCaseCompletionReportMock.mockImplementation(() => Promise.resolve(caseCompletionReport));
+      getQuestionnairesMock.mockImplementation(() => Promise.resolve([]));
+      getMonitoringMock.mockImplementation(() => Promise.resolve([]));
+
+      render(
+        <App />
+      );
+
+      await waitFor(() => {
+        expect(screen.getByText("No Uptime checks data.")).toBeDefined();
+      });
+    });
+  });
+
 });
