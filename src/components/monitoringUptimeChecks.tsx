@@ -48,27 +48,27 @@ export default class MonitoringUptimeChecks extends Component<MonitoringUptimeCh
         // | dev-sj01-bts.social-surveys.gcp.onsdigital.uk      | true    | true | true |  true |
 
         return (
-            <tr className="ons-table__row" key={this.props.hostname} data-testid={"questionnaire-table-row"}>
+            <tr className="ons-table__row" key={this.props.hostname} data-testid={"monitoring-table-row"}>
                 <td className="ons-table__cell" data-testid={`uptimecheck-${this.props.hostname}`}>
                     {this.props.hostname}
                 </td>
                 <td className="ons-table__cell">
-                    <span data-testid={`uptimecheck-europe`}
+                    <span data-testid={"uptimecheck-europe"}
                         className={`ons-status ons-status--${this.getStatusColor(this.props.eurBelgium)}`}>
                     </span>
                 </td>
                 <td className="ons-table__cell">
-                    <span data-testid={`uptimecheck-asia`}
+                    <span data-testid={"uptimecheck-asia"}
                         className={`ons-status ons-status--${this.getStatusColor(this.props.apacSingapore)}`}>
                     </span>
                 </td>
                 <td className="ons-table__cell">
-                    <span data-testid={`uptimecheck-northAmerica`}
+                    <span data-testid={"uptimecheck-northAmerica"}
                         className={`ons-status ons-status--${this.getStatusColor(this.props.northAmerica)}`}>
                     </span>
                 </td>
                 <td className="ons-table__cell">
-                    <span data-testid={`uptimecheck-southAmerica`}
+                    <span data-testid={"uptimecheck-southAmerica"}
                         className={`ons-status ons-status--${this.getStatusColor(this.props.southAmerica)}`}>
                     </span>
                 </td>

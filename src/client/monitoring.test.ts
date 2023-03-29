@@ -13,7 +13,6 @@ describe("getMonitoring tests", () => {
 
   it("It should return uptime checks", async () => {
     mock.onGet("/api/monitoring").reply(200, []);
-
     const result = await getMonitoring();
     expect(result).toStrictEqual([]);
   });

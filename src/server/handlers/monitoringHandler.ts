@@ -1,7 +1,6 @@
 import express, { Request, Response, Router } from "express";
 import monitoring from "@google-cloud/monitoring";
-import { MonitoringDataModel } from "../monitoringDataModel";
-import { Region } from "../monitoringDataModel";
+import { MonitoringDataModel, Region} from "../monitoringDataModel";
 import { google } from "@google-cloud/monitoring/build/protos/protos";
 
 export default function NewMonitoringListHandler(): Router {
@@ -23,6 +22,7 @@ export class MonitoringHandler {
     }
 
     async GetMonitoringData(req: Request, res: Response): Promise<Response> {
+        
        try {
             const request = {
                 parent: uptimeclient.projectPath(projectId)
@@ -30,7 +30,7 @@ export class MonitoringHandler {
 
             // Retrieves an uptime check config with hostnames-services like dqs, bus, bum, dashboard etc
             const [uptimeCheckConfigs] = await uptimeclient.listUptimeCheckConfigs(request);
-
+            return res.status(200).json("success");
             const monitoringDataResponse = uptimeCheckConfigs.map(fetchHostnames);
            return res.status(200).json(await Promise.all(monitoringDataResponse));
         } catch (error: any) {
