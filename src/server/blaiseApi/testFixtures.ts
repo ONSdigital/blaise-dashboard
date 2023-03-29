@@ -55,15 +55,15 @@ export const mockHealthCheckList = [
         hostname: "dev-bts.social-surveys.gcp.onsdigital.uk",
         regions:[
             {
-                region: "Europe",
+                region: "europe",
                 status: "success"
             },
             {
-                region: "Apac-Singapore",
+                region: "apac-singapore",
                 status: "error"
             },
             {
-                region: "USA-Oregon",
+                region: "usa-oregon",
                 status: "success"
             },
             {

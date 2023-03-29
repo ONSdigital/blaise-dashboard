@@ -49,7 +49,7 @@ exports[`Monitoring Uptime Checks Table renders a table row for the uptime check
   >
     <tr
       class="ons-table__row"
-      data-testid="questionnaire-table-row"
+      data-testid="monitoring-table-row"
     >
       <td
         class="ons-table__cell"
