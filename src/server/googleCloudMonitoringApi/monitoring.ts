@@ -11,22 +11,19 @@ export async function getMonitoringUptimeCheckTimeSeries(
     projectId: string
 ): Promise<MonitoringDataModel[]> {
     
-    // try 
-    // {
-       const [uptimeCheckConfigs] = await getUptimeChecksConfigs(projectId);
-    //     const monitoringDataResponse = uptimeCheckConfigs.map(fetchHostnames(projectId));
-       
-    //     return await Promise.all(monitoringDataResponse);
-    // } catch (error: any) {
-    //     console.error(`Response: ${error}`);
-    //     return [{"hostname":"bts","regions":[{"region":"europe", "status":"false"}]}];
-    // }
-    return [];
+    try 
+    {
+        const [uptimeCheckConfigs] = await getUptimeChecksConfigs(projectId);
+        const monitoringDataResponse = uptimeCheckConfigs.map((uptimeCheckConfig) => fetchHostnames(uptimeCheckConfig, projectId));
+
+        return await Promise.all(monitoringDataResponse);
+    } catch (error: any) {
+       // console.error(`Response: ${error}`);
+        return [{"hostname":"unknown","regions":[{"region":"unknown", "status":"false"}]}];
+    }
 }
 
- var fetchHostnames = function getData(projectId: string){
-    return async function(uptimeCheckConfig:google.monitoring.v3.IUptimeCheckConfig) 
-    {
+    async function fetchHostnames ( uptimeCheckConfig:google.monitoring.v3.IUptimeCheckConfig, projectId: string) {
         const hostname = uptimeCheckConfig?.monitoredResource?.labels?.host!;
         const regions = regionsMonitored.map((region) => fetchTimeSeriesPoints(region, hostname, projectId));
         const monitoringDataObject : MonitoringDataModel = {
@@ -36,7 +33,19 @@ export async function getMonitoringUptimeCheckTimeSeries(
         return monitoringDataObject;
     };
 
-};
+//  var fetchHostnames = function getData(projectId: string){
+//     return async function(uptimeCheckConfig:google.monitoring.v3.IUptimeCheckConfig) 
+//     {
+//         const hostname = uptimeCheckConfig?.monitoredResource?.labels?.host!;
+//         const regions = regionsMonitored.map((region) => fetchTimeSeriesPoints(region, hostname, projectId));
+//         const monitoringDataObject : MonitoringDataModel = {
+//             hostname: hostname,
+//             regions: await Promise.all(regions)
+//         };
+//         return monitoringDataObject;
+//     };
+
+// };
 
  async function fetchTimeSeriesPoints ( regionMonitored : string, hostname : string, projectId: string) {
     //get timeSeries points
