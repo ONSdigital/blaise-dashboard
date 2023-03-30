@@ -5,35 +5,26 @@ import { google } from "@google-cloud/monitoring/build/protos/protos";
 const uptimeclient = new monitoring.UptimeCheckServiceClient();
 const metricsClient = new monitoring.MetricServiceClient();
 
-
 const regionsMonitored : string [] = ["eur-belgium", "apac-singapore", "usa-oregon","sa-brazil-sao_paulo"];
-//const projectId = "ons-blaise-v2-dev-sj01";
-
 
 export async function getMonitoringUptimeCheckTimeSeries(
-    projectId: string,
-    regionsMonitored: string[]
+    projectId: string
 ): Promise<MonitoringDataModel[]> {
-
-    try 
-    {
-        const request = {
-            parent: uptimeclient.projectPath(projectId)
-        };
-
-        // Retrieves an uptime check config with hostnames-services like dqs, bus, bum, dashboard etc
-        const [uptimeCheckConfigs] = await uptimeclient.listUptimeCheckConfigs(request);
-        const monitoringDataResponse = uptimeCheckConfigs.map(fetchHostnames(projectId));
+    
+    // try 
+    // {
+       const [uptimeCheckConfigs] = await getUptimeChecksConfigs(projectId);
+    //     const monitoringDataResponse = uptimeCheckConfigs.map(fetchHostnames(projectId));
        
-        return await Promise.all(monitoringDataResponse);
-    } catch (error: any) {
-        console.error(`Response: ${error}`);
-        return [{"hostname":"bts","regions":[{"region":"europe", "status":"false"}]}];
-    }
+    //     return await Promise.all(monitoringDataResponse);
+    // } catch (error: any) {
+    //     console.error(`Response: ${error}`);
+    //     return [{"hostname":"bts","regions":[{"region":"europe", "status":"false"}]}];
+    // }
+    return [];
 }
 
  var fetchHostnames = function getData(projectId: string){
-
     return async function(uptimeCheckConfig:google.monitoring.v3.IUptimeCheckConfig) 
     {
         const hostname = uptimeCheckConfig?.monitoredResource?.labels?.host!;
@@ -51,21 +42,10 @@ export async function getMonitoringUptimeCheckTimeSeries(
     //get timeSeries points
     try{
         const filter = "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" resource.type=\"uptime_url\" resource.label.\"host\"=\"" + hostname + "\" metric.label.\"checker_location\"=\"" + regionMonitored+ "\"";
-        const request = {
-            name: metricsClient.projectPath(projectId),
-            filter: filter,
-            interval: {
-                startTime: {
-                    // Limit results to the last 1 minutes
-                    seconds: Date.now() / 1000 - 60 * 1/2,
-                },
-                endTime: {
-                    seconds: Date.now() / 1000,
-                }
-            }
-        };
-        // Writes time series data
-        const [timeSeries] = await metricsClient.listTimeSeries(request);
+        const startTime = Date.now() / 1000 - 60 * 1/2;
+        const endTime = Date.now() / 1000;
+        
+        const [timeSeries] = await listTimeSeries(filter, startTime, endTime, projectId);
 
         console.log("Status: for "+ hostname + " in region = "+ regionMonitored + " is " + JSON.stringify( timeSeries[0].points?.at(0)?.value?.boolValue));
         var region : Region = {
@@ -83,4 +63,34 @@ export async function getMonitoringUptimeCheckTimeSeries(
         };
         return region;
     }
+}
+
+//Google calling functions -- cannot be testes :) 
+
+export async function getUptimeChecksConfigs (projectId: string){
+
+    const request = {
+        parent: uptimeclient.projectPath(projectId)
+    };
+
+    // Retrieves an uptime check config with hostnames-services like dqs, bus, bum, dashboard etc
+    return uptimeclient.listUptimeCheckConfigs(request);
+}
+
+export async function listTimeSeries (filter : string,startTime: number , endTime : number, projectId : string ){
+    const request = {
+        name: metricsClient.projectPath(projectId),
+        filter: filter,
+        interval: {
+            startTime: {
+                // Limit results to the last 30 seconds
+                seconds: startTime,
+            },
+            endTime: {
+                seconds: endTime
+            }
+        }
+    };
+    // Writes time series data
+    return metricsClient.listTimeSeries(request);
 }
