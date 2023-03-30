@@ -22,10 +22,12 @@ const getMonitoringUptimeCheckTimeSeriesMock = getMonitoringUptimeCheckTimeSerie
 describe("Get all uptime checks from API", () => {
     
     it("should return a 200 status and a json list of 1 items when API returns a 1 item list", async () => {
+        process.env.GOOGLE_CLOUD_PROJECT = "example-project-id";
         getMonitoringUptimeCheckTimeSeriesMock.mockReturnValue(Promise.resolve(mockHealthCheckList));
         const response = await request.get("/api/monitoring");
         expect(response.status).toEqual(200); 
         expect(response.body).toEqual(mockHealthCheckList);
+        expect(getMonitoringUptimeCheckTimeSeriesMock).toHaveBeenCalledWith("example-project-id");
     });
 
     it("should return a 500 status direct from the API", async () => {

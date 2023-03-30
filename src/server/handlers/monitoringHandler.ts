@@ -7,9 +7,6 @@ export default function NewMonitoringListHandler(): Router {
     const monitoringHandler = new MonitoringHandler();
     return router.get("/api/monitoring", monitoringHandler.GetMonitoringData);
 }
- 
-const regionsMonitored : string [] = ["eur-belgium", "apac-singapore", "usa-oregon","sa-brazil-sao_paulo"];
-const projectId = "ons-blaise-v2-dev-sj01";
 
 export class MonitoringHandler {
     
@@ -20,7 +17,7 @@ export class MonitoringHandler {
     async GetMonitoringData(req: Request, res: Response): Promise<Response> {
         
         try {
-            return res.status(200).json(await getMonitoringUptimeCheckTimeSeries(projectId,regionsMonitored));
+            return res.status(200).json(await getMonitoringUptimeCheckTimeSeries(process.env.GOOGLE_CLOUD_PROJECT || "no_project_id"));
         } catch (error: any) {
             console.error(`Response: ${error}`);
             return res.status(500).json("Failed to get monitoring uptimeChecks config data");
