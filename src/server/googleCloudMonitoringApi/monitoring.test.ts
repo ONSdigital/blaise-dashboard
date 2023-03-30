@@ -1,32 +1,44 @@
-import * as monitoring from "./monitoring";
-import { getMonitoringUptimeCheckTimeSeries } from "./monitoring";
+import {getMonitoringUptimeCheckTimeSeries} from "./monitoring";
 
-import { mockHealthCheckList } from "../blaiseApi/testFixtures";
-import { MonitoringDataModel } from "../monitoringDataModel";
-import { google } from "@google-cloud/monitoring/build/protos/protos";
-
-type GetUptimeChecksConfigsResult = [google.monitoring.v3.IUptimeCheckConfig[], google.monitoring.v3.IListUptimeCheckConfigsRequest | null, google.monitoring.v3.IListUptimeCheckConfigsResponse];
-
-jest.spyOn(monitoring , "getUptimeChecksConfigs").mockReturnValue(Promise.resolve( [[], null, []] as GetUptimeChecksConfigsResult));
-jest.spyOn(monitoring , "listTimeSeries").mockReturnValue(Promise.resolve( [[], null, []]  ) as ReturnType <typeof monitoring.listTimeSeries> );
-
+const mockGoogleMonitoring = {
+    getUptimeChecksConfigs: jest.fn(),
+    listTimeSeries: jest.fn(),
+};
 
 describe("Get all uptime checks from API", () => {
-    
-    it("should return a 200 status and a json list of 1 items when API returns a 1 item list", async () => {
-        getMonitoringUptimeCheckTimeSeries("anything");
+
+    it("should return success statuses", async () => {
+        mockGoogleMonitoring.getUptimeChecksConfigs.mockReturnValue(
+            Promise.resolve([
+                {monitoredResource: {labels: {host: "example-host"}}}
+            ])
+        );
+        mockGoogleMonitoring.listTimeSeries.mockImplementation(
+            (filter, hostname, regionMonitored) => Promise.resolve(
+                [
+                    {points: [{value: {boolValue: true}}]}
+                ]
+            )
+        );
+        const result = await getMonitoringUptimeCheckTimeSeries(mockGoogleMonitoring);
+        expect(result).toEqual([
+            {
+                "hostname": "example-host",
+                "regions": [
+                    {"region": "eur-belgium", "status": "success"},
+                    {"region": "apac-singapore", "status": "success"},
+                    {"region": "usa-oregon", "status": "success"},
+                    {"region": "sa-brazil-sao_paulo", "status": "success"}
+                ]
+            }
+        ]);
     });
 
-    // it("should return a 500 status direct from the API", async () => {
-    //     getMonitoringUptimeCheckTimeSeriesMock.mockImplementation(() => Promise.reject("Error getting uptime checks"));
-    //     const response = await request.get("/api/monitoring");
-    //     expect(response.status).toEqual(500); 
-    //     expect(response.body).toEqual("Failed to get monitoring uptimeChecks config data");
-    // });
+    // TODO: write more tests
 
     afterEach(() => {
         jest.clearAllMocks();
         jest.resetModules();
-       
+
     });
 });
