@@ -1,30 +1,111 @@
-import * as monitoring from "./monitoring";
-import { getMonitoringUptimeCheckTimeSeries } from "./monitoring";
+import {getMonitoringUptimeCheckTimeSeries} from "./monitoring";
 
-import { mockHealthCheckList } from "../blaiseApi/testFixtures";
-import { MonitoringDataModel } from "../monitoringDataModel";
-import { google } from "@google-cloud/monitoring/build/protos/protos";
-
-type GetUptimeChecksConfigsResult = [google.monitoring.v3.IUptimeCheckConfig[], google.monitoring.v3.IListUptimeCheckConfigsRequest | null, google.monitoring.v3.IListUptimeCheckConfigsResponse];
-
-jest.spyOn(monitoring , "getUptimeChecksConfigs").mockReturnValue(Promise.resolve( [[], null, []] as GetUptimeChecksConfigsResult));
-//jest.spyOn(monitoring , "listTimeSeries").mockReturnValue(Promise.resolve( [[], null, []]  ) as ReturnType <typeof monitoring.listTimeSeries> );
-
-import { getUptimeChecksConfigs } from "./monitoring";
-const getUptimeChecksConfigsMock = getUptimeChecksConfigs as unknown as jest.Mock<Promise<GetUptimeChecksConfigsResult[]>>;
-
+const mockGoogleMonitoring = {
+    getUptimeChecksConfigs: jest.fn(),
+    listTimeSeries: jest.fn(),
+};
 
 describe("Get all uptime checks from API", () => {
-    
-    it("should return a 200 status and a json list of 1 items when API returns a 1 item list", async () => {
-        getUptimeChecksConfigsMock.mockImplementation(() => Promise.resolve([]));
-        const response = await getMonitoringUptimeCheckTimeSeries("ons-blaise-v2-dev-sj02");
-        expect(response).toStrictEqual([{"hostname":"unknown","regions":[{"region":"unknown", "status":"false"}]}]);
+    it("should return success statuses", async () => {
+        mockGoogleMonitoring.getUptimeChecksConfigs.mockReturnValue(
+            Promise.resolve([
+                {monitoredResource: {labels: {host: "example-host"}}}
+            ])
+        );
+        mockGoogleMonitoring.listTimeSeries.mockImplementation(
+            (filter, hostname, regionMonitored) => Promise.resolve(
+                [
+                    {points: [{value: {boolValue: true}}]}
+                ]
+            )
+        );
+        const result = await getMonitoringUptimeCheckTimeSeries(mockGoogleMonitoring);
+        expect(result).toEqual([
+            {
+                "hostname": "example-host",
+                "regions": [
+                    {"region": "eur-belgium", "status": "success"},
+                    {"region": "apac-singapore", "status": "success"},
+                    {"region": "usa-oregon", "status": "success"},
+                    {"region": "sa-brazil-sao_paulo", "status": "success"}
+                ]
+            }
+        ]);
     });
 
-    afterEach(() => {
+     // TODO: write more tests
+
+     it("should return error statuses if coudnt get valid time series points", async () => {
+        mockGoogleMonitoring.getUptimeChecksConfigs.mockReturnValue(
+            Promise.resolve([
+                {monitoredResource: {labels: {host: "example-host"}}}
+            ])
+        );
+        mockGoogleMonitoring.listTimeSeries.mockImplementation(
+            (filter, hostname, regionMonitored) => Promise.resolve(
+                [
+                    "Failed to get time series points"
+                ]
+            )
+        );
+        const result = await getMonitoringUptimeCheckTimeSeries(mockGoogleMonitoring);
+        expect(result).toEqual([{"hostname": "example-host", 
+        "regions": 
+        [{"region": "eur-belgium", "status": "error"}, 
+        {"region": "apac-singapore", "status": "error"}, 
+        {"region": "usa-oregon", "status": "error"}, 
+        {"region": "sa-brazil-sao_paulo", "status": "error"}]}]);
+    });
+
+
+    it("should return error statuses if coudnt get time series points for wrong hostname provided", async () => {
+        mockGoogleMonitoring.getUptimeChecksConfigs.mockReturnValue(
+            Promise.resolve([
+                {monitoredResource: {labels: {host: null}}}
+            ])
+        );
+        mockGoogleMonitoring.listTimeSeries.mockImplementation(
+            (filter, hostname, regionMonitored) => Promise.resolve(
+                [
+                    "Failed to get time series points"
+                ]
+            )
+        );
+        const result = await getMonitoringUptimeCheckTimeSeries(mockGoogleMonitoring);
+        expect(result).toEqual([{"hostname": null, 
+        "regions": 
+        [{"region": "eur-belgium", "status": "error"}, 
+        {"region": "apac-singapore", "status": "error"}, 
+        {"region": "usa-oregon", "status": "error"}, 
+        {"region": "sa-brazil-sao_paulo", "status": "error"}]}]);
+    });
+
+    it("should return requestFailed statuses if coudnt get time series points for any other reason", async () => {
+        mockGoogleMonitoring.getUptimeChecksConfigs.mockReturnValue(
+            Promise.resolve([
+                {monitoredResource: {labels: {host: "example-host"}}}
+            ])
+        );
+        mockGoogleMonitoring.listTimeSeries.mockImplementation(
+            (filter, hostname, regionMonitored) => Promise.resolve(
+                [
+                    null
+                ]
+            )
+        );
+        const result = await getMonitoringUptimeCheckTimeSeries(mockGoogleMonitoring);
+        expect(result).toEqual([{"hostname": "example-host", 
+        "regions": 
+        [{"region": "eur-belgium", "status": "requestFailed"}, 
+        {"region": "apac-singapore", "status": "requestFailed"}, 
+        {"region": "usa-oregon", "status": "requestFailed"}, 
+        {"region": "sa-brazil-sao_paulo", "status": "requestFailed"}]}]);
+    });
+
+     afterEach(() => {
         jest.clearAllMocks();
         jest.resetModules();
        
+
     });
 });
