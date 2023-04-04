@@ -10,8 +10,8 @@ export type Region = {
 
 export type UptimeCheck = {
     hostname: string,
-    eurBelgium : string , 
-    apacSingapore : string,
-    northAmerica : string,
-    southAmerica : string
+    eurBelgium: string , 
+    apacSingapore: string,
+    northAmerica: string,
+    southAmerica: string
 }

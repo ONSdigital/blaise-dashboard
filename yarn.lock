@@ -2788,9 +2788,9 @@ axe-core@^4.6.2:
   integrity sha512-/BQzOX780JhsxDnPpH4ZiyrJAzcd8AfzFPkv+89veFSr1rcMjuq2JDCwypKaPeB6ljHp9KjXhPpjgCvQlWYuqg==
 
 axios-mock-adapter@^1.20.0:
-  version "1.21.3"
-  resolved "https://registry.yarnpkg.com/axios-mock-adapter/-/axios-mock-adapter-1.21.3.tgz#057fcae78ddd1f358a095e9b71094bcd518d6961"
-  integrity sha512-cdrQs/BqiJq4qn5EvaUUKDCaSor2j0KKW5tMtq5lqfTauxLRownBlzUNoLe+WKRoDrrXXXbtXTbmKpWFdL/NJw==
+  version "1.21.4"
+  resolved "https://registry.yarnpkg.com/axios-mock-adapter/-/axios-mock-adapter-1.21.4.tgz#ced09b54b245b338422e3af425ae529bfa26e051"
+  integrity sha512-ztnENm28ONAKeRXC/6SUW6pcsaXbThKq93MRDRAA47LYTzrGSDoO/DCr1NHz7jApEl95DrBoGPvZ0r9xtSbjqw==
   dependencies:
     fast-deep-equal "^3.1.3"
     is-buffer "^2.0.5"
@@ -3627,9 +3627,9 @@ css-what@^6.0.1:
   integrity sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw==
 
 cssdb@^7.1.0:
-  version "7.5.2"
-  resolved "https://registry.yarnpkg.com/cssdb/-/cssdb-7.5.2.tgz#76332c46a2802b0e68f3fdfb3d3efe227aba560b"
-  integrity sha512-Xpu7Bf5Vlw+G7ikA2Lg/lVCRTSY8D5M5qFUgGNFyS4pa8ufGLyCBxIX/3if3krHlF1SKSfVPI/YsAWLDVEbocw==
+  version "7.5.3"
+  resolved "https://registry.yarnpkg.com/cssdb/-/cssdb-7.5.3.tgz#6bbd0c6a935919d7f78b8a3ce098faacda01ae8a"
+  integrity sha512-NQNRhrEnS6cW+RU/foLphb6xI/MDA70bI3Cy6VxJU8ilxgyTYz1X9zUzFGVTG5nGPylcKAGIt/UNc4deT56lQQ==
 
 cssesc@^3.0.0:
   version "3.0.0"
@@ -3710,9 +3710,9 @@ cssstyle@^2.3.0:
     cssom "~0.3.6"
 
 csstype@^3.0.2:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.1.tgz#841b532c45c758ee546a11d5bd7b7b473c8c30b9"
-  integrity sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.2.tgz#1d4bf9d572f11c14031f0436e1c10bc1f571f50b"
+  integrity sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==
 
 damerau-levenshtein@^1.0.8:
   version "1.0.8"
@@ -4039,9 +4039,9 @@ ejs@^3.1.6, ejs@^3.1.7:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.284:
-  version "1.4.347"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.347.tgz#4b72564912c3456c6704d4250918aa6a105d5dc3"
-  integrity sha512-LNi3+/9nV0vT6Bz1OsSoZ/w7IgNuWdefZ7mjKNjZxyRlI/ag6uMXxsxAy5Etvuixq3Q26exw2fc4bNYvYQqXSw==
+  version "1.4.348"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.348.tgz#f49379dc212d79f39112dd026f53e371279e433d"
+  integrity sha512-gM7TdwuG3amns/1rlgxMbeeyNoBFPa+4Uu0c7FeROWh4qWmvSOnvcslKmWy51ggLKZ2n/F/4i2HJ+PVNxH9uCQ==
 
 emittery@^0.10.2:
   version "0.10.2"
@@ -9669,9 +9669,9 @@ webpack-dev-middleware@^5.3.1:
     schema-utils "^4.0.0"
 
 webpack-dev-server@^4.6.0:
-  version "4.13.1"
-  resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-4.13.1.tgz#6417a9b5d2f528e7644b68d6ed335e392dccffe8"
-  integrity sha512-5tWg00bnWbYgkN+pd5yISQKDejRBYGEw15RaEEslH+zdbNDxxaZvEAO2WulaSaFKb5n3YG8JXsGaDsut1D0xdA==
+  version "4.13.2"
+  resolved "https://registry.yarnpkg.com/webpack-dev-server/-/webpack-dev-server-4.13.2.tgz#d97445481d78691efe6d9a3b230833d802fc31f9"
+  integrity sha512-5i6TrGBRxG4vnfDpB6qSQGfnB6skGBXNL5/542w2uRGLimX6qeE5BQMLrzIC3JYV/xlGOv+s+hTleI9AZKUQNw==
   dependencies:
     "@types/bonjour" "^3.5.9"
     "@types/connect-history-api-fallback" "^1.3.5"

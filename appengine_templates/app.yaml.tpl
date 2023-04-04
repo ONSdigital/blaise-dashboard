@@ -4,8 +4,6 @@ runtime: nodejs16
 vpc_access_connector:
   name: projects/_PROJECT_ID/locations/europe-west2/connectors/vpcconnect
 
-resources:
-  memory_gb: 1.0
 env_variables:
   BLAISE_API_URL: _BLAISE_API_URL
   PROJECT_ID: _PROJECT_ID

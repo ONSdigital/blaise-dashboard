@@ -22,11 +22,11 @@ const divStyle = {
 
 type AppState = {
     questionnaires: Questionnaire[],
-    loading: boolean,
-    errored: boolean,
+    questionnaireLoading: boolean,
+    questionnaireErrored: boolean,
     uptimeChecks: MonitoringDataModel[],
-    uptimeChecksLoading : boolean,
-    uptimeChecksErrored : boolean
+    uptimeChecksLoading: boolean,
+    uptimeChecksErrored: boolean
 }
 
 export default class App extends Component<unknown, AppState> {
@@ -36,11 +36,11 @@ export default class App extends Component<unknown, AppState> {
         super(props);
         this.state = {
             questionnaires: [],
-            loading: true,
-            errored: false,
-            uptimeChecksLoading : true,
-            uptimeChecks : [],
-            uptimeChecksErrored : false
+            questionnaireLoading: true,
+            questionnaireErrored: false,
+            uptimeChecksLoading: true,
+            uptimeChecks: [],
+            uptimeChecksErrored: false
         };
     }
 
@@ -59,18 +59,19 @@ export default class App extends Component<unknown, AppState> {
     }
 
     loadMonitoringData(): void {
-        console.log("Getting Monitoring Data");
+        console.log("Getting monitoring data");
         this.getMonitoringDataList().then((uptimeChecks: MonitoringDataModel[]) => {
             console.log(uptimeChecks);
             this.setState({
                 uptimeChecks: uptimeChecks,
-                uptimeChecksLoading : false
+                uptimeChecksLoading: false
             });
         }).catch((reason: unknown) => {
             console.error(reason);
             this.setState({
                 uptimeChecks: [],
-                uptimeChecksLoading : true
+                uptimeChecksLoading: true,
+                uptimeChecksErrored: true
             });
         });
     }
@@ -80,12 +81,12 @@ export default class App extends Component<unknown, AppState> {
         this.getQuestionnaireList().then((questionnaires: Questionnaire[]) => {
             this.setState({
                 questionnaires: questionnaires,
-                loading: false,
-                errored: false,
+                questionnaireLoading: false,
+                questionnaireErrored: false,
             });
         }).catch((reason: unknown) => {
             console.error(reason);
-            this.setState({errored: true});
+            this.setState({questionnaireErrored: true});
         });
     }
 
@@ -97,12 +98,13 @@ export default class App extends Component<unknown, AppState> {
         return await getMonitoring();
     }
 
-    errorPanel(): ReactElement | undefined {
-        if (this.state.errored) {
+    questionnaireErrorPanel(): ReactElement | undefined {
+        if (this.state.questionnaireErrored) {
             return <ONSPanel status="error">Failed to get questionnaires.</ONSPanel>;
         }
         return undefined;
     }
+
     uptimeChecksErrorPanel(): ReactElement | undefined {
         if (this.state.uptimeChecksErrored) {
             return <ONSPanel status="error">Failed to get uptime checks.</ONSPanel>;
@@ -110,23 +112,22 @@ export default class App extends Component<unknown, AppState> {
         return undefined;
     }
 
-
-    loadingPanel(): ReactElement | undefined {
-        if (this.state.loading && !this.state.errored) {
+    questionnaireLoadingPanel(): ReactElement | undefined {
+        if (this.state.questionnaireLoading && !this.state.questionnaireErrored) {
             return <ONSLoadingPanel message={"Getting questionnaires for report"}/>;
         }
         return undefined;
     }
 
-    UptimeChecksloadingPanel(): ReactElement | undefined {
+    uptimeChecksloadingPanel(): ReactElement | undefined {
         if (this.state.uptimeChecksLoading) {
             return <ONSLoadingPanel message={"Getting uptime checks for services"}/>;
         }
         return undefined;
     }
 
-    reportTable(): ReactElement | undefined {
-        if (this.state.loading) {
+    questionnaireReportTable(): ReactElement | undefined {
+        if (this.state.questionnaireLoading) {
             return undefined;
         }
         if (this.state.questionnaires.length === 0) {
@@ -136,7 +137,7 @@ export default class App extends Component<unknown, AppState> {
     }
 
     completedCaseDefinition(): ReactElement | undefined {
-        if (this.state.loading !== true && this.state.questionnaires.length !== 0) {
+        if (this.state.questionnaireLoading !== true && this.state.questionnaires.length !== 0) {
             return <Collapsible title="What is a completed case?">
                 <>
                     <p>Completed cases are cases that do <strong>NOT</strong> have any of the following outcome codes:</p>
@@ -164,7 +165,7 @@ export default class App extends Component<unknown, AppState> {
             return undefined;
         }
         if (this.state.uptimeChecks.length === 0) {
-            return <ONSPanel>No Uptime checks data.</ONSPanel>;
+            return <ONSPanel>No uptime checks data.</ONSPanel>;
         }
         return <MonitoringUptimeChecksTable monitoringData={this.state.uptimeChecks}/>;
     }
@@ -177,12 +178,12 @@ export default class App extends Component<unknown, AppState> {
                 <div style={divStyle} className="ons-page__container ons-container">
                     <main id="main-content" className="ons-page__main ons-u-mt-no">
                         <h2 className="ons-u-mt-m">Completed case information</h2>
-                        {this.errorPanel()}
-                        {this.loadingPanel()}
-                        {this.reportTable()}
+                        {this.questionnaireErrorPanel()}
+                        {this.questionnaireLoadingPanel()}
+                        {this.questionnaireReportTable()}
                         {this.completedCaseDefinition()}
-                        <h2 className="ons-u-mt-m">Service Health Check Information</h2>
-                        {this.UptimeChecksloadingPanel()}
+                        <h2 className="ons-u-mt-m">Service health check information</h2>
+                        {this.uptimeChecksloadingPanel()}
                         {this.uptimeChecksErrorPanel()}
                         {this.ServiceHealthCheck()}
                     </main>

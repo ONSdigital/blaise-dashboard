@@ -12,14 +12,11 @@ export interface GoogleMonitoring {
     listTimeSeries(filter: string, startTime: number, endTime: number): Promise<ListTimeSeriesResult>;
 }
 
-export async function getMonitoringUptimeCheckTimeSeries(
+export async function getMonitoringUptimeCheckTimeSeries(googleMonitoring: GoogleMonitoring): Promise<MonitoringDataModel[]> {
     
-        googleMonitoring: GoogleMonitoring
-
-    ): Promise<MonitoringDataModel[]> {
-
     const nowInSeconds = Date.now() / 1000;
-    const startTime = nowInSeconds - 30;
+    // Limit results to the last 30 seconds
+    const startTime = nowInSeconds - 30; 
     const endTime = nowInSeconds;
 
     try {
@@ -30,7 +27,6 @@ export async function getMonitoringUptimeCheckTimeSeries(
         console.error(`Response: ${error}`);
         return [{"hostname": "unknown", "regions": [{"region": "unknown", "status": "false"}]}];
     }
-
 
     async function fetchHostnames(uptimeCheckConfig: google.monitoring.v3.IUptimeCheckConfig): Promise<MonitoringDataModel> {
         const hostname = uptimeCheckConfig.monitoredResource?.labels?.host!;
@@ -56,10 +52,9 @@ export async function getMonitoringUptimeCheckTimeSeries(
                 const timeSeries = await googleMonitoring.listTimeSeries(filter, startTime, endTime);
                 return timeSeries[0].points?.at(0)?.value?.boolValue == true ? "success" : "error";
             } catch (error: any) {
-                console.error(`Response: ${error}`);
                 console.log("Failed to get timeSeries points data");
                 return "requestFailed";
             }
         }
     }
-    }
+}
