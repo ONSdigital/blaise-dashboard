@@ -7,40 +7,17 @@ type MonitoringUptimeChecksTableProps = {
     monitoringData: MonitoringDataModel[]
 }
 
-type MonitoringUptimeChecksTableState = {
-    loaded: boolean,
-    errored: boolean,
-    uptimeChecks: UptimeCheck[]
-}
-
-export default class MonitoringUptimeChecksTable extends Component<MonitoringUptimeChecksTableProps, MonitoringUptimeChecksTableState> {
+export default class MonitoringUptimeChecksTable extends Component<MonitoringUptimeChecksTableProps> {
 
     constructor(props: MonitoringUptimeChecksTableProps) {
         super(props);
-        this.state = {
-            loaded: false,
-            errored: false,
-            uptimeChecks: []
-        };
-    }
-
-    componentDidMount() {
-        if(this.props.monitoringData.length === 0 ){
-            this.setState({
-                loaded: true,
-                errored: true,
-                uptimeChecks: []
-            });
-        }
+        
     }
 
     errorPanel(): ReactElement | undefined {
-        if (this.state.loaded === false) {
-            return undefined;
+        if (this.props.monitoringData.length === 0) {
+            return (<ONSPanel status="error"> Failed uptime checks data fetch....</ONSPanel>);
         }
-        return (
-            <ONSPanel status="error"> Failed uptime checks data fetch....</ONSPanel>
-        );
     }
 
     render(): ReactElement {

@@ -33,8 +33,6 @@ describe("QuestionnaireCaseReportTable", () => {
             <QuestionnaireCaseReportTable questionnaires={mockQuestionnaireList} />
         );
 
-        expect(screen.queryByText(/Loading/i)).toBeDefined();
-
         await waitFor(() => {
             expect(screen.getByTestId("questionnaire-case-report-questionnaire-OPN2101A").textContent).toEqual("OPN2101A");
             expect(screen.getByTestId("questionnaire-case-report-total-OPN2101A").textContent).toEqual("7");

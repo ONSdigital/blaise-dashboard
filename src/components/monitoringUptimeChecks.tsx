@@ -9,22 +9,9 @@ type MonitoringUptimeChecksProps = {
     southAmerica : string
 }
 
-type MonitoringUptimeChecksState = {
-    loaded: boolean
-}
-
-export default class MonitoringUptimeChecks extends Component<MonitoringUptimeChecksProps, MonitoringUptimeChecksState> {
+export default class MonitoringUptimeChecks extends Component<MonitoringUptimeChecksProps> {
     constructor(props: MonitoringUptimeChecksProps) {
         super(props);
-        this.state = {
-            loaded: false
-        };
-    }
-
-    componentDidMount() {
-        this.setState({
-            loaded: true
-        });
     }
 
     getStatusColor(status: string  | undefined) {
@@ -38,11 +25,7 @@ export default class MonitoringUptimeChecks extends Component<MonitoringUptimeCh
         }
     }
 
-
     render(): ReactElement {
-        if (!this.state.loaded) {
-            return <tr><td><ONSLoadingPanel message={"Getting uptime checks"}/></td></tr>;
-        }
 
         // | hostname | Europe | Asia Pacific   | North America  |  South America  |
         // | dev-sj01-bts.social-surveys.gcp.onsdigital.uk      | true    | true | true |  true |

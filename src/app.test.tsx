@@ -46,17 +46,14 @@ describe("App", () => {
       <App />
     );
 
-    expect(screen.findByText(/Loading/i)).toBeDefined(); //doesnt work
-    expect(screen.findByText(/What is sa completed case/i)).toBeDefined();  //doesnt work
-    expect(await screen.findByText("Service health check information")).toBeDefined();
-    expect(screen.findByText("Getting ssuptime checks for services")).toBeDefined();   //doesnt work
-    await act(async () => {
-      await flushPromises();
-    });
+    expect(screen.getByText("Getting questionnaires for report")).toBeVisible();
+    expect(screen.getByText("Getting uptime checks for services")).toBeVisible();
+    expect(await screen.findByText("What is a completed case?")).toBeVisible();
+    expect(await screen.findByText("Service health check information")).toBeVisible();
+    expect(screen.queryByText("Getting questionnaires for report")).not.toBeInTheDocument();
+    expect(screen.queryByText("Getting uptime checks for services")).not.toBeInTheDocument();
+    expect(app).toMatchSnapshot();
 
-    await waitFor(() => {
-      expect(app).toMatchSnapshot();
-    });
   });
 
   describe("when getting case completion reports errors", () => {
@@ -68,8 +65,7 @@ describe("App", () => {
         <App />
       );
 
-      expect(await screen.findByText("Failed to get questionnaires.")).toBeDefined();
-      expect(screen.queryByText(/What is a completed case/i)).not.toBeUndefined(); //doesnt work
+      expect(await screen.findByText("Failed to get questionnaires.")).toBeVisible();
     });
   });
 
@@ -84,9 +80,7 @@ describe("App", () => {
         <App />
       );
 
-      expect(screen.queryByText(/Loading/i)).toBeDefined();  //deosnt work
-      expect(await screen.findByText("No questionnaires installed.")).toBeDefined();
-      expect(screen.findByText(/What is a completed case/i)).not.toBeUndefined();
+      expect(await screen.findByText("No questionnaires installed.")).toBeVisible();
     });
   });
 
@@ -100,7 +94,7 @@ describe("App", () => {
         <App />
       );
 
-      expect(await screen.findByText("No uptime checks data.")).toBeDefined();
+      expect(await screen.findByText("No uptime checks data.")).toBeVisible();
     });
   });
 
@@ -114,7 +108,7 @@ describe("App", () => {
         <App />
       );
 
-      expect(await screen.findByText("Failed to get uptime checks.")).toBeDefined();
+      expect(await screen.findByText("Failed to get uptime checks.")).toBeVisible();
     });
   });
 
