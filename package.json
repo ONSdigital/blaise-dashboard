@@ -15,6 +15,7 @@
     "lint-fix"
   ],
   "dependencies": {
+    "@google-cloud/monitoring": "^3.0.3",
     "@types/ejs": "^3.1.0",
     "axios": "^0.25.0",
     "blaise-api-node-client": "https://github.com/ONSdigital/blaise-api-node-client",
@@ -31,6 +32,7 @@
     "@babel/core": "^7.16.7",
     "@babel/preset-env": "^7.16.8",
     "@babel/preset-typescript": "^7.16.7",
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^12.1.2",
     "@types/jest": "^27.4.0",
     "@types/react": "^17.0.38",

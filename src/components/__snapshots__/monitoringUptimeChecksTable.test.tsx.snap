@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Monitoring Uptime Checks Table renders a table row for the uptime checks 1`] = `
+<table
+  class="ons-table"
+  data-testid="healthCheck-table"
+  id="healthCheck-table"
+>
+  <thead
+    class="ons-table__head"
+  >
+    <tr
+      class="ons-table__row"
+    >
+      <th
+        class="ons-table__header"
+        scope="col"
+      >
+        Service
+      </th>
+      <th
+        class="ons-table__header"
+        scope="col"
+      >
+        Eur-Belgium
+      </th>
+      <th
+        class="ons-table__header"
+        scope="col"
+      >
+        Asia Pacific
+      </th>
+      <th
+        class="ons-table__header"
+        scope="col"
+      >
+        North America
+      </th>
+      <th
+        class="ons-table__header"
+        scope="col"
+      >
+        South America
+      </th>
+    </tr>
+  </thead>
+  <tbody
+    class="ons-table__body"
+  >
+    <tr
+      class="ons-table__row"
+      data-testid="monitoring-table-row"
+    >
+      <td
+        class="ons-table__cell"
+        data-testid="uptimecheck-dev-bts.social-surveys.gcp.onsdigital.uk"
+      >
+        dev-bts.social-surveys.gcp.onsdigital.uk
+      </td>
+      <td
+        class="ons-table__cell"
+      >
+        <span
+          class="ons-status ons-status--success"
+          data-testid="uptimecheck-europe"
+        />
+      </td>
+      <td
+        class="ons-table__cell"
+      >
+        <span
+          class="ons-status ons-status--error"
+          data-testid="uptimecheck-asia"
+        />
+      </td>
+      <td
+        class="ons-table__cell"
+      >
+        <span
+          class="ons-status ons-status--success"
+          data-testid="uptimecheck-northAmerica"
+        />
+      </td>
+      <td
+        class="ons-table__cell"
+      >
+        <span
+          class="ons-status ons-status--requestFailed"
+          data-testid="uptimecheck-southAmerica"
+        />
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
