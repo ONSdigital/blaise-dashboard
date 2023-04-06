@@ -49,3 +49,27 @@ export const mockCaseList = [
                 primaryKey: "1000007" ,
                 outcome: 999
             }];
+
+export const mockHealthCheckList = [
+    {
+        hostname: "dev-bts.social-surveys.gcp.onsdigital.uk",
+        regions:[
+            {
+                region: "europe",
+                status: "success"
+            },
+            {
+                region: "apac-singapore",
+                status: "error"
+            },
+            {
+                region: "usa-oregon",
+                status: "success"
+            },
+            {
+                region: "sa-brazil-sao_paulo",
+                status: "requestFailed"
+            }
+        ]
+    }
+];
