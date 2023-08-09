@@ -1228,11 +1228,11 @@
   integrity sha512-x5vzdtOOGgFVDCUs81QRB2+liax8rFg3+7hqM+QhBG0/G3F1ZsoYl97UrqgHgQ9KKT7G6c4V+aTUCgu/n22v1A==
 
 "@google-cloud/monitoring@^3.0.3":
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/@google-cloud/monitoring/-/monitoring-3.0.3.tgz#f01c82ba563cdfd96108dbddfd7705f2dad0847a"
-  integrity sha512-SIm1EUYwrb0HKvjdc+1LyL2naGU+k4KeivWq3eYgsjRnRncRFMWvmqN2giVJWbDvnfk4xhkbPEm3lggXjWU+qQ==
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/@google-cloud/monitoring/-/monitoring-3.0.5.tgz#a42a18b7133f96e09043d888adaaf6ade1fd5230"
+  integrity sha512-txZPpmE+HGkx1wo5SO975Y7M1lhnIUMI79+7SDTHvVU7lNvQB6i6rNqOSkJZYHj5I/JFFqHIarUtSoIWU0ZCSw==
   dependencies:
-    google-gax "^3.5.2"
+    google-gax "^3.5.8"
 
 "@grpc/grpc-js@~1.8.0":
   version "1.8.13"
@@ -3060,7 +3060,7 @@ binary-extensions@^2.0.0:
 
 "blaise-api-node-client@https://github.com/ONSdigital/blaise-api-node-client":
   version "1.0.0"
-  resolved "https://github.com/ONSdigital/blaise-api-node-client#f3e4051cc2dd0b730c91fba4909e804835631748"
+  resolved "https://github.com/ONSdigital/blaise-api-node-client#dbc1474e320153e94a43673c8ecaa18ce1b7c65a"
   dependencies:
     "@babel/preset-env" "^7.14.7"
     axios "^0.21.1"
@@ -5196,10 +5196,10 @@ google-auth-library@^8.0.2:
     jws "^4.0.0"
     lru-cache "^6.0.0"
 
-google-gax@^3.5.2:
-  version "3.5.8"
-  resolved "https://registry.yarnpkg.com/google-gax/-/google-gax-3.5.8.tgz#297b124a04c29547186c9abe5f98b10ada09a50d"
-  integrity sha512-bkqxv7YdYP3FGh+dywvgyctj8XM07toJ/JCWwAkmmE15QTt3ieF/f7Hpz7xG85+dGmZtQR8Y+yMo0ENFmhypNA==
+google-gax@^3.5.8:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/google-gax/-/google-gax-3.6.1.tgz#02c78fc496f5adf86f2ca9145545f4b6575f6118"
+  integrity sha512-g/lcUjGcB6DSw2HxgEmCDOrI/CByOwqRvsuUvNalHUK2iPPPlmAIpbMbl62u0YufGMr8zgE3JL7th6dCb1Ry+w==
   dependencies:
     "@grpc/grpc-js" "~1.8.0"
     "@grpc/proto-loader" "^0.7.0"
@@ -5213,7 +5213,7 @@ google-gax@^3.5.2:
     node-fetch "^2.6.1"
     object-hash "^3.0.0"
     proto3-json-serializer "^1.0.0"
-    protobufjs "7.2.2"
+    protobufjs "7.2.4"
     protobufjs-cli "1.1.1"
     retry-request "^5.0.0"
 
@@ -8169,10 +8169,10 @@ protobufjs-cli@1.1.1:
     tmp "^0.2.1"
     uglify-js "^3.7.7"
 
-protobufjs@7.2.2:
-  version "7.2.2"
-  resolved "https://registry.yarnpkg.com/protobufjs/-/protobufjs-7.2.2.tgz#2af401d8c547b9476fb37ffc65782cf302342ca3"
-  integrity sha512-++PrQIjrom+bFDPpfmqXfAGSQs40116JRrqqyf53dymUMvvb5d/LMRyicRoF1AUKoXVS1/IgJXlEgcpr4gTF3Q==
+protobufjs@7.2.4:
+  version "7.2.4"
+  resolved "https://registry.yarnpkg.com/protobufjs/-/protobufjs-7.2.4.tgz#3fc1ec0cdc89dd91aef9ba6037ba07408485c3ae"
+  integrity sha512-AT+RJgD2sH8phPmCf7OUZR8xGdcJRga4+1cOaXJ64hvcSkVhNcRHOwIxUatPH15+nj59WAGTDv3LSGZPEQbJaQ==
   dependencies:
     "@protobufjs/aspromise" "^1.1.2"
     "@protobufjs/base64" "^1.1.2"
