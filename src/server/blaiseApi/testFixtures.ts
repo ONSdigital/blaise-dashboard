@@ -1,4 +1,4 @@
-import {Outcome} from "blaise-api-node-client";
+import {CaseOutcome} from "blaise-api-node-client";
 
 export const mockQuestionnaireList = [
         {
@@ -23,27 +23,27 @@ export const mockQuestionnaireList = [
 export const mockCaseList = [
             {
                 primaryKey: "1000001" ,
-                outcome: Outcome.Completed
+                outcome: CaseOutcome.Completed
             },
             {
                 primaryKey: "1000002" ,
-                outcome: Outcome.Completed
+                outcome: CaseOutcome.Completed
             },
             {
                 primaryKey: "1000003" ,
-                outcome: Outcome.None
+                outcome: CaseOutcome.None
             },
             {
                 primaryKey: "1000004" ,
-                outcome: Outcome.Partial
+                outcome: CaseOutcome.Partial
             },
             {
                 primaryKey: "1000005" ,
-                outcome: Outcome.AppointmentMade
+                outcome: CaseOutcome.AppointmentMade
             },
             {
                 primaryKey: "1000006" ,
-                outcome: Outcome.NonContact
+                outcome: CaseOutcome.NonContact
             },
             {
                 primaryKey: "1000007" ,

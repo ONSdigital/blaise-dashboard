@@ -1,52 +1,52 @@
-import {Outcome} from "blaise-api-node-client";
+import {CaseOutcome} from "blaise-api-node-client";
 
-const completedOutcomes: Outcome[] = [
-    Outcome.Completed,
-    Outcome.CompletedNudge,
-    Outcome.ConcernsWontTakePart,
-    Outcome.UnableToComplete,
-    Outcome.NoInternetAccess,
-    Outcome.RequestedDifferentMode,
-    Outcome.LostAccessCode,
-    Outcome.RejectTandCs,
-    Outcome.DeleteRequested,
-    Outcome.BrailleRequested,
-    Outcome.LargePrintRequested,
-    Outcome.OtherFormat,
-    Outcome.HQRefusal,
-    Outcome.NotAvailable,
-    Outcome.HardRefusal,
-    Outcome.SoftRefusal,
-    Outcome.NoTraceOfAddress,
-    Outcome.IneligibleVacant,
-    Outcome.LanguageDifficultiesHeadOffice,
-    Outcome.LanguageDifficultiesInterviewer,
-    Outcome.WrongNumber,
-    Outcome.IneligibleNonResidential,
-    Outcome.IneligibleInstitution,
-    Outcome.DeleteRequestedCompleted,
-    Outcome.DeleteRequestedPartial,
-    Outcome.IneligibleSecondHome,
-    Outcome.Under16,
-    Outcome.WrongAddress,
-    Outcome.RequestedCopyOfData,
-    Outcome.ClarificationOnStudyRequested,
-    Outcome.AssistanceRequested,
-    Outcome.RequestForContext,
-    Outcome.QuestionProblem
+const completedOutcomes: CaseOutcome[] = [
+    CaseOutcome.Completed,
+    CaseOutcome.CompletedNudge,
+    CaseOutcome.ConcernsWontTakePart,
+    CaseOutcome.UnableToComplete,
+    CaseOutcome.NoInternetAccess,
+    CaseOutcome.RequestedDifferentMode,
+    CaseOutcome.LostAccessCode,
+    CaseOutcome.RejectTandCs,
+    CaseOutcome.DeleteRequested,
+    CaseOutcome.BrailleRequested,
+    CaseOutcome.LargePrintRequested,
+    CaseOutcome.OtherFormat,
+    CaseOutcome.HQRefusal,
+    CaseOutcome.NotAvailable,
+    CaseOutcome.HardRefusal,
+    CaseOutcome.SoftRefusal,
+    CaseOutcome.NoTraceOfAddress,
+    CaseOutcome.IneligibleVacant,
+    CaseOutcome.LanguageDifficultiesHeadOffice,
+    CaseOutcome.LanguageDifficultiesInterviewer,
+    CaseOutcome.WrongNumber,
+    CaseOutcome.IneligibleNonResidential,
+    CaseOutcome.IneligibleInstitution,
+    CaseOutcome.DeleteRequestedCompleted,
+    CaseOutcome.DeleteRequestedPartial,
+    CaseOutcome.IneligibleSecondHome,
+    CaseOutcome.Under16,
+    CaseOutcome.WrongAddress,
+    CaseOutcome.RequestedCopyOfData,
+    CaseOutcome.ClarificationOnStudyRequested,
+    CaseOutcome.AssistanceRequested,
+    CaseOutcome.RequestForContext,
+    CaseOutcome.QuestionProblem
 ];
 
-const notCompletedOutcomes: Outcome[] = [
-    Outcome.None,
-    Outcome.Partial,
-    Outcome.AppointmentMade,
-    Outcome.NonContact
+const notCompletedOutcomes: CaseOutcome[] = [
+    CaseOutcome.None,
+    CaseOutcome.Partial,
+    CaseOutcome.AppointmentMade,
+    CaseOutcome.NonContact
 ];
 
-export function isCompleted(outcome: Outcome): boolean {
+export function isCompleted(outcome: CaseOutcome): boolean {
     return completedOutcomes.includes(outcome);
 }
 
-export function isNotCompleted(outcome: Outcome): boolean {
+export function isNotCompleted(outcome: CaseOutcome): boolean {
     return notCompletedOutcomes.includes(outcome);
 }

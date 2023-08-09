@@ -21,6 +21,7 @@ export async function getMonitoringUptimeCheckTimeSeries(googleMonitoring: Googl
 
     try {
         const uptimeCheckConfigs = await googleMonitoring.getUptimeChecksConfigs();
+        console.log(uptimeCheckConfigs)
         const monitoringDataResponse = uptimeCheckConfigs.map(fetchHostnames);
         return Promise.all(monitoringDataResponse);
     } catch (error: any) {
