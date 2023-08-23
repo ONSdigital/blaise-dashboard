@@ -1,52 +1,52 @@
-import {Outcome} from "blaise-api-node-client";
+import {CaseOutcome} from "blaise-api-node-client";
 import {isCompleted} from "./outcomes";
 
 describe("Test the outcome codes are completed codes", () => {
     it.each([
-        [Outcome.Completed],
-        [Outcome.CompletedNudge],
-        [Outcome.ConcernsWontTakePart],
-        [Outcome.UnableToComplete],
-        [Outcome.NoInternetAccess],
-        [Outcome.RequestedDifferentMode],
-        [Outcome.LostAccessCode],
-        [Outcome.RejectTandCs],
-        [Outcome.DeleteRequested],
-        [Outcome.BrailleRequested],
-        [Outcome.LargePrintRequested],
-        [Outcome.OtherFormat],
-        [Outcome.HQRefusal],
-        [Outcome.NotAvailable],
-        [Outcome.HardRefusal],
-        [Outcome.SoftRefusal],
-        [Outcome.NoTraceOfAddress],
-        [Outcome.IneligibleVacant],
-        [Outcome.LanguageDifficultiesHeadOffice],
-        [Outcome.LanguageDifficultiesInterviewer],
-        [Outcome.WrongNumber],
-        [Outcome.IneligibleNonResidential],
-        [Outcome.IneligibleInstitution],
-        [Outcome.DeleteRequestedCompleted],
-        [Outcome.DeleteRequestedPartial],
-        [Outcome.IneligibleSecondHome],
-        [Outcome.Under16],
-        [Outcome.WrongAddress],
-        [Outcome.RequestedCopyOfData],
-        [Outcome.ClarificationOnStudyRequested],
-        [Outcome.AssistanceRequested],
-        [Outcome.RequestForContext],
-        [Outcome.QuestionProblem]
-    ])("should return true if the outcome code is a completed code", (outcome: Outcome) => {
+        [CaseOutcome.Completed],
+        [CaseOutcome.CompletedNudge],
+        [CaseOutcome.ConcernsWontTakePart],
+        [CaseOutcome.UnableToComplete],
+        [CaseOutcome.NoInternetAccess],
+        [CaseOutcome.RequestedDifferentMode],
+        [CaseOutcome.LostAccessCode],
+        [CaseOutcome.RejectTandCs],
+        [CaseOutcome.DeleteRequested],
+        [CaseOutcome.BrailleRequested],
+        [CaseOutcome.LargePrintRequested],
+        [CaseOutcome.OtherFormat],
+        [CaseOutcome.HQRefusal],
+        [CaseOutcome.NotAvailable],
+        [CaseOutcome.HardRefusal],
+        [CaseOutcome.SoftRefusal],
+        [CaseOutcome.NoTraceOfAddress],
+        [CaseOutcome.IneligibleVacant],
+        [CaseOutcome.LanguageDifficultiesHeadOffice],
+        [CaseOutcome.LanguageDifficultiesInterviewer],
+        [CaseOutcome.WrongNumber],
+        [CaseOutcome.IneligibleNonResidential],
+        [CaseOutcome.IneligibleInstitution],
+        [CaseOutcome.DeleteRequestedCompleted],
+        [CaseOutcome.DeleteRequestedPartial],
+        [CaseOutcome.IneligibleSecondHome],
+        [CaseOutcome.Under16],
+        [CaseOutcome.WrongAddress],
+        [CaseOutcome.RequestedCopyOfData],
+        [CaseOutcome.ClarificationOnStudyRequested],
+        [CaseOutcome.AssistanceRequested],
+        [CaseOutcome.RequestForContext],
+        [CaseOutcome.QuestionProblem]
+    ])("should return true if the outcome code is a completed code", (outcome: CaseOutcome) => {
         expect(isCompleted(outcome)).toBeTruthy();
     });
 
 
     it.each([
-        [Outcome.None],
-        [Outcome.Partial],
-        [Outcome.AppointmentMade],
-        [Outcome.NonContact]
-    ])("should return false if the outcome code is not a completed code", (outcome: Outcome) => {
+        [CaseOutcome.None],
+        [CaseOutcome.Partial],
+        [CaseOutcome.AppointmentMade],
+        [CaseOutcome.NonContact]
+    ])("should return false if the outcome code is not a completed code", (outcome: CaseOutcome) => {
         expect(isCompleted(outcome)).toBeFalsy();
     });
 });
