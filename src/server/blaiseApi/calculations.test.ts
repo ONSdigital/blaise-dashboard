@@ -1,5 +1,5 @@
 import {calculateCaseTotals, calculatePercentComplete} from "./calculations";
-import {Outcome} from "blaise-api-node-client";
+import {CaseOutcome} from "blaise-api-node-client";
 
 describe("Test that the backend calculations are correct", () => {
     describe("When two cases are completed in an questionnaire", () => {
@@ -7,11 +7,11 @@ describe("Test that the backend calculations are correct", () => {
             const testData = [
                 {
                     primaryKey: "123456789",
-                    outcome: Outcome.Completed
+                    outcome: CaseOutcome.Completed
                 },
                 {
                     primaryKey: "987654321",
-                    outcome: Outcome.Completed
+                    outcome: CaseOutcome.Completed
                 }];
 
             expect(calculateCaseTotals(testData).Total).toBe(2);
@@ -23,27 +23,27 @@ describe("Test that the backend calculations are correct", () => {
         const testData = [
             {
                 primaryKey: "1000001" ,
-                outcome: Outcome.Completed
+                outcome: CaseOutcome.Completed
             },
             {
                 primaryKey: "1000002" ,
-                outcome: Outcome.Completed
+                outcome: CaseOutcome.Completed
             },
             {
                 primaryKey: "1000003" ,
-                outcome: Outcome.None
+                outcome: CaseOutcome.None
             },
             {
                 primaryKey: "1000004" ,
-                outcome: Outcome.Partial
+                outcome: CaseOutcome.Partial
             },
             {
                 primaryKey: "1000005" ,
-                outcome: Outcome.AppointmentMade
+                outcome: CaseOutcome.AppointmentMade
             },
             {
                 primaryKey: "1000006" ,
-                outcome: Outcome.NonContact
+                outcome: CaseOutcome.NonContact
             },
             {
                 primaryKey: "1000007" ,
