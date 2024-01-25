@@ -28,14 +28,6 @@ export async function getMonitoringUptimeCheckTimeSeries(googleMonitoring: Googl
         return [{"hostname": "unknown", "regions": [{"region": "unknown", "status": "false"}]}];
     }
 
-    // async function fetchHostnames(uptimeCheckConfig: google.monitoring.v3.IUptimeCheckConfig): Promise<MonitoringDataModel> {
-    //     const hostname = uptimeCheckConfig.monitoredResource?.labels?.host!;
-    //     const regions = regionsMonitored.map((region) => fetchTimeSeriesPoints(region, hostname));
-    //     return {
-    //         hostname: hostname,
-    //         regions: await Promise.all(regions)
-    //     };
-
     async function fetchHostnames(uptimeCheckConfig: google.monitoring.v3.IUptimeCheckConfig): Promise<MonitoringDataModel> {
     const hostname = uptimeCheckConfig.monitoredResource?.labels?.host;
 
@@ -53,7 +45,7 @@ export async function getMonitoringUptimeCheckTimeSeries(googleMonitoring: Googl
         async function fetchTimeSeriesPoints(regionMonitored: string, hostname: string): Promise<Region> {
             const filter = "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" resource.type=\"uptime_url\" " +
                 `resource.label."host"="${hostname}" metric.label."checker_location"="${regionMonitored}"`;
-            const status = await listTimeSeries(filter, hostname, regionMonitored);
+            const status = await listTimeSeries(filter);
     
             return {
                 region: regionMonitored,
@@ -61,7 +53,7 @@ export async function getMonitoringUptimeCheckTimeSeries(googleMonitoring: Googl
             };
         }
     
-        async function listTimeSeries(filter: string, hostname: string, regionMonitored: string): Promise<string> {
+        async function listTimeSeries(filter: string): Promise<string> {
             try {
                 const timeSeries = await googleMonitoring.listTimeSeries(filter, startTime, endTime);
                 return timeSeries[0].points?.at(0)?.value?.boolValue == true ? "success" : "error";

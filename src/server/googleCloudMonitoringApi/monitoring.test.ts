@@ -11,7 +11,7 @@ describe("Get all uptime checks from API", () => {
             [{monitoredResource: {labels: {host: "example-host"}}} ]
         );
         mockGoogleMonitoring.listTimeSeries.mockImplementation(
-            (filter, hostname, regionMonitored) => Promise.resolve(
+            ()=> Promise.resolve(
                 [
                     {points: [{value: {boolValue: true}}]}
                 ]
@@ -31,12 +31,13 @@ describe("Get all uptime checks from API", () => {
         ]);
     });
 
+
     it("should return error statuses if coudnt get valid time series points", async () => {
         mockGoogleMonitoring.getUptimeChecksConfigs.mockResolvedValue(
             [{monitoredResource: {labels: {host: "example-host"}}} ]
         );
         mockGoogleMonitoring.listTimeSeries.mockImplementation(
-            (filter, hostname, regionMonitored) => Promise.resolve(
+            () => Promise.resolve(
                 [
                     "Failed to get time series points"
                 ]
@@ -57,7 +58,7 @@ describe("Get all uptime checks from API", () => {
             [{monitoredResource: {labels: {host: null}}} ]
         );
         mockGoogleMonitoring.listTimeSeries.mockImplementation(
-            (filter, hostname, regionMonitored) => Promise.resolve(
+            () => Promise.resolve(
                 [
                     "Failed to get time series points"
                 ]
