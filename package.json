@@ -6,6 +6,7 @@
     "client": "react-scripts start",
     "server": "tsc --project tsconfig.server.json && node ./dist/index.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "lint": "node_modules/.bin/eslint .",
     "lint-fix": "node_modules/.bin/eslint . --fix",
     "test": "jest --coverage --watchAll=false --detectOpenHandles --config=jest.config.js",
     "gcp-build": "react-scripts build && tsc --project tsconfig.server.json"
