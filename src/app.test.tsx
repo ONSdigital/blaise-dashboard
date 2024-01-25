@@ -80,7 +80,7 @@ describe("App", () => {
         <App />
       );
 
-      expect(await screen.findByText("No questionnaires installed.")).toBeVisible();
+      expect(await screen.findByText("No OPN questionnaires installed.")).toBeVisible();
     });
   });
 
