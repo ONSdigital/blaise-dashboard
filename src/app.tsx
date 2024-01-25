@@ -131,7 +131,7 @@ export default class App extends Component<unknown, AppState> {
             return undefined;
         }
         if (this.state.questionnaires.length === 0) {
-            return <ONSPanel>No OPN questionnaires installed.</ONSPanel>;
+            return <ONSPanel>No questionnaires installed.</ONSPanel>;
         }
         return <QuestionnaireCaseReportTable questionnaires={this.state.questionnaires}/>;
     }
