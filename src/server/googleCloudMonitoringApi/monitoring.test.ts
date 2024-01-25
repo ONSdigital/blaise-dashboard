@@ -79,7 +79,7 @@ describe("Get all uptime checks from API", () => {
             [{monitoredResource: {labels: {host: "example-host"}}} ]
         );
         mockGoogleMonitoring.listTimeSeries.mockImplementation(
-            (filter, hostname, regionMonitored) => Promise.resolve([null])
+            () => Promise.resolve([null])
         );
         const result = await getMonitoringUptimeCheckTimeSeries(mockGoogleMonitoring);
         expect(result).toEqual([{"hostname": "example-host", 
