@@ -28,13 +28,27 @@ export async function getMonitoringUptimeCheckTimeSeries(googleMonitoring: Googl
         return [{"hostname": "unknown", "regions": [{"region": "unknown", "status": "false"}]}];
     }
 
+    // async function fetchHostnames(uptimeCheckConfig: google.monitoring.v3.IUptimeCheckConfig): Promise<MonitoringDataModel> {
+    //     const hostname = uptimeCheckConfig.monitoredResource?.labels?.host!;
+    //     const regions = regionsMonitored.map((region) => fetchTimeSeriesPoints(region, hostname));
+    //     return {
+    //         hostname: hostname,
+    //         regions: await Promise.all(regions)
+    //     };
+
     async function fetchHostnames(uptimeCheckConfig: google.monitoring.v3.IUptimeCheckConfig): Promise<MonitoringDataModel> {
-        const hostname = uptimeCheckConfig.monitoredResource?.labels?.host!;
-        const regions = regionsMonitored.map((region) => fetchTimeSeriesPoints(region, hostname));
-        return {
-            hostname: hostname,
-            regions: await Promise.all(regions)
-        };
+    const hostname = uptimeCheckConfig.monitoredResource?.labels?.host;
+
+    if (hostname === undefined) {
+        throw new Error("Hostname is undefined");
+    }
+
+    const regions = regionsMonitored.map((region) => fetchTimeSeriesPoints(region, hostname));
+    return {
+        hostname: hostname,
+        regions: await Promise.all(regions)
+    };
+
 
         async function fetchTimeSeriesPoints(regionMonitored: string, hostname: string): Promise<Region> {
             const filter = "metric.type=\"monitoring.googleapis.com/uptime_check/check_passed\" resource.type=\"uptime_url\" " +

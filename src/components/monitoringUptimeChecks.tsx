@@ -1,5 +1,4 @@
 import React, {Component, ReactElement} from "react";
-import {ONSLoadingPanel} from "blaise-design-system-react-components";
 
 type MonitoringUptimeChecksProps = {
     hostname: string,
