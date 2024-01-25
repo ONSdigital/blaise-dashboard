@@ -10,21 +10,20 @@ export class GoogleMonitoringApi implements GoogleMonitoring {
         this.metricsClient = new MetricServiceClient();
     }
 
-    async getUptimeChecksConfigs(): Promise<GetUptimeChecksConfigResult>{
-        try{
-            const request = {
-                parent: this.uptimeClient.projectPath(this.projectId)
-            };
+    async getUptimeChecksConfigs(): Promise<GetUptimeChecksConfigResult> {
+    try {
+        const request = {
+            parent: this.uptimeClient.projectPath(this.projectId)
+        };
 
-            // Retrieves an uptime check config with hostnames-services like dqs, bus, bum, dashboard etc
-            const [uptimeCheckConfigs] = await this.uptimeClient.listUptimeCheckConfigs(request);
-            return uptimeCheckConfigs;
-        }catch(error: any)
-        {
-            return error;
-        }
+        // Retrieves an uptime check config with hostnames-services like dqs, bus, bum, dashboard, etc.
+        const [uptimeCheckConfigs] = await this.uptimeClient.listUptimeCheckConfigs(request);
+        return uptimeCheckConfigs;
+    } catch (error) {
+        console.error(`Error in getUptimeChecksConfigs: ${error}`);
+        throw error;
     }
-
+}
     async listTimeSeries(filter: string, startTime: number, endTime: number): Promise<ListTimeSeriesResult>{
         const request= {
             name: this.metricsClient.projectPath(this.projectId),

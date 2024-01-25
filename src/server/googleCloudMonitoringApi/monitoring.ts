@@ -23,7 +23,7 @@ export async function getMonitoringUptimeCheckTimeSeries(googleMonitoring: Googl
         const uptimeCheckConfigs = await googleMonitoring.getUptimeChecksConfigs();
         const monitoringDataResponse = uptimeCheckConfigs.map(fetchHostnames);
         return Promise.all(monitoringDataResponse);
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error(`Response: ${error}`);
         return [{"hostname": "unknown", "regions": [{"region": "unknown", "status": "false"}]}];
     }
@@ -57,7 +57,7 @@ export async function getMonitoringUptimeCheckTimeSeries(googleMonitoring: Googl
             try {
                 const timeSeries = await googleMonitoring.listTimeSeries(filter, startTime, endTime);
                 return timeSeries[0].points?.at(0)?.value?.boolValue == true ? "success" : "error";
-            } catch (error: any) {
+            } catch (error: unknown) {
                 console.log("Failed to get timeSeries points data");
                 return "requestFailed";
             }

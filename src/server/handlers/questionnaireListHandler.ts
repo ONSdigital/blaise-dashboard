@@ -28,7 +28,7 @@ export class QuestionnaireListHandler {
             const questionnaires = await getQuestionnaires(this.blaiseApiClient, this.cache, this.config, "OPN");
 
             return res.status(200).json(questionnaires);
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error(`Response: ${error}`);
             return res.status(500).json(`Failed to get questionnaires installed on server park ${this.config.ServerPark}`);
         }
