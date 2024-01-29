@@ -24,7 +24,7 @@ export class MonitoringHandler {
     async GetMonitoringData(req: Request, res: Response): Promise<Response> {
         try {
             return res.status(200).json(await getMonitoringUptimeCheckTimeSeries(this.googleMonitoring));
-        } catch (error: any) {
+        } catch (error: unknown) {
             console.error(`Response: ${error}`);
             return res.status(500).json("Failed to get monitoring uptimeChecks config data");
         }
