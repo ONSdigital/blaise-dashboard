@@ -1,4 +1,4 @@
-import BlaiseApiClient, { CaseStatus } from "blaise-api-node-client";
+import BlaiseApiClient from "blaise-api-node-client";
 import { Config } from "../config";
 import { buildCaseCompletionReport, CaseCompletionReport } from "../blaiseApi/caseCompletionReport";
 import express, { Request, Response, Router } from "express";
