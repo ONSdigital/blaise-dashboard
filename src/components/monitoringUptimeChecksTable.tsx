@@ -1,6 +1,6 @@
 import React, { Component, ReactElement } from "react";
 import { ONSPanel, ONSTable } from "blaise-design-system-react-components";
-import { MonitoringDataModel, UptimeCheck } from "../server/monitoringDataModel";
+import { MonitoringDataModel } from "../server/monitoringDataModel";
 import MonitoringUptimeChecks from "./monitoringUptimeChecks";
 
 type MonitoringUptimeChecksTableProps = {

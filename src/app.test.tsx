@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import { render, screen, waitFor, act } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import App from "./app";
 import { mockQuestionnaireList } from "./server/blaiseApi/testFixtures";
 
@@ -18,8 +18,6 @@ import { Questionnaire } from "blaise-api-node-client";
 jest.mock("./client/monitoring");
 import { getMonitoring } from "./client/monitoring";
 import { MonitoringDataModel } from "./server/monitoringDataModel";
-
-const flushPromises = () => new Promise(setImmediate);
 
 const getCaseCompletionReportMock = getCaseCompletionReport as jest.Mock<Promise<CaseCompletionReport>>;
 const getQuestionnairesMock = getQuestionnaires as jest.Mock<Promise<Questionnaire[]>>;
@@ -80,7 +78,7 @@ describe("App", () => {
         <App />
       );
 
-      expect(await screen.findByText("No questionnaires installed.")).toBeVisible();
+      expect(await screen.findByText("No OPN questionnaires installed.")).toBeVisible();
     });
   });
 
