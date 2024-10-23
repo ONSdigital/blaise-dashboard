@@ -23,7 +23,7 @@
     "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#0.13.2",
     "dotenv": "^16.4.1",
     "ejs": "^3.1.10",
-    "express": "^4.19.2",
+    "express": "^4.20.0",
     "node-cache": "^5.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
