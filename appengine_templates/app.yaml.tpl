@@ -2,7 +2,7 @@ service: dashboard-ui
 runtime: nodejs20
 
 vpc_access_connector:
-  name: _VPC_CONNECTOR_NAME
+  name: _VPC_CONNECTOR
 
 env_variables:
   BLAISE_API_URL: _BLAISE_API_URL
