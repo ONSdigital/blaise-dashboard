@@ -91,6 +91,23 @@ describe("Get all uptime checks from API", () => {
         ]);
     });
 
+    it("should return a consistent fallback shape if uptime checks configs cannot be fetched", async () => {
+        mockGoogleMonitoring.getUptimeChecksConfigs.mockRejectedValue(new Error("boom"));
+
+        const result = await getMonitoringUptimeCheckTimeSeries(mockGoogleMonitoring);
+        expect(result).toEqual([
+            {
+                hostname: "unknown",
+                regions: [
+                    { region: "eur-belgium", status: "requestFailed" },
+                    { region: "apac-singapore", status: "requestFailed" },
+                    { region: "usa-oregon", status: "requestFailed" },
+                    { region: "sa-brazil-sao_paulo", status: "requestFailed" }
+                ]
+            }
+        ]);
+    });
+
      afterEach(() => {
         jest.clearAllMocks();
         jest.resetModules();
