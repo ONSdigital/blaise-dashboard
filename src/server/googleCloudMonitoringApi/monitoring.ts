@@ -22,16 +22,10 @@ export async function getMonitoringUptimeCheckTimeSeries(googleMonitoring: Googl
     try {
         const uptimeCheckConfigs = await googleMonitoring.getUptimeChecksConfigs();
         const monitoringDataResponse = uptimeCheckConfigs.map(fetchHostnames);
-        return await Promise.all(monitoringDataResponse);
+        return Promise.all(monitoringDataResponse);
     } catch (error: unknown) {
         console.error(`Response: ${error}`);
-        return [{
-            "hostname": "unknown",
-            "regions": regionsMonitored.map((region) => ({
-                "region": region,
-                "status": "requestFailed"
-            }))
-        }];
+        return [{"hostname": "unknown", "regions": [{"region": "unknown", "status": "false"}]}];
     }
 
     async function fetchHostnames(uptimeCheckConfig: google.monitoring.v3.IUptimeCheckConfig): Promise<MonitoringDataModel> {

@@ -25,10 +25,10 @@ export default class MonitoringUptimeChecksTable extends Component<MonitoringUpt
             <MonitoringUptimeChecks
                 key={obj.hostname}
                 hostname={obj.hostname}
-                eurBelgium={obj.regions?.[0]?.status ?? "requestFailed"}
-                apacSingapore={obj.regions?.[1]?.status ?? "requestFailed"}
-                northAmerica={obj.regions?.[2]?.status ?? "requestFailed"}
-                southAmerica={obj.regions?.[3]?.status ?? "requestFailed"}
+                eurBelgium={obj.regions[0].status}
+                apacSingapore={obj.regions[1].status}
+                northAmerica={obj.regions[2].status}
+                southAmerica={obj.regions[3].status}
             />
         ));
 

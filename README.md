@@ -34,12 +34,14 @@ Create an .env file in the root of the project and add the following variables:
 | --- | --- | --- |
 | BLAISE_API_URL | The RESTful API URL the application will use to get questionnaire data. | localhost:90 |
 | SERVER_PARK | The name of the Blaise server park. | gusty |
+| PROJECT_ID | The name of the project you are running the dashboard against. | ons-blaise-v2-dev-cn5 |
 
 Example .env file:
 
 ```shell
 BLAISE_API_URL="localhost:8011"
 SERVER_PARK="gusty"
+PROJECT_ID="ons-blaise-v2-dev-cn5"
 ````
 
 Install the project dependencies:
@@ -57,6 +59,7 @@ More information about yarn (https://confluence.ons.gov.uk/x/zdwACQ)
 Authenticate with GCP:
 ```shell
 gcloud auth login
+gcloud auth application-default login
 ```
 
 Set your GCP project:

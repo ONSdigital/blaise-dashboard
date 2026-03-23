@@ -30,19 +30,4 @@ describe("Monitoring Uptime Checks Table", () => {
 
         expect(await screen.findByText("Failed uptime checks data fetch....")).toBeDefined();
     });
-
-    it("does not crash when regions are missing", async () => {
-        render(
-            <MonitoringUptimeChecksTable monitoringData={[{
-                hostname: "example-host",
-                regions: [{ region: "eur-belgium", status: "success" }]
-            }]} />
-        );
-
-        expect(screen.getByTestId("uptimecheck-example-host").textContent).toEqual("example-host");
-        expect(screen.getByTestId("uptimecheck-europe").className).toContain("ons-status--success");
-        expect(screen.getByTestId("uptimecheck-asia").className).toContain("ons-status--requestFailed");
-        expect(screen.getByTestId("uptimecheck-northAmerica").className).toContain("ons-status--requestFailed");
-        expect(screen.getByTestId("uptimecheck-southAmerica").className).toContain("ons-status--requestFailed");
-    });
 });
