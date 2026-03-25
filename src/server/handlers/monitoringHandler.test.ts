@@ -24,7 +24,7 @@ const getMonitoringUptimeCheckTimeSeriesMock = getMonitoringUptimeCheckTimeSerie
 describe("Get all uptime checks from API", () => {
     
     it("should return a 200 status and a json list of 1 items when API returns a 1 item list", async () => {
-        process.env.GOOGLE_CLOUD_PROJECT = "example-project-id";
+        process.env.PROJECT_ID = "example-project-id";
         getMonitoringUptimeCheckTimeSeriesMock.mockReturnValue(Promise.resolve(mockHealthCheckList));
 
         const server = NewServer(blaiseApiClient, cache, config);
