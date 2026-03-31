@@ -7,7 +7,7 @@ import {
 
 export default function NewMonitoringListHandler(): Router {
     const router = express.Router();
-    const projectId = process.env.GOOGLE_CLOUD_PROJECT || "no_project_id";
+    const projectId = process.env.PROJECT_ID || "no_project_id";
     const googleMonitoringApi = new GoogleMonitoringApi(projectId);
     const monitoringHandler = new MonitoringHandler(googleMonitoringApi);
     return router.get("/api/monitoring", monitoringHandler.GetMonitoringData);
