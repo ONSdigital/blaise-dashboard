@@ -1,6 +1,7 @@
 module.exports = {
     "moduleNameMapper": {
-        "\\.(css|less|scss)$": "identity-obj-proxy"
+        "\\.(css|less|scss)$": "identity-obj-proxy",
+        "^blaise-api-node-client$": "<rootDir>/src/test/mocks/blaiseApiNodeClientMock.ts"
     },
     setupFilesAfterEnv: ["<rootDir>/jest-setup.js"]
 };

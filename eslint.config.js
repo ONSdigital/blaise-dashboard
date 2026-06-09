@@ -8,7 +8,7 @@ const compat = new FlatCompat({
 });
 
 const legacyConfig = {
-    ignorePatterns: ["node_modules/*", "dist/*", "build/*"],
+    ignorePatterns: ["node_modules/*", "dist/*", "build/*", "coverage/*", "eslint.config.js"],
     env: {
         browser: true,
         es2021: true,

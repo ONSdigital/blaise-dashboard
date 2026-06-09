@@ -29,4 +29,4 @@ jest.mock("blaise-design-system-react-components", () => {
 		Collapsible,
 		ONSTable
 	};
-});
+}, { virtual: true });
