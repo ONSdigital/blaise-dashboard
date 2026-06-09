@@ -44,7 +44,35 @@ describe("Get all uptime checks from API", () => {
         const request = supertest(server);
         const response = await request.get("/api/monitoring");
         expect(response.status).toEqual(500);
-        expect(response.body).toEqual("Failed to get monitoring uptimeChecks config data");
+        expect(response.body).toEqual("Failed to get monitoring uptimeChecks config data: Error getting uptime checks");
+    });
+
+    it("should use GOOGLE_CLOUD_PROJECT when PROJECT_ID is not set", async () => {
+        delete process.env.PROJECT_ID;
+        process.env.GOOGLE_CLOUD_PROJECT = "fallback-project-id";
+        getMonitoringUptimeCheckTimeSeriesMock.mockReturnValue(Promise.resolve(mockHealthCheckList));
+
+        const server = NewServer(blaiseApiClient, cache, config);
+        const request = supertest(server);
+        const response = await request.get("/api/monitoring");
+
+        expect(response.status).toEqual(200);
+        const [googleMonitoringApi] = getMonitoringUptimeCheckTimeSeriesMock.mock.calls[0] as GoogleMonitoringApi[];
+        expect(googleMonitoringApi.projectId).toEqual("fallback-project-id");
+    });
+
+    it("should return a clear error when no project ID env var exists", async () => {
+        delete process.env.PROJECT_ID;
+        delete process.env.GOOGLE_CLOUD_PROJECT;
+        delete process.env.GCLOUD_PROJECT;
+
+        const server = NewServer(blaiseApiClient, cache, config);
+        const request = supertest(server);
+        const response = await request.get("/api/monitoring");
+
+        expect(response.status).toEqual(500);
+        expect(response.body).toEqual("Monitoring project ID is not configured");
+        expect(getMonitoringUptimeCheckTimeSeriesMock).not.toHaveBeenCalled();
     });
 
     afterEach(() => {

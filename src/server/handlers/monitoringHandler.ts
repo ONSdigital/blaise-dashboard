@@ -5,9 +5,21 @@ import {
     GoogleMonitoring
 } from "../googleCloudMonitoringApi/monitoring";
 
+function getProjectIdFromEnv(): string | undefined {
+    return process.env.PROJECT_ID || process.env.GOOGLE_CLOUD_PROJECT || process.env.GCLOUD_PROJECT;
+}
+
 export default function NewMonitoringListHandler(): Router {
     const router = express.Router();
-    const projectId = process.env.PROJECT_ID || "no_project_id";
+    const projectId = getProjectIdFromEnv();
+
+    if (!projectId) {
+        console.error("Monitoring project ID is not configured");
+        return router.get("/api/monitoring", (_req: Request, res: Response) => {
+            return res.status(500).json("Monitoring project ID is not configured");
+        });
+    }
+
     const googleMonitoringApi = new GoogleMonitoringApi(projectId);
     const monitoringHandler = new MonitoringHandler(googleMonitoringApi);
     return router.get("/api/monitoring", monitoringHandler.GetMonitoringData);
@@ -25,8 +37,9 @@ export class MonitoringHandler {
         try {
             return res.status(200).json(await getMonitoringUptimeCheckTimeSeries(this.googleMonitoring));
         } catch (error: unknown) {
-            console.error(`Response: ${error}`);
-            return res.status(500).json("Failed to get monitoring uptimeChecks config data");
+            const reason = error instanceof Error ? error.message : String(error);
+            console.error(`Response: ${reason}`);
+            return res.status(500).json(`Failed to get monitoring uptimeChecks config data: ${reason}`);
         }
     }
 }
