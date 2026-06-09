@@ -21,25 +21,24 @@ export async function getMonitoringUptimeCheckTimeSeries(googleMonitoring: Googl
 
     try {
         const uptimeCheckConfigs = await googleMonitoring.getUptimeChecksConfigs();
-        const monitoringDataResponse = uptimeCheckConfigs.map(fetchHostnames);
-        return Promise.all(monitoringDataResponse);
+        const hostnames = uptimeCheckConfigs
+            .map((uptimeCheckConfig) => uptimeCheckConfig.monitoredResource?.labels?.host)
+            .filter((hostname): hostname is string => typeof hostname === "string" && hostname.length > 0);
+
+        const monitoringDataResponse = hostnames.map(fetchHostname);
+        return await Promise.all(monitoringDataResponse);
     } catch (error: unknown) {
         console.error(`Response: ${error}`);
-        return [{"hostname": "unknown", "regions": [{"region": "unknown", "status": "false"}]}];
+        throw error;
     }
 
-    async function fetchHostnames(uptimeCheckConfig: google.monitoring.v3.IUptimeCheckConfig): Promise<MonitoringDataModel> {
-    const hostname = uptimeCheckConfig.monitoredResource?.labels?.host;
-
-    if (hostname === undefined) {
-        throw new Error("Hostname is undefined");
+    async function fetchHostname(hostname: string): Promise<MonitoringDataModel> {
+        const regions = regionsMonitored.map((region) => fetchTimeSeriesPoints(region, hostname));
+        return {
+            hostname: hostname,
+            regions: await Promise.all(regions)
+        };
     }
-
-    const regions = regionsMonitored.map((region) => fetchTimeSeriesPoints(region, hostname));
-    return {
-        hostname: hostname,
-        regions: await Promise.all(regions)
-    };
 
 
         async function fetchTimeSeriesPoints(regionMonitored: string, hostname: string): Promise<Region> {
@@ -62,5 +61,4 @@ export async function getMonitoringUptimeCheckTimeSeries(googleMonitoring: Googl
                 return "requestFailed";
             }
         }
-    }
 }

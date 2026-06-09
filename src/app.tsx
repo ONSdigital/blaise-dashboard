@@ -70,7 +70,7 @@ export default class App extends Component<unknown, AppState> {
             console.error(reason);
             this.setState({
                 uptimeChecks: [],
-                uptimeChecksLoading: true,
+                uptimeChecksLoading: false,
                 uptimeChecksErrored: true
             });
         });
