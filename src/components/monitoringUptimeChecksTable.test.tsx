@@ -29,4 +29,19 @@ describe("Monitoring Uptime Checks Table", () => {
 
         expect(await screen.findByText("Failed uptime checks data fetch....")).toBeDefined();
     });
+
+    it("falls back safely when region data is incomplete", async () => {
+        render(
+            <MonitoringUptimeChecksTable monitoringData={[{
+                hostname: "partial-host",
+                regions: [{ region: "europe", status: "success" }]
+            }]} />
+        );
+
+        expect(screen.getByTestId("uptimecheck-partial-host").textContent).toEqual("partial-host");
+        expect(screen.getByTestId("uptimecheck-europe").className).toContain("ons-status--success");
+        expect(screen.getByTestId("uptimecheck-asia").className).toContain("ons-status--requestFailed");
+        expect(screen.getByTestId("uptimecheck-northAmerica").className).toContain("ons-status--requestFailed");
+        expect(screen.getByTestId("uptimecheck-southAmerica").className).toContain("ons-status--requestFailed");
+    });
 });

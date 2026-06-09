@@ -20,15 +20,19 @@ export default class MonitoringUptimeChecksTable extends Component<MonitoringUpt
         }
     }
 
+    getRegionStatus(obj: MonitoringDataModel, regionCode: string): string {
+        return obj.regions.find((region) => region.region === regionCode)?.status ?? "requestFailed";
+    }
+
     render(): ReactElement {
         const uptimeChecksRows: ReactElement[] = this.props.monitoringData.map((obj) => ( 
             <MonitoringUptimeChecks
                 key={obj.hostname}
                 hostname={obj.hostname}
-                eurBelgium={obj.regions[0].status}
-                apacSingapore={obj.regions[1].status}
-                northAmerica={obj.regions[2].status}
-                southAmerica={obj.regions[3].status}
+                eurBelgium={this.getRegionStatus(obj, "europe")}
+                apacSingapore={this.getRegionStatus(obj, "apac-singapore")}
+                northAmerica={this.getRegionStatus(obj, "usa-oregon")}
+                southAmerica={this.getRegionStatus(obj, "sa-brazil-sao_paulo")}
             />
         ));
 
