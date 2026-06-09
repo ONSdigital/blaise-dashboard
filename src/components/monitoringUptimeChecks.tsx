@@ -13,15 +13,18 @@ export default class MonitoringUptimeChecks extends Component<MonitoringUptimeCh
         super(props);
     }
 
-    getStatusColor(status: string  | undefined) {
-        switch (status) {
-        case "success":
+    getStatusColor(status: string | undefined): "success" | "error" | "dead" {
+        const normalizedStatus = status?.trim().toLowerCase();
+
+        if (normalizedStatus === "success" || normalizedStatus === "true") {
             return "success";
-        case "error":
-            return "error";    
-        default:
-            return "requestFailed";
         }
+
+        if (normalizedStatus === "error" || normalizedStatus === "false") {
+            return "error";
+        }
+
+        return "dead";
     }
 
     render(): ReactElement {

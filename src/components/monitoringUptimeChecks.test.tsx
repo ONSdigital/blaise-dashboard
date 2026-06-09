@@ -24,7 +24,7 @@ describe("MonitoringUptimeChecks", () => {
         expect(screen.getByTestId("uptimecheck-europe").className).toContain("success");
         expect(screen.getByTestId("uptimecheck-asia").className).toContain("error");
         expect(screen.getByTestId("uptimecheck-northAmerica").className).toContain("success");
-        expect(screen.getByTestId("uptimecheck-southAmerica").className).toContain("requestFailed");
+        expect(screen.getByTestId("uptimecheck-southAmerica").className).toContain("dead");
        
     });
 });

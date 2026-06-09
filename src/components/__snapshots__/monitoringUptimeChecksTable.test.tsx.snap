@@ -43,7 +43,7 @@ exports[`Monitoring Uptime Checks Table > renders a table row for the uptime che
       class="ons-table__cell"
     >
       <span
-        class="ons-status ons-status--requestFailed"
+        class="ons-status ons-status--dead"
         data-testid="uptimecheck-southAmerica"
       />
     </td>

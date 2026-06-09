@@ -17,7 +17,7 @@ describe("Monitoring Uptime Checks Table", () => {
         expect(screen.getByTestId("uptimecheck-europe").className).toContain("ons-status--success");
         expect(screen.getByTestId("uptimecheck-asia").className).toContain("ons-status--error");
         expect(screen.getByTestId("uptimecheck-northAmerica").className).toContain("ons-status--success");
-        expect(screen.getByTestId("uptimecheck-southAmerica").className).toContain("ons-status--requestFailed");
+        expect(screen.getByTestId("uptimecheck-southAmerica").className).toContain("ons-status--dead");
         expect(screen.getByTestId("healthCheck-table")).toMatchSnapshot();
         
     });
@@ -40,8 +40,8 @@ describe("Monitoring Uptime Checks Table", () => {
 
         expect(screen.getByTestId("uptimecheck-partial-host").textContent).toEqual("partial-host");
         expect(screen.getByTestId("uptimecheck-europe").className).toContain("ons-status--success");
-        expect(screen.getByTestId("uptimecheck-asia").className).toContain("ons-status--requestFailed");
-        expect(screen.getByTestId("uptimecheck-northAmerica").className).toContain("ons-status--requestFailed");
-        expect(screen.getByTestId("uptimecheck-southAmerica").className).toContain("ons-status--requestFailed");
+        expect(screen.getByTestId("uptimecheck-asia").className).toContain("ons-status--dead");
+        expect(screen.getByTestId("uptimecheck-northAmerica").className).toContain("ons-status--dead");
+        expect(screen.getByTestId("uptimecheck-southAmerica").className).toContain("ons-status--dead");
     });
 });
