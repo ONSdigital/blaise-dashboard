@@ -26,7 +26,7 @@ function NewServer(blaiseApiClient: BlaiseApiClient, cache: NodeCache, config: C
     server.use("/", monitoringHandler());
 
     //define entry point
-    server.get("*", function (req: Request, res: Response) {
+    server.get("/{*splat}", function (req: Request, res: Response) {
         res.render("index.html");
     });
 

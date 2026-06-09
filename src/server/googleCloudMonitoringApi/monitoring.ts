@@ -57,7 +57,7 @@ export async function getMonitoringUptimeCheckTimeSeries(googleMonitoring: Googl
             try {
                 const timeSeries = await googleMonitoring.listTimeSeries(filter, startTime, endTime);
                 return timeSeries[0].points?.at(0)?.value?.boolValue == true ? "success" : "error";
-            } catch (error: unknown) {
+            } catch {
                 console.log("Failed to get timeSeries points data");
                 return "requestFailed";
             }
