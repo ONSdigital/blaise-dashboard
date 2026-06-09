@@ -1,16 +1,16 @@
 import NewServer from "../server";
 import supertest, { Response } from "supertest";
-import BlaiseApiClient from "blaise-api-node-client";
+import { BlaiseApiClient } from "blaise-api-node-client";
 import { GetConfigFromEnv } from "../config";
 import { mockCaseList } from "../blaiseApi/testFixtures";
 import NodeCache from "node-cache";
 
 
-jest.mock("blaise-api-node-client");
+vi.mock("blaise-api-node-client");
 const config = GetConfigFromEnv();
 const cache = new NodeCache({ stdTTL: 60 });
 
-const mockGetCaseStatus = jest.fn();
+const mockGetCaseStatus = vi.fn();
 BlaiseApiClient.prototype.getCaseStatus = mockGetCaseStatus;
 const blaiseApiClient = new BlaiseApiClient(config.BlaiseApiUrl);
 
@@ -25,8 +25,8 @@ describe("Build a case report", () => {
     });
 
     afterEach(() => {
-        jest.clearAllMocks();
-        jest.resetModules();
+        vi.clearAllMocks();
+        vi.resetModules();
     });
 
     it("should return a 200 status and a case report", async () => {

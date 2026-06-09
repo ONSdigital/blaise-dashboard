@@ -1,17 +1,13 @@
-/**
- * @jest-environment jsdom
- */
-
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import QuestionnaireCaseReportTable from "./questionnaireCaseReportTable";
 import { mockQuestionnaireList } from "../server/blaiseApi/testFixtures";
 
-jest.mock("../client/caseCompletionReport");
+vi.mock("../client/caseCompletionReport");
 import { getCaseCompletionReport } from "../client/caseCompletionReport";
-import { CaseCompletionReport } from "../server/blaiseApi/caseCompletionReport";
+import { CaseCompletionReport } from "../types/caseCompletionReport";
 
-const getCaseCompletionReportMock = getCaseCompletionReport as jest.Mock<Promise<CaseCompletionReport>>;
+const getCaseCompletionReportMock = vi.mocked(getCaseCompletionReport);
 
 
 describe("QuestionnaireCaseReportTable", () => {
@@ -23,7 +19,7 @@ describe("QuestionnaireCaseReportTable", () => {
     };
 
     afterEach(() => {
-        jest.resetAllMocks();
+        vi.resetAllMocks();
     });
 
     it("renders a table row for the questionnaire case status", async () => {

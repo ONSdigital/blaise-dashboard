@@ -1,6 +1,6 @@
-import {CaseOutcome} from "blaise-api-node-client";
+import { CaseOutcome } from "blaise-api-node-client";
 
-const completedOutcomes: CaseOutcome[] = [
+const completedOutcomes: number[] = [
     CaseOutcome.Completed,
     CaseOutcome.CompletedNudge,
     CaseOutcome.ConcernsWontTakePart,
@@ -36,17 +36,17 @@ const completedOutcomes: CaseOutcome[] = [
     CaseOutcome.QuestionProblem
 ];
 
-const notCompletedOutcomes: CaseOutcome[] = [
+const notCompletedOutcomes: number[] = [
     CaseOutcome.None,
     CaseOutcome.Partial,
     CaseOutcome.AppointmentMade,
     CaseOutcome.NonContact
 ];
 
-export function isCompleted(outcome: CaseOutcome): boolean {
+export function isCompleted(outcome: number): boolean {
     return completedOutcomes.includes(outcome);
 }
 
-export function isNotCompleted(outcome: CaseOutcome): boolean {
+export function isNotCompleted(outcome: number): boolean {
     return notCompletedOutcomes.includes(outcome);
 }

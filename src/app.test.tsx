@@ -1,27 +1,23 @@
-/**
- * @jest-environment jsdom
- */
-
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import App from "./app";
 import { mockQuestionnaireList } from "./server/blaiseApi/testFixtures";
 
-jest.mock("./client/caseCompletionReport");
+vi.mock("./client/caseCompletionReport");
 import { getCaseCompletionReport } from "./client/caseCompletionReport";
-import { CaseCompletionReport } from "./server/blaiseApi/caseCompletionReport";
+import { CaseCompletionReport } from "./types/caseCompletionReport";
 
-jest.mock("./client/questionnaires");
+vi.mock("./client/questionnaires");
 import { getQuestionnaires } from "./client/questionnaires";
 import { Questionnaire } from "blaise-api-node-client";
 
-jest.mock("./client/monitoring");
+vi.mock("./client/monitoring");
 import { getMonitoring } from "./client/monitoring";
-import { MonitoringDataModel } from "./server/monitoringDataModel";
+import { MonitoringDataModel } from "./types/monitoringDataModel";
 
-const getCaseCompletionReportMock = getCaseCompletionReport as jest.Mock<Promise<CaseCompletionReport>>;
-const getQuestionnairesMock = getQuestionnaires as jest.Mock<Promise<Questionnaire[]>>;
-const getMonitoringMock = getMonitoring as jest.Mock<Promise<MonitoringDataModel[]>>;
+const getCaseCompletionReportMock = vi.mocked(getCaseCompletionReport);
+const getQuestionnairesMock = vi.mocked(getQuestionnaires);
+const getMonitoringMock = vi.mocked(getMonitoring);
 
 describe("App", () => {
   const caseCompletionReport = {
@@ -32,7 +28,7 @@ describe("App", () => {
   };
 
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it("renders correctly", async () => {

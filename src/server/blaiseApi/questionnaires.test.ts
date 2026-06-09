@@ -1,14 +1,14 @@
 import { filterQuestionnaires, getQuestionnaires } from "./questionnaires";
-import BlaiseApiClient from "blaise-api-node-client";
+import { BlaiseApiClient } from "blaise-api-node-client";
 import { GetConfigFromEnv } from "../config";
 import { mockQuestionnaireList } from "./testFixtures";
 import NodeCache from "node-cache";
 
-jest.mock("blaise-api-node-client");
+vi.mock("blaise-api-node-client");
 const config = GetConfigFromEnv();
 const cache = new NodeCache({ stdTTL: 60 });
 
-const getQuestionnairesMock = jest.fn();
+const getQuestionnairesMock = vi.fn();
 BlaiseApiClient.prototype.getQuestionnaires = getQuestionnairesMock;
 const blaiseApiClient = new BlaiseApiClient(config.BlaiseApiUrl);
 
@@ -40,7 +40,7 @@ describe("getQuestionnaires", () => {
 
     afterEach(() => {
         cache.flushAll();
-        jest.resetAllMocks();
+        vi.resetAllMocks();
     });
 
     describe("when an QuestionnaireTLA is provided", () => {

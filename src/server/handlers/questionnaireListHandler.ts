@@ -1,5 +1,5 @@
 import express, { Request, Response, Router } from "express";
-import BlaiseApiClient from "blaise-api-node-client";
+import { BlaiseApiClient } from "blaise-api-node-client";
 import { Config } from "../config";
 import { getQuestionnaires } from "../blaiseApi/questionnaires";
 import NodeCache from "node-cache";

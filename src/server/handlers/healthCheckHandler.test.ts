@@ -1,7 +1,7 @@
 import NewServer from "../server";
 import supertest from "supertest";
 
-import BlaiseApiClient from "blaise-api-node-client";
+import { BlaiseApiClient } from "blaise-api-node-client";
 import { GetConfigFromEnv } from "../config";
 import NodeCache from "node-cache";
 

@@ -11,7 +11,7 @@ export type CaseCalculations = {
     CompletePercentage: number
 }
 
-export function calculateCaseTotals(cases: CaseStatus[]): CaseTotals {
+export function calculateCaseTotals(cases: readonly CaseStatus[]): CaseTotals {
     const caseTotals: CaseTotals = {
         Total: 0,
         Complete: 0,

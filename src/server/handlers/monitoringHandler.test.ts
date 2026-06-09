@@ -1,6 +1,6 @@
 import NewServer from "../server";
 import supertest from "supertest";
-import BlaiseApiClient from "blaise-api-node-client";
+import { BlaiseApiClient } from "blaise-api-node-client";
 import {GetConfigFromEnv} from "../config";
 import NodeCache from "node-cache";
 import {getMonitoringUptimeCheckTimeSeries} from "../googleCloudMonitoringApi/monitoring";
@@ -11,15 +11,15 @@ import {MonitoringDataModel} from "../monitoringDataModel";
 const config = GetConfigFromEnv();
 const cache = new NodeCache({ stdTTL: 60 });
 const blaiseApiClient = new BlaiseApiClient(config.BlaiseApiUrl);
-jest.mock("../googleCloudMonitoringApi/monitoring", () => {
-    const original = jest.requireActual("../googleCloudMonitoringApi/monitoring");
+vi.mock("../googleCloudMonitoringApi/monitoring", async (importOriginal) => {
+    const original = await importOriginal<typeof import("../googleCloudMonitoringApi/monitoring")>();
     return {
         ...original,
-        getMonitoringUptimeCheckTimeSeries: jest.fn()
+        getMonitoringUptimeCheckTimeSeries: vi.fn()
     };
 });
 
-const getMonitoringUptimeCheckTimeSeriesMock = getMonitoringUptimeCheckTimeSeries as jest.Mock<Promise<MonitoringDataModel[]>>;
+const getMonitoringUptimeCheckTimeSeriesMock = vi.mocked(getMonitoringUptimeCheckTimeSeries);
 
 describe("Get all uptime checks from API", () => {
     
@@ -48,8 +48,8 @@ describe("Get all uptime checks from API", () => {
     });
 
     afterEach(() => {
-        jest.clearAllMocks();
-        jest.resetModules();
+        vi.clearAllMocks();
+        vi.resetModules();
         cache.flushAll();
     });
 });

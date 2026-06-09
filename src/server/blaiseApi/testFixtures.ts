@@ -1,4 +1,4 @@
-import {CaseOutcome} from "blaise-api-node-client";
+import { CaseOutcome } from "blaise-api-node-client";
 
 export const mockQuestionnaireList = [
         {

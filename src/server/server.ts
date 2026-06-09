@@ -4,7 +4,7 @@ import ejs from "ejs";
 import HealthCheckHandler from "./handlers/healthCheckHandler";
 import QuestionnaireListHandler from "./handlers/questionnaireListHandler";
 import { Config } from "./config";
-import BlaiseApiClient from "blaise-api-node-client";
+import { BlaiseApiClient } from "blaise-api-node-client";
 import caseReportHandler from "./handlers/reportHandler";
 import NodeCache from "node-cache";
 import monitoringHandler from "./handlers/monitoringHandler";

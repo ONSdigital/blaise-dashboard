@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Monitoring Uptime Checks Table renders a table row for the uptime checks 1`] = `
+exports[`Monitoring Uptime Checks Table > renders a table row for the uptime checks 1`] = `
 <table
   columns="Service,Eur-Belgium,Asia Pacific,North America,South America"
   data-testid="healthCheck-table"

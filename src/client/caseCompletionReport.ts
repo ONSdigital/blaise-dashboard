@@ -1,4 +1,4 @@
-import { CaseCompletionReport } from "../server/blaiseApi/caseCompletionReport";
+import { CaseCompletionReport } from "../types/caseCompletionReport";
 import axios from "axios";
 
 export async function getCaseCompletionReport(questionnaireName: string): Promise<CaseCompletionReport> {

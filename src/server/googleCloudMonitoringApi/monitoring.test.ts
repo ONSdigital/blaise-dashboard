@@ -1,8 +1,8 @@
 import {getMonitoringUptimeCheckTimeSeries} from "./monitoring";
 
 const mockGoogleMonitoring = {
-    getUptimeChecksConfigs: jest.fn(),
-    listTimeSeries: jest.fn(),
+    getUptimeChecksConfigs: vi.fn(),
+    listTimeSeries: vi.fn(),
 };
 
 describe("Get all uptime checks from API", () => {
@@ -92,7 +92,7 @@ describe("Get all uptime checks from API", () => {
     });
 
      afterEach(() => {
-        jest.clearAllMocks();
-        jest.resetModules();
+        vi.clearAllMocks();
+        vi.resetModules();
     });
 });

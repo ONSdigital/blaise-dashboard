@@ -1,6 +1,6 @@
 import React, {Component, ReactElement} from "react";
-import {CaseCompletionReport} from "../server/blaiseApi/caseCompletionReport";
-import {ONSLoadingPanel} from "blaise-design-system-react-components";
+import { CaseCompletionReport } from "../types/caseCompletionReport";
+import {LoadingPanel} from "blaise-design-system-react-components";
 
 type QuestionnaireCaseReportProps = {
     caseCompletionReport: CaseCompletionReport,
@@ -27,7 +27,7 @@ export default class QuestionnaireCaseReport extends Component<QuestionnaireCase
 
     render(): ReactElement {
         if (!this.state.loaded) {
-            return <tr><td><ONSLoadingPanel message={"Getting cases"}/></td></tr>;
+            return <tr><td><LoadingPanel message={"Getting cases"}/></td></tr>;
         }
 
         // | questionnaire | cases | completed   | progress  |

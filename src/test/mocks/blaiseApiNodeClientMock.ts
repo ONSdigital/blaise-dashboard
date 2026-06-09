@@ -71,7 +71,7 @@ export const QuestionnaireListMockObject: Questionnaire[] = [
     }
 ];
 
-export default class BlaiseApiClient {
+export class BlaiseApiClient {
     baseUrl: string;
 
     constructor(baseUrl: string) {
@@ -88,3 +88,5 @@ export default class BlaiseApiClient {
         return [];
     }
 }
+
+export default BlaiseApiClient;

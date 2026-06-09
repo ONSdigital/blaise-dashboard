@@ -1,19 +1,19 @@
 import React, {Component, ReactElement} from "react";
-import {Questionnaire} from "blaise-api-node-client";
+import { Questionnaire } from "blaise-api-node-client";
 import {
     BetaBanner,
     Collapsible,
     Footer,
     Header,
-    ONSLoadingPanel,
-    ONSPanel
+    LoadingPanel,
+    Panel
 } from "blaise-design-system-react-components";
 import "./style.css";
 import {getQuestionnaires} from "./client/questionnaires";
 import QuestionnaireCaseReportTable from "./components/questionnaireCaseReportTable";
 import {refreshInterval} from "./client/refreshInterval";
 import { getMonitoring } from "./client/monitoring";
-import { MonitoringDataModel } from "./server/monitoringDataModel";
+import { MonitoringDataModel } from "./types/monitoringDataModel";
 import MonitoringUptimeChecksTable from "./components/monitoringUptimeChecksTable";
 
 const divStyle = {
@@ -100,28 +100,28 @@ export default class App extends Component<unknown, AppState> {
 
     questionnaireErrorPanel(): ReactElement | undefined {
         if (this.state.questionnaireErrored) {
-            return <ONSPanel status="error">Failed to get questionnaires.</ONSPanel>;
+            return <Panel status="error">Failed to get questionnaires.</Panel>;
         }
         return undefined;
     }
 
     uptimeChecksErrorPanel(): ReactElement | undefined {
         if (this.state.uptimeChecksErrored) {
-            return <ONSPanel status="error">Failed to get uptime checks.</ONSPanel>;
+            return <Panel status="error">Failed to get uptime checks.</Panel>;
         }
         return undefined;
     }
 
     questionnaireLoadingPanel(): ReactElement | undefined {
         if (this.state.questionnaireLoading && !this.state.questionnaireErrored) {
-            return <ONSLoadingPanel message={"Getting questionnaires for report"}/>;
+            return <LoadingPanel message={"Getting questionnaires for report"}/>;
         }
         return undefined;
     }
 
     uptimeChecksloadingPanel(): ReactElement | undefined {
         if (this.state.uptimeChecksLoading) {
-            return <ONSLoadingPanel message={"Getting uptime checks for services"}/>;
+            return <LoadingPanel message={"Getting uptime checks for services"}/>;
         }
         return undefined;
     }
@@ -131,7 +131,7 @@ export default class App extends Component<unknown, AppState> {
             return undefined;
         }
         if (this.state.questionnaires.length === 0) {
-            return <ONSPanel>No OPN questionnaires installed.</ONSPanel>;
+            return <Panel>No OPN questionnaires installed.</Panel>;
         }
         return <QuestionnaireCaseReportTable questionnaires={this.state.questionnaires}/>;
     }
@@ -165,7 +165,7 @@ export default class App extends Component<unknown, AppState> {
             return undefined;
         }
         if (this.state.uptimeChecks.length === 0) {
-            return <ONSPanel>No uptime checks data.</ONSPanel>;
+            return <Panel>No uptime checks data.</Panel>;
         }
         return <MonitoringUptimeChecksTable monitoringData={this.state.uptimeChecks}/>;
     }

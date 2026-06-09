@@ -7,7 +7,7 @@ const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
 
 describe("getQuestionnaires tests", () => {
   beforeAll(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     mock.reset();
   });
 

@@ -1,8 +1,8 @@
 import React, { Component, ReactElement } from "react";
-import { CaseCompletionReport } from "../server/blaiseApi/caseCompletionReport";
+import { CaseCompletionReport } from "../types/caseCompletionReport";
 import { getCaseCompletionReport } from "../client/caseCompletionReport";
 import { Questionnaire } from "blaise-api-node-client";
-import { ONSLoadingPanel, ONSPanel, ONSTable } from "blaise-design-system-react-components";
+import { LoadingPanel, Panel, Table } from "blaise-design-system-react-components";
 import QuestionnaireCaseReport from "./questionnaireCaseReport";
 import { refreshInterval } from "../client/refreshInterval";
 
@@ -73,15 +73,15 @@ export default class QuestionnaireCaseReportTable extends Component<Questionnair
             return undefined;
         }
         return (
-            <ONSPanel status="error">
+            <Panel status="error">
                 Failed to get completion reports for questionnaires: {this.state.erroredQuestionnaires.join(", ")}
-            </ONSPanel>
+            </Panel>
         );
     }
 
     render(): ReactElement {
         if (!this.state.loaded) {
-            return <ONSLoadingPanel message={"Getting case completion reports"} />;
+            return <LoadingPanel message={"Getting case completion reports"} />;
         }
 
         const caseReportRows: ReactElement[] = [];
@@ -95,9 +95,9 @@ export default class QuestionnaireCaseReportTable extends Component<Questionnair
 
         return (<>
             {this.errorPanel()}
-            <ONSTable columns={["Questionnaire", "Cases", "Completed", "Progress"]} tableID="case-report-table">
+            <Table columns={["Questionnaire", "Cases", "Completed", "Progress"]} id="case-report-table">
                 <>{caseReportRows}</>
-            </ONSTable>
+            </Table>
         </>);
     }
 }

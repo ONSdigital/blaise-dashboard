@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`QuestionnaireCaseReportTable renders a table row for the questionnaire case status 1`] = `
+exports[`QuestionnaireCaseReportTable > renders a table row for the questionnaire case status 1`] = `
 <table
   columns="Questionnaire,Cases,Completed,Progress"
   data-testid="case-report-table"

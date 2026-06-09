@@ -21,10 +21,20 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "types": [
+      "node",
+      "vite/client"
+    ],
     "jsx": "react-jsx",
     "noFallthroughCasesInSwitch": true
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "src/server/**",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx",
+    "src/**/__snapshots__/**"
   ]
 }

@@ -1,4 +1,4 @@
-import BlaiseApiClient from "blaise-api-node-client";
+import { BlaiseApiClient } from "blaise-api-node-client";
 import { GetConfigFromEnv } from "./config";
 import NewServer from "./server";
 import NodeCache from "node-cache";

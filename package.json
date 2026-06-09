@@ -2,16 +2,19 @@
   "license": "ISC",
   "scripts": {
     "start": "node ./dist/index.js",
-    "build-react": "react-scripts build",
-    "client": "react-scripts start",
-    "server": "tsc --project tsconfig.server.json && node ./dist/index.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "build": "yarn build:client && yarn build:server",
+    "build:client": "yarn vite build",
+    "build:server": "yarn tsc --project tsconfig.server.json",
+    "server": "yarn build:server && node ./dist/index.js",
+    "dev": "yarn concurrently --kill-others-on-fail --names \"server,web\" \"yarn dev:server\" \"yarn dev:client\"",
+    "dev:client": "yarn vite",
+    "dev:server": "yarn tsx watch src/server/index.ts",
     "lint": "node_modules/.bin/eslint .",
     "lint-fix": "node_modules/.bin/eslint . --fix",
-    "test": "jest --coverage --watchAll=false --detectOpenHandles --config=jest.config.js",
-    "gcp-build": "react-scripts build && tsc --project tsconfig.server.json"
+    "test": "yarn vitest run --coverage",
+    "test-watch": "yarn vitest",
+    "gcp-build": "yarn build"
   },
-  "proxy": "http://localhost:5000",
   "pre-commit": [
     "lint-fix"
   ],
@@ -19,39 +22,41 @@
     "@google-cloud/monitoring": "^5.3.3",
     "@types/ejs": "^3.1.5",
     "axios": "^1.17.0",
-    "blaise-api-node-client": "https://github.com/ONSdigital/blaise-api-node-client#v3.0.0",
-    "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#2.0.0",
+    "blaise-api-node-client": "git+https://github.com/ONSdigital/blaise-api-node-client#v3.0.0",
+    "blaise-design-system-react-components": "git+https://github.com/ONSdigital/blaise-design-system-react-components#v2.0.0",
     "dotenv": "^17.4.2",
     "ejs": "^6.0.1",
     "express": "^5.2.1",
+    "formik": "^2.4.9",
     "node-cache": "^5.1.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router-dom": "^7.17.0",
-    "react-scripts": "^5.0.1",
     "typescript": "~6.0.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.7",
-    "@babel/plugin-transform-react-jsx": "^7.29.7",
-    "@babel/preset-env": "^7.29.7",
-    "@babel/preset-typescript": "^7.29.7",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
-    "@types/jest": "^30.0.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^25.9.2",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@types/supertest": "^7.2.0",
     "@typescript-eslint/eslint-plugin": "^8.61.0",
     "@typescript-eslint/parser": "^8.61.0",
+    "@vitejs/plugin-react": "^6.0.2",
+    "@vitest/coverage-v8": "^4.1.8",
     "axios-mock-adapter": "^2.1.0",
-    "babel-jest": "^30.4.1",
     "concurrently": "^10.0.3",
-    "eslint": "^9.39.4",
+    "eslint": "^8.57.1",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-react": "^7.37.5",
-    "supertest": "^7.2.2"
+    "happy-dom": "^18.0.1",
+    "supertest": "^7.2.2",
+    "tsx": "^4.22.4",
+    "vite": "^8.0.16",
+    "vitest": "^4.1.8"
   },
   "browserslist": {
     "production": [
@@ -64,5 +69,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "packageManager": "yarn@4.14.1"
 }

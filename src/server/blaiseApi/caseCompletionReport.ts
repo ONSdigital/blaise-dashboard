@@ -1,10 +1,10 @@
 import {calculateCaseTotals, calculatePercentComplete, CaseCalculations, CaseTotals} from "./calculations";
-import {CaseStatus} from "blaise-api-node-client";
+import { CaseStatus } from "blaise-api-node-client";
 
 
 export type CaseCompletionReport = CaseTotals & CaseCalculations
 
-export function buildCaseCompletionReport(cases: CaseStatus[]): CaseCompletionReport {
+export function buildCaseCompletionReport(cases: readonly CaseStatus[]): CaseCompletionReport {
     const caseTotals = calculateCaseTotals(cases);
     const caseCompletePercentage = calculatePercentComplete(caseTotals);
     return {

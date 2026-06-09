@@ -53,7 +53,7 @@ const legacyConfig = {
             }
         },
         {
-            files: ["eslint.config.js", "jest-setup.js"],
+            files: ["eslint.config.js"],
             rules: {
                 "@typescript-eslint/no-require-imports": "off",
                 "react/prop-types": "off",
