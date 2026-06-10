@@ -1,5 +1,4 @@
 import {MonitoringDataModel, Region} from "../monitoringDataModel";
-import {google} from "@google-cloud/monitoring/build/protos/protos";
 import * as protos from "@google-cloud/monitoring/build/protos/protos";
 
 const regionsMonitored: string [] = ["eur-belgium", "apac-singapore", "usa-oregon", "sa-brazil-sao_paulo"];

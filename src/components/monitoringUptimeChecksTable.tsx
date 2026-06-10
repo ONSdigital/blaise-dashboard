@@ -39,7 +39,7 @@ export default class MonitoringUptimeChecksTable extends Component<MonitoringUpt
         return (<>
             {this.errorPanel()}
             <Table columns={["Service", "Eur-Belgium","Asia Pacific","North America", "South America"]} id="healthCheck-table">
-                <>{uptimeChecksRows}</>
+                <tbody>{uptimeChecksRows}</tbody>
             </Table>
         </>);
     }

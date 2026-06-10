@@ -40,6 +40,10 @@ describe("Test the outcome codes are completed codes", () => {
         expect(isCompleted(outcome)).toBeTruthy();
     });
 
+    it("should return true for unknown outcome codes", () => {
+        expect(isCompleted(999)).toBeTruthy();
+    });
+
 
     it.each([
         [CaseOutcome.None],

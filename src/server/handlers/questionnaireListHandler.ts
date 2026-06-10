@@ -25,7 +25,7 @@ export class QuestionnaireListHandler {
 
     async GetListOfQuestionnaires(req: Request, res: Response): Promise<Response> {
         try {
-            const questionnaires = await getQuestionnaires(this.blaiseApiClient, this.cache, this.config, "OPN");
+            const questionnaires = await getQuestionnaires(this.blaiseApiClient, this.cache, this.config);
 
             return res.status(200).json(questionnaires);
         } catch (error: unknown) {

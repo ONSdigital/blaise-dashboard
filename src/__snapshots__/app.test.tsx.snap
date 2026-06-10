@@ -26,6 +26,210 @@ exports[`App > renders correctly 1`] = `
             columns="Questionnaire,Cases,Completed,Progress"
             data-testid="case-report-table"
           >
+            <tbody>
+              <tr
+                class="ons-table__row"
+                data-testid="questionnaire-table-row"
+              >
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-questionnaire-LMS2101_CC1"
+                >
+                  LMS2101_CC1
+                </td>
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-total-LMS2101_CC1"
+                >
+                  7
+                </td>
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-complete-LMS2101_CC1"
+                >
+                  5
+                   (
+                  71.43
+                  %)
+                </td>
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-complete-percentage-LMS2101_CC1"
+                >
+                  <progress
+                    aria-valuemax="100"
+                    aria-valuemin="0"
+                    aria-valuenow="71.43"
+                    id="file"
+                    max="100"
+                    role="progressbar"
+                    value="71.43"
+                  >
+                    71.43
+                    %
+                  </progress>
+                </td>
+              </tr>
+              <tr
+                class="ons-table__row"
+                data-testid="questionnaire-table-row"
+              >
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-questionnaire-OPN2101A"
+                >
+                  OPN2101A
+                </td>
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-total-OPN2101A"
+                >
+                  7
+                </td>
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-complete-OPN2101A"
+                >
+                  5
+                   (
+                  71.43
+                  %)
+                </td>
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-complete-percentage-OPN2101A"
+                >
+                  <progress
+                    aria-valuemax="100"
+                    aria-valuemin="0"
+                    aria-valuenow="71.43"
+                    id="file"
+                    max="100"
+                    role="progressbar"
+                    value="71.43"
+                  >
+                    71.43
+                    %
+                  </progress>
+                </td>
+              </tr>
+              <tr
+                class="ons-table__row"
+                data-testid="questionnaire-table-row"
+              >
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-questionnaire-OPN2007T"
+                >
+                  OPN2007T
+                </td>
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-total-OPN2007T"
+                >
+                  7
+                </td>
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-complete-OPN2007T"
+                >
+                  5
+                   (
+                  71.43
+                  %)
+                </td>
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-complete-percentage-OPN2007T"
+                >
+                  <progress
+                    aria-valuemax="100"
+                    aria-valuemin="0"
+                    aria-valuenow="71.43"
+                    id="file"
+                    max="100"
+                    role="progressbar"
+                    value="71.43"
+                  >
+                    71.43
+                    %
+                  </progress>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <section>
+            <h3>
+              What is a completed case?
+            </h3>
+            <p>
+              Completed cases are cases that do 
+              <strong>
+                NOT
+              </strong>
+               have any of the following outcome codes:
+            </p>
+            <ul
+              class="ons-list"
+            >
+              <li
+                class="ons-list__item"
+              >
+                0 - Not actioned
+              </li>
+              <li
+                class="ons-list__item"
+              >
+                210 - Partial
+              </li>
+              <li
+                class="ons-list__item"
+              >
+                300 - Appointment made
+              </li>
+              <li
+                class="ons-list__item"
+              >
+                310 - Non-contact
+              </li>
+            </ul>
+          </section>
+          <h2
+            class="ons-u-mt-m"
+          >
+            Service health check information
+          </h2>
+          <div>
+            No uptime checks data.
+          </div>
+        </main>
+      </div>
+      <footer />
+    </div>
+  </body>,
+  "container": <div>
+    <div />
+    <header>
+      Dashboard
+    </header>
+    <div
+      class="ons-page__container ons-container"
+      style="min-height: calc(67vh);"
+    >
+      <main
+        class="ons-page__main ons-u-mt-no"
+        id="main-content"
+      >
+        <h2
+          class="ons-u-mt-m"
+        >
+          Completed case information
+        </h2>
+        <table
+          columns="Questionnaire,Cases,Completed,Progress"
+          data-testid="case-report-table"
+        >
+          <tbody>
             <tr
               class="ons-table__row"
               data-testid="questionnaire-table-row"
@@ -155,207 +359,7 @@ exports[`App > renders correctly 1`] = `
                 </progress>
               </td>
             </tr>
-          </table>
-          <section>
-            <h3>
-              What is a completed case?
-            </h3>
-            <p>
-              Completed cases are cases that do 
-              <strong>
-                NOT
-              </strong>
-               have any of the following outcome codes:
-            </p>
-            <ul
-              class="ons-list"
-            >
-              <li
-                class="ons-list__item"
-              >
-                0 - Not actioned
-              </li>
-              <li
-                class="ons-list__item"
-              >
-                210 - Partial
-              </li>
-              <li
-                class="ons-list__item"
-              >
-                300 - Appointment made
-              </li>
-              <li
-                class="ons-list__item"
-              >
-                310 - Non-contact
-              </li>
-            </ul>
-          </section>
-          <h2
-            class="ons-u-mt-m"
-          >
-            Service health check information
-          </h2>
-          <div>
-            No uptime checks data.
-          </div>
-        </main>
-      </div>
-      <footer />
-    </div>
-  </body>,
-  "container": <div>
-    <div />
-    <header>
-      Dashboard
-    </header>
-    <div
-      class="ons-page__container ons-container"
-      style="min-height: calc(67vh);"
-    >
-      <main
-        class="ons-page__main ons-u-mt-no"
-        id="main-content"
-      >
-        <h2
-          class="ons-u-mt-m"
-        >
-          Completed case information
-        </h2>
-        <table
-          columns="Questionnaire,Cases,Completed,Progress"
-          data-testid="case-report-table"
-        >
-          <tr
-            class="ons-table__row"
-            data-testid="questionnaire-table-row"
-          >
-            <td
-              class="ons-table__cell"
-              data-testid="questionnaire-case-report-questionnaire-LMS2101_CC1"
-            >
-              LMS2101_CC1
-            </td>
-            <td
-              class="ons-table__cell"
-              data-testid="questionnaire-case-report-total-LMS2101_CC1"
-            >
-              7
-            </td>
-            <td
-              class="ons-table__cell"
-              data-testid="questionnaire-case-report-complete-LMS2101_CC1"
-            >
-              5
-               (
-              71.43
-              %)
-            </td>
-            <td
-              class="ons-table__cell"
-              data-testid="questionnaire-case-report-complete-percentage-LMS2101_CC1"
-            >
-              <progress
-                aria-valuemax="100"
-                aria-valuemin="0"
-                aria-valuenow="71.43"
-                id="file"
-                max="100"
-                role="progressbar"
-                value="71.43"
-              >
-                71.43
-                %
-              </progress>
-            </td>
-          </tr>
-          <tr
-            class="ons-table__row"
-            data-testid="questionnaire-table-row"
-          >
-            <td
-              class="ons-table__cell"
-              data-testid="questionnaire-case-report-questionnaire-OPN2101A"
-            >
-              OPN2101A
-            </td>
-            <td
-              class="ons-table__cell"
-              data-testid="questionnaire-case-report-total-OPN2101A"
-            >
-              7
-            </td>
-            <td
-              class="ons-table__cell"
-              data-testid="questionnaire-case-report-complete-OPN2101A"
-            >
-              5
-               (
-              71.43
-              %)
-            </td>
-            <td
-              class="ons-table__cell"
-              data-testid="questionnaire-case-report-complete-percentage-OPN2101A"
-            >
-              <progress
-                aria-valuemax="100"
-                aria-valuemin="0"
-                aria-valuenow="71.43"
-                id="file"
-                max="100"
-                role="progressbar"
-                value="71.43"
-              >
-                71.43
-                %
-              </progress>
-            </td>
-          </tr>
-          <tr
-            class="ons-table__row"
-            data-testid="questionnaire-table-row"
-          >
-            <td
-              class="ons-table__cell"
-              data-testid="questionnaire-case-report-questionnaire-OPN2007T"
-            >
-              OPN2007T
-            </td>
-            <td
-              class="ons-table__cell"
-              data-testid="questionnaire-case-report-total-OPN2007T"
-            >
-              7
-            </td>
-            <td
-              class="ons-table__cell"
-              data-testid="questionnaire-case-report-complete-OPN2007T"
-            >
-              5
-               (
-              71.43
-              %)
-            </td>
-            <td
-              class="ons-table__cell"
-              data-testid="questionnaire-case-report-complete-percentage-OPN2007T"
-            >
-              <progress
-                aria-valuemax="100"
-                aria-valuemin="0"
-                aria-valuenow="71.43"
-                id="file"
-                max="100"
-                role="progressbar"
-                value="71.43"
-              >
-                71.43
-                %
-              </progress>
-            </td>
-          </tr>
+          </tbody>
         </table>
         <section>
           <h3>

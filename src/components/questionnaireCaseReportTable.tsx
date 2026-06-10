@@ -96,7 +96,7 @@ export default class QuestionnaireCaseReportTable extends Component<Questionnair
         return (<>
             {this.errorPanel()}
             <Table columns={["Questionnaire", "Cases", "Completed", "Progress"]} id="case-report-table">
-                <>{caseReportRows}</>
+                <tbody>{caseReportRows}</tbody>
             </Table>
         </>);
     }

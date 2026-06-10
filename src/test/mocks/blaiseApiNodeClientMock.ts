@@ -19,6 +19,7 @@ export enum CaseOutcome {
     SoftRefusal = 461,
     LanguageDifficultiesHeadOffice = 541,
     LanguageDifficultiesInterviewer = 542,
+    // eslint-disable-next-line @typescript-eslint/no-duplicate-enum-values
     WrongNumber = 542,
     DeleteRequestedCompleted = 561,
     DeleteRequestedPartial = 562,

@@ -26,7 +26,8 @@ type AppState = {
     questionnaireErrored: boolean,
     uptimeChecks: MonitoringDataModel[],
     uptimeChecksLoading: boolean,
-    uptimeChecksErrored: boolean
+    uptimeChecksErrored: boolean,
+    uptimeChecksErrorMessage: string
 }
 
 export default class App extends Component<unknown, AppState> {
@@ -40,7 +41,8 @@ export default class App extends Component<unknown, AppState> {
             questionnaireErrored: false,
             uptimeChecksLoading: true,
             uptimeChecks: [],
-            uptimeChecksErrored: false
+            uptimeChecksErrored: false,
+            uptimeChecksErrorMessage: ""
         };
     }
 
@@ -50,7 +52,9 @@ export default class App extends Component<unknown, AppState> {
         this.loadMonitoringData();
         this.interval = setInterval(() => {
             this.loadQuestionnaires();
-            this.loadMonitoringData();
+            if (!this.state.uptimeChecksErrored) {
+                this.loadMonitoringData();
+            }
         }, refreshInterval);
     }
 
@@ -64,16 +68,30 @@ export default class App extends Component<unknown, AppState> {
             console.log(uptimeChecks);
             this.setState({
                 uptimeChecks: uptimeChecks,
-                uptimeChecksLoading: false
+                uptimeChecksLoading: false,
+                uptimeChecksErrored: false,
+                uptimeChecksErrorMessage: ""
             });
         }).catch((reason: unknown) => {
             console.error(reason);
             this.setState({
                 uptimeChecks: [],
                 uptimeChecksLoading: false,
-                uptimeChecksErrored: true
+                uptimeChecksErrored: true,
+                uptimeChecksErrorMessage: this.extractMonitoringErrorMessage(reason)
             });
         });
+    }
+
+    extractMonitoringErrorMessage(reason: unknown): string {
+        if (typeof reason === "object" && reason !== null && "response" in reason) {
+            const response = (reason as { response?: { data?: unknown } }).response;
+            if (typeof response?.data === "string" && response.data.trim().length > 0) {
+                return response.data;
+            }
+        }
+
+        return "Failed to get uptime checks.";
     }
 
     loadQuestionnaires(): void {
@@ -107,7 +125,7 @@ export default class App extends Component<unknown, AppState> {
 
     uptimeChecksErrorPanel(): ReactElement | undefined {
         if (this.state.uptimeChecksErrored) {
-            return <Panel status="error">Failed to get uptime checks.</Panel>;
+            return <Panel status="error">{this.state.uptimeChecksErrorMessage}</Panel>;
         }
         return undefined;
     }
@@ -161,7 +179,7 @@ export default class App extends Component<unknown, AppState> {
     }
 
     ServiceHealthCheck(): ReactElement | undefined {
-        if (this.state.uptimeChecksLoading) {
+        if (this.state.uptimeChecksLoading || this.state.uptimeChecksErrored) {
             return undefined;
         }
         if (this.state.uptimeChecks.length === 0) {

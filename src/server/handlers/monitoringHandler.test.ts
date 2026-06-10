@@ -6,7 +6,6 @@ import NodeCache from "node-cache";
 import {getMonitoringUptimeCheckTimeSeries} from "../googleCloudMonitoringApi/monitoring";
 import { GoogleMonitoringApi } from "../googleCloudMonitoringApi/googleMonitoringApi";
 import {mockHealthCheckList} from "../blaiseApi/testFixtures";
-import {MonitoringDataModel} from "../monitoringDataModel";
 
 const config = GetConfigFromEnv();
 const cache = new NodeCache({ stdTTL: 60 });

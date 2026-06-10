@@ -32,6 +32,11 @@ describe("BlaiseAPI Get all questionnaires from API", () => {
         expect(response.status).toEqual(200);
         expect(response.body).toStrictEqual(mockQuestionnaireList);
         expect(response.body.length).toStrictEqual(3);
+        expect(getQuestionnairesMock).toHaveBeenCalledWith(
+            expect.any(Object),
+            expect.any(Object),
+            expect.any(Object)
+        );
     });
 
     it("should return a 500 status direct from the API", async () => {

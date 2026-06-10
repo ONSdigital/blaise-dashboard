@@ -5,15 +5,12 @@ import { mockQuestionnaireList } from "./server/blaiseApi/testFixtures";
 
 vi.mock("./client/caseCompletionReport");
 import { getCaseCompletionReport } from "./client/caseCompletionReport";
-import { CaseCompletionReport } from "./types/caseCompletionReport";
 
 vi.mock("./client/questionnaires");
 import { getQuestionnaires } from "./client/questionnaires";
-import { Questionnaire } from "blaise-api-node-client";
 
 vi.mock("./client/monitoring");
 import { getMonitoring } from "./client/monitoring";
-import { MonitoringDataModel } from "./types/monitoringDataModel";
 
 const getCaseCompletionReportMock = vi.mocked(getCaseCompletionReport);
 const getQuestionnairesMock = vi.mocked(getQuestionnaires);
@@ -103,6 +100,24 @@ describe("App", () => {
       );
 
       expect(await screen.findByText("Failed to get uptime checks.")).toBeVisible();
+      expect(screen.queryByText("No uptime checks data.")).not.toBeInTheDocument();
+    });
+
+    it("renders API error details when available", async () => {
+      getCaseCompletionReportMock.mockImplementation(() => Promise.resolve(caseCompletionReport));
+      getQuestionnairesMock.mockImplementation(() => Promise.resolve([]));
+      getMonitoringMock.mockImplementation(() => Promise.reject({
+        response: {
+          data: "Failed to get monitoring uptimeChecks config data: PERMISSION_DENIED"
+        }
+      }));
+
+      render(
+        <App />
+      );
+
+      expect(await screen.findByText("Failed to get monitoring uptimeChecks config data: PERMISSION_DENIED")).toBeVisible();
+      expect(screen.queryByText("No uptime checks data.")).not.toBeInTheDocument();
     });
   });
 

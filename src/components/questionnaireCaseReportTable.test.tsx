@@ -5,7 +5,6 @@ import { mockQuestionnaireList } from "../server/blaiseApi/testFixtures";
 
 vi.mock("../client/caseCompletionReport");
 import { getCaseCompletionReport } from "../client/caseCompletionReport";
-import { CaseCompletionReport } from "../types/caseCompletionReport";
 
 const getCaseCompletionReportMock = vi.mocked(getCaseCompletionReport);
 
