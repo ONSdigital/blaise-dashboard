@@ -97,8 +97,9 @@ export default class App extends Component<unknown, AppState> {
     loadQuestionnaires(): void {
         console.log("Getting questionnaires list");
         this.getQuestionnaireList().then((questionnaires: Questionnaire[]) => {
+            const filteredQuestionnaires = questionnaires.filter((questionnaire) => !questionnaire.name.toUpperCase().startsWith("IPA"));
             this.setState({
-                questionnaires: questionnaires,
+                questionnaires: filteredQuestionnaires,
                 questionnaireLoading: false,
                 questionnaireErrored: false,
             });
@@ -149,7 +150,7 @@ export default class App extends Component<unknown, AppState> {
             return undefined;
         }
         if (this.state.questionnaires.length === 0) {
-            return <Panel>No OPN questionnaires installed.</Panel>;
+            return <Panel>No questionnaires installed.</Panel>;
         }
         return <QuestionnaireCaseReportTable questionnaires={this.state.questionnaires}/>;
     }

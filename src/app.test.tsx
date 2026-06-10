@@ -71,7 +71,36 @@ describe("App", () => {
         <App />
       );
 
-      expect(await screen.findByText("No OPN questionnaires installed.")).toBeVisible();
+      expect(await screen.findByText("No questionnaires installed.")).toBeVisible();
+    });
+  });
+
+  describe("when questionnaires include IPA prefixes", () => {
+    it("excludes IPA questionnaires from completed case information", async () => {
+      getCaseCompletionReportMock.mockImplementation(() => Promise.resolve(caseCompletionReport));
+      getQuestionnairesMock.mockImplementation(() => Promise.resolve([
+        {
+          name: "IPA2101A",
+          installDate: "210122",
+          serverParkName: "gusty",
+          fieldPeriod: "210122"
+        },
+        {
+          name: "OPN2101A",
+          installDate: "210122",
+          serverParkName: "gusty",
+          fieldPeriod: "210122"
+        }
+      ]));
+      getMonitoringMock.mockImplementation(() => Promise.resolve([]));
+
+      render(
+        <App />
+      );
+
+      expect(await screen.findByTestId("questionnaire-case-report-questionnaire-OPN2101A")).toBeVisible();
+      expect(screen.queryByTestId("questionnaire-case-report-questionnaire-IPA2101A")).not.toBeInTheDocument();
+      expect(getCaseCompletionReportMock).not.toHaveBeenCalledWith("IPA2101A");
     });
   });
 

@@ -16,9 +16,28 @@ vi.mock("blaise-design-system-react-components", () => {
             React.createElement("h3", null, title),
             children
         );
+
+    const flattenChildren = (children: unknown): unknown[] =>
+        React.Children.toArray(children).flatMap((child) => {
+            if (React.isValidElement(child) && child.type === React.Fragment) {
+                return flattenChildren(child.props.children);
+            }
+            return [child];
+        });
+
     const Table = ({ children, id, ...props }: { children?: unknown; id?: string } & Record<string, unknown>) => {
         const dataTestId = (props["data-testid"] as string | undefined) ?? id;
-        return React.createElement("table", { ...props, "data-testid": dataTestId }, children);
+        const childNodes = flattenChildren(children);
+        const hasTableSection = childNodes.some((child) =>
+            React.isValidElement(child)
+            && ["thead", "tbody", "tfoot", "caption", "colgroup"].includes(String(child.type))
+        );
+
+        const normalizedChildren = hasTableSection
+            ? children
+            : React.createElement("tbody", null, childNodes);
+
+        return React.createElement("table", { ...props, "data-testid": dataTestId }, normalizedChildren);
     };
 
     return {
