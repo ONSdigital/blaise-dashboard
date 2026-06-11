@@ -22,7 +22,11 @@ export default tseslint.config(
       "import-x/resolver-next": [
         createTypeScriptImportResolver({
           noWarnOnMultipleProjects: true,
-          project: ["./tsconfig.client.json", "./tsconfig.server.json", "./tsconfig.tooling.json"],
+          project: [
+            "./tsconfig.client.json",
+            "./tsconfig.server.json",
+            "./tsconfig.tooling.json",
+          ],
         }),
       ],
     },
@@ -33,7 +37,10 @@ export default tseslint.config(
     plugins: { "import-x": pluginImportX },
     rules: {
       "@typescript-eslint/no-explicit-any": "warn",
-      "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_" },
+      ],
       "@typescript-eslint/consistent-type-imports": "off",
       "padding-line-between-statements": "off",
       "sort-imports": "off",
@@ -48,6 +55,7 @@ export default tseslint.config(
             "src/**/*.mock.{ts,tsx}",
             "src/**/*.test.{ts,tsx}",
             "src/client/setupTests.ts",
+            "src/client/testUtils/**/*.{ts,tsx}",
             "*.config.ts",
           ],
         },

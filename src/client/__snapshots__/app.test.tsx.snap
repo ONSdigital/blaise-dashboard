@@ -27,7 +27,7 @@ exports[`App > renders correctly 1`] = `
           <h2
             class="ons-u-mt-m"
           >
-            Blase health check status
+            Blaise health check status
           </h2>
           <table
             columns="Health check type,Status"
@@ -277,7 +277,8 @@ exports[`App > renders correctly 1`] = `
             class="ons-u-mt-s ons-u-mb-s"
             data-testid="cawi-login-total"
           >
-            Total successful CAWI logins (24h): 
+            Total successful CAWI logins (24h):
+             
             <strong>
               5
             </strong>
@@ -1098,7 +1099,7 @@ exports[`App > renders correctly 1`] = `
         <h2
           class="ons-u-mt-m"
         >
-          Blase health check status
+          Blaise health check status
         </h2>
         <table
           columns="Health check type,Status"
@@ -1348,7 +1349,8 @@ exports[`App > renders correctly 1`] = `
           class="ons-u-mt-s ons-u-mb-s"
           data-testid="cawi-login-total"
         >
-          Total successful CAWI logins (24h): 
+          Total successful CAWI logins (24h):
+           
           <strong>
             5
           </strong>

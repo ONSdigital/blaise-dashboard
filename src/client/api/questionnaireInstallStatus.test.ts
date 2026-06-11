@@ -3,22 +3,24 @@ import axios from "axios";
 import { getQuestionnaireInstallStatus } from "./questionnaireInstallStatus";
 
 describe("Questionnaire Install Status API", () => {
-    const mockAdapter = new MockAdapter(axios);
+  const mockAdapter = new MockAdapter(axios);
 
-    it("returns questionnaire install status list", async () => {
-        const responseBody = [
-            {
-                questionnaireName: "OPN2101A",
-                totalNodes: 2,
-                activeNodes: 2,
-                activeOnAllNodes: true
-            }
-        ];
+  it("returns questionnaire install status list", async () => {
+    const responseBody = [
+      {
+        questionnaireName: "OPN2101A",
+        totalNodes: 2,
+        activeNodes: 2,
+        activeOnAllNodes: true,
+      },
+    ];
 
-        mockAdapter.onGet("/api/questionnaires/install-status").reply(200, responseBody);
+    mockAdapter
+      .onGet("/api/questionnaires/install-status")
+      .reply(200, responseBody);
 
-        const response = await getQuestionnaireInstallStatus();
+    const response = await getQuestionnaireInstallStatus();
 
-        expect(response).toEqual(responseBody);
-    });
+    expect(response).toEqual(responseBody);
+  });
 });

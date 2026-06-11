@@ -2,7 +2,6 @@ import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 import { getQuestionnaires } from "./questionnaires";
 
-// This sets the mock adapter on the default instance
 const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
 
 describe("getQuestionnaires tests", () => {

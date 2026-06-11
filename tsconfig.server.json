@@ -5,10 +5,7 @@
     "moduleResolution": "NodeNext",
     "outDir": "build/server",
     "rootDir": "./src/server",
-    "types": [
-      "node",
-      "vitest/globals"
-    ]
+    "types": ["node", "vitest/globals"]
   },
   "include": ["src/server"]
 }

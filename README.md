@@ -59,11 +59,11 @@ PROJECT_ID=ons-blaise-v2-dev-sandbox123
 
 Variable reference:
 
-| Variable | Description |
-| --- | --- |
+| Variable         | Description                                       |
+| ---------------- | ------------------------------------------------- |
 | `BLAISE_API_URL` | Blaise REST API host used by the dashboard server |
-| `SERVER_PARK` | Blaise server park name |
-| `PROJECT_ID` | GCP project for Monitoring checks |
+| `SERVER_PARK`    | Blaise server park name                           |
+| `PROJECT_ID`     | GCP project for Monitoring checks                 |
 
 ### Run the app
 
