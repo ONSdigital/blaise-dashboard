@@ -1,6 +1,7 @@
 {
   "extends": "./tsconfig.server.json",
   "compilerOptions": {
+    "noEmit": false,
     "types": ["node"]
   },
   "exclude": [

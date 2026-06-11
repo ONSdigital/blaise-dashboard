@@ -3,6 +3,7 @@
   "compilerOptions": {
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
+    "noEmit": true,
     "outDir": "build/server",
     "rootDir": "./src/server",
     "types": ["node", "vitest/globals"]
