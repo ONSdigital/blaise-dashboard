@@ -1,7 +1,6 @@
 import React, {Component, ReactElement} from "react";
 import { Questionnaire } from "blaise-api-node-client";
 import {
-    BetaBanner,
     Collapsible,
     Footer,
     Header,
@@ -9,10 +8,10 @@ import {
     Panel
 } from "blaise-design-system-react-components";
 import "./style.css";
-import {getQuestionnaires} from "./client/questionnaires";
+import {getQuestionnaires} from "./api/questionnaires";
 import QuestionnaireCaseReportTable from "./components/questionnaireCaseReportTable";
-import {refreshInterval} from "./client/refreshInterval";
-import { getMonitoring } from "./client/monitoring";
+import {refreshInterval} from "./utils/refreshInterval";
+import { getMonitoring } from "./api/monitoring";
 import { MonitoringDataModel } from "./types/monitoringDataModel";
 import MonitoringUptimeChecksTable from "./components/monitoringUptimeChecksTable";
 
@@ -97,7 +96,9 @@ export default class App extends Component<unknown, AppState> {
     loadQuestionnaires(): void {
         console.log("Getting questionnaires list");
         this.getQuestionnaireList().then((questionnaires: Questionnaire[]) => {
-            const filteredQuestionnaires = questionnaires.filter((questionnaire) => !questionnaire.name.toUpperCase().startsWith("IPA"));
+            const filteredQuestionnaires = questionnaires.filter(
+                (questionnaire) => !/^IPS/i.test(questionnaire.name)
+            );
             this.setState({
                 questionnaires: filteredQuestionnaires,
                 questionnaireLoading: false,
@@ -192,7 +193,6 @@ export default class App extends Component<unknown, AppState> {
     render() {
         return (
             <>
-                <BetaBanner/>
                 <Header title={"Dashboard"}/>
                 <div style={divStyle} className="ons-page__container ons-container">
                     <main id="main-content" className="ons-page__main ons-u-mt-no">

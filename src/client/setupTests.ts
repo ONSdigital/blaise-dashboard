@@ -2,14 +2,15 @@ import "@testing-library/jest-dom/vitest";
 import React from "react";
 import { vi } from "vitest";
 
+type MockComponentProps = Record<string, unknown> & { children?: React.ReactNode };
+
 vi.mock("blaise-design-system-react-components", () => {
-    const BetaBanner = ({ children, ...props }: Record<string, unknown> & { children?: unknown }) => React.createElement("div", props, children);
-    const Header = ({ title, ...props }: { title?: unknown } & Record<string, unknown>) => React.createElement("header", props, title);
-    const Footer = ({ children, ...props }: Record<string, unknown> & { children?: unknown }) => React.createElement("footer", props, children);
-    const LoadingPanel = ({ message, children, ...props }: { message?: unknown; children?: unknown } & Record<string, unknown>) =>
+    const Header = ({ title, ...props }: { title?: React.ReactNode } & Record<string, unknown>) => React.createElement("header", props, title);
+    const Footer = ({ children, ...props }: MockComponentProps) => React.createElement("footer", props, children);
+    const LoadingPanel = ({ message, children, ...props }: { message?: React.ReactNode; children?: React.ReactNode } & Record<string, unknown>) =>
         React.createElement("div", props, children ?? message);
-    const Panel = ({ children, ...props }: Record<string, unknown> & { children?: unknown }) => React.createElement("div", props, children);
-    const Collapsible = ({ title, children, ...props }: { title?: unknown; children?: unknown } & Record<string, unknown>) =>
+    const Panel = ({ children, ...props }: MockComponentProps) => React.createElement("div", props, children);
+    const Collapsible = ({ title, children, ...props }: { title?: React.ReactNode; children?: React.ReactNode } & Record<string, unknown>) =>
         React.createElement(
             "section",
             props,
@@ -17,15 +18,15 @@ vi.mock("blaise-design-system-react-components", () => {
             children
         );
 
-    const flattenChildren = (children: unknown): unknown[] =>
+    const flattenChildren = (children: React.ReactNode): React.ReactNode[] =>
         React.Children.toArray(children).flatMap((child) => {
-            if (React.isValidElement(child) && child.type === React.Fragment) {
+            if (React.isValidElement<{ children?: React.ReactNode }>(child) && child.type === React.Fragment) {
                 return flattenChildren(child.props.children);
             }
             return [child];
         });
 
-    const Table = ({ children, id, ...props }: { children?: unknown; id?: string } & Record<string, unknown>) => {
+    const Table = ({ children, id, ...props }: { children?: React.ReactNode; id?: string } & Record<string, unknown>) => {
         const dataTestId = (props["data-testid"] as string | undefined) ?? id;
         const childNodes = flattenChildren(children);
         const hasTableSection = childNodes.some((child) =>
@@ -41,7 +42,6 @@ vi.mock("blaise-design-system-react-components", () => {
     };
 
     return {
-        BetaBanner,
         Header,
         Footer,
         LoadingPanel,
@@ -49,9 +49,4 @@ vi.mock("blaise-design-system-react-components", () => {
         Collapsible,
         Table
     };
-});
-
-process.env = Object.assign(process.env, {
-    BLAISE_API_URL: "mock-api",
-    SERVER_PARK: "server-park"
 });

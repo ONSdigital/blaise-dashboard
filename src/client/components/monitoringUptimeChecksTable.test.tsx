@@ -3,7 +3,7 @@
 
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { mockHealthCheckList } from "../server/blaiseApi/testFixtures";
+import { mockHealthCheckList } from "../../server/blaiseApi/testFixtures";
 
 import MonitoringUptimeChecksTable from "./monitoringUptimeChecksTable";
 

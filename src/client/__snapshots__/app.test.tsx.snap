@@ -5,7 +5,6 @@ exports[`App > renders correctly 1`] = `
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div />
       <header>
         Dashboard
       </header>
@@ -208,7 +207,6 @@ exports[`App > renders correctly 1`] = `
     </div>
   </body>,
   "container": <div>
-    <div />
     <header>
       Dashboard
     </header>

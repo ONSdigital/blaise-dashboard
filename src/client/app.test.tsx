@@ -1,16 +1,16 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import App from "./app";
-import { mockQuestionnaireList } from "./server/blaiseApi/testFixtures";
+import { mockQuestionnaireList } from "../server/blaiseApi/testFixtures";
 
-vi.mock("./client/caseCompletionReport");
-import { getCaseCompletionReport } from "./client/caseCompletionReport";
+vi.mock("./api/caseCompletionReport");
+import { getCaseCompletionReport } from "./api/caseCompletionReport";
 
-vi.mock("./client/questionnaires");
-import { getQuestionnaires } from "./client/questionnaires";
+vi.mock("./api/questionnaires");
+import { getQuestionnaires } from "./api/questionnaires";
 
-vi.mock("./client/monitoring");
-import { getMonitoring } from "./client/monitoring";
+vi.mock("./api/monitoring");
+import { getMonitoring } from "./api/monitoring";
 
 const getCaseCompletionReportMock = vi.mocked(getCaseCompletionReport);
 const getQuestionnairesMock = vi.mocked(getQuestionnaires);
@@ -75,12 +75,18 @@ describe("App", () => {
     });
   });
 
-  describe("when questionnaires include IPA prefixes", () => {
-    it("excludes IPA questionnaires from completed case information", async () => {
+  describe("when questionnaires include IPS prefixes", () => {
+    it("excludes only IPS questionnaires from completed case information", async () => {
       getCaseCompletionReportMock.mockImplementation(() => Promise.resolve(caseCompletionReport));
       getQuestionnairesMock.mockImplementation(() => Promise.resolve([
         {
           name: "IPA2101A",
+          installDate: "210122",
+          serverParkName: "gusty",
+          fieldPeriod: "210122"
+        },
+        {
+          name: "IPS2201A",
           installDate: "210122",
           serverParkName: "gusty",
           fieldPeriod: "210122"
@@ -99,8 +105,10 @@ describe("App", () => {
       );
 
       expect(await screen.findByTestId("questionnaire-case-report-questionnaire-OPN2101A")).toBeVisible();
-      expect(screen.queryByTestId("questionnaire-case-report-questionnaire-IPA2101A")).not.toBeInTheDocument();
-      expect(getCaseCompletionReportMock).not.toHaveBeenCalledWith("IPA2101A");
+      expect(await screen.findByTestId("questionnaire-case-report-questionnaire-IPA2101A")).toBeVisible();
+      expect(screen.queryByTestId("questionnaire-case-report-questionnaire-IPS2201A")).not.toBeInTheDocument();
+      expect(getCaseCompletionReportMock).toHaveBeenCalledWith("IPA2101A");
+      expect(getCaseCompletionReportMock).not.toHaveBeenCalledWith("IPS2201A");
     });
   });
 

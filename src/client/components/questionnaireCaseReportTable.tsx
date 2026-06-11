@@ -1,10 +1,10 @@
 import React, { Component, ReactElement } from "react";
 import { CaseCompletionReport } from "../types/caseCompletionReport";
-import { getCaseCompletionReport } from "../client/caseCompletionReport";
+import { getCaseCompletionReport } from "../api/caseCompletionReport";
 import { Questionnaire } from "blaise-api-node-client";
 import { LoadingPanel, Panel, Table } from "blaise-design-system-react-components";
 import QuestionnaireCaseReport from "./questionnaireCaseReport";
-import { refreshInterval } from "../client/refreshInterval";
+import { refreshInterval } from "../utils/refreshInterval";
 
 type QuestionnaireCaseReportTableProps = {
     questionnaires: Questionnaire[]

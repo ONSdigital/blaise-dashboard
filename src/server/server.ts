@@ -31,7 +31,7 @@ function NewServer(blaiseApiClient: BlaiseApiClient, cache: NodeCache, config: C
     });
 
     server.use(function (err: Error, req: Request, res: Response) {
-        res.render("../src/views/500.html", {});
+        res.render("../src/server/views/500.html", {});
     });
     return server;
 }

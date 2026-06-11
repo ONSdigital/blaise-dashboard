@@ -4,7 +4,7 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
     resolve: {
         alias: {
-            "blaise-api-node-client": fileURLToPath(new URL("./src/test/mocks/blaiseApiNodeClientMock.ts", import.meta.url))
+            "blaise-api-node-client": fileURLToPath(new URL("./src/server/test-utils/blaiseApiNodeClientMock.ts", import.meta.url))
         }
     },
     test: {
@@ -15,8 +15,8 @@ export default defineConfig({
                     globals: true,
                     clearMocks: true,
                     environment: "happy-dom",
-                    setupFiles: ["./src/test/setupTests.ts"],
-                    include: ["src/**/*.test.tsx", "src/client/**/*.test.ts"]
+                    setupFiles: ["./src/client/setupTests.ts"],
+                    include: ["src/client/**/*.test.{ts,tsx}"]
                 }
             },
             {
@@ -25,7 +25,7 @@ export default defineConfig({
                     globals: true,
                     clearMocks: true,
                     environment: "node",
-                    setupFiles: ["./src/test/setupTests.ts"],
+                    setupFiles: ["./src/server/setupTests.ts"],
                     include: ["src/server/**/*.test.ts"]
                 }
             }
@@ -34,7 +34,12 @@ export default defineConfig({
             provider: "v8",
             reporter: ["text", "json", "html"],
             include: ["src/**/*.{ts,tsx}"],
-            exclude: ["src/**/*.test.{ts,tsx}", "src/**/__snapshots__/**", "src/test/**"]
+            exclude: [
+                "src/**/*.test.{ts,tsx}",
+                "src/**/__snapshots__/**",
+                "src/server/test-utils/**",
+                "src/**/setupTests.ts"
+            ]
         }
     }
 });

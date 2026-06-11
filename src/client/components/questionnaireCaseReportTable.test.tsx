@@ -1,10 +1,10 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import QuestionnaireCaseReportTable from "./questionnaireCaseReportTable";
-import { mockQuestionnaireList } from "../server/blaiseApi/testFixtures";
+import { mockQuestionnaireList } from "../../server/blaiseApi/testFixtures";
 
-vi.mock("../client/caseCompletionReport");
-import { getCaseCompletionReport } from "../client/caseCompletionReport";
+vi.mock("../api/caseCompletionReport");
+import { getCaseCompletionReport } from "../api/caseCompletionReport";
 
 const getCaseCompletionReportMock = vi.mocked(getCaseCompletionReport);
 
