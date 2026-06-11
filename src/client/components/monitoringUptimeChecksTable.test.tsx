@@ -1,7 +1,3 @@
-/**
- */
-
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import { mockHealthCheckList } from "../../server/blaiseApi/testFixtures";
 
@@ -18,6 +14,10 @@ describe("Monitoring Uptime Checks Table", () => {
         expect(screen.getByTestId("uptimecheck-asia").className).toContain("ons-status--error");
         expect(screen.getByTestId("uptimecheck-northAmerica").className).toContain("ons-status--success");
         expect(screen.getByTestId("uptimecheck-southAmerica").className).toContain("ons-status--dead");
+        const rows = screen.getAllByTestId("monitoring-table-row");
+        rows.forEach((row) => {
+            expect(row.querySelectorAll("td")).toHaveLength(5);
+        });
         expect(screen.getByTestId("healthCheck-table")).toMatchSnapshot();
         
     });
@@ -30,7 +30,7 @@ describe("Monitoring Uptime Checks Table", () => {
         expect(await screen.findByText("Failed uptime checks data fetch....")).toBeDefined();
     });
 
-    it("falls back safely when region data is incomplete", async () => {
+    it("shows dead status when region data is incomplete", async () => {
         render(
             <MonitoringUptimeChecksTable monitoringData={[{
                 hostname: "partial-host",

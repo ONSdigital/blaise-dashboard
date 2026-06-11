@@ -1,8 +1,8 @@
-import NewServer from "../server";
+import NewServer from "../server.js";
 import supertest, { Response } from "supertest";
 import { BlaiseApiClient } from "blaise-api-node-client";
-import { GetConfigFromEnv } from "../config";
-import { mockQuestionnaireList } from "../blaiseApi/testFixtures";
+import { GetConfigFromEnv } from "../config.js";
+import { mockQuestionnaireList } from "../blaiseApi/testFixtures.js";
 import NodeCache from "node-cache";
 
 const config = GetConfigFromEnv();
@@ -13,7 +13,7 @@ const server = NewServer(blaiseApiClient, cache, config);
 const request = supertest(server);
 
 
-import { getQuestionnaires } from "../blaiseApi/questionnaires";
+import { getQuestionnaires } from "../blaiseApi/questionnaires.js";
 vi.mock("../blaiseApi/questionnaires");
 const getQuestionnairesMock = vi.mocked(getQuestionnaires);
 

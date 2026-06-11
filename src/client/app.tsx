@@ -1,5 +1,5 @@
 import React, {Component, ReactElement} from "react";
-import { Questionnaire } from "blaise-api-node-client";
+import type { Questionnaire } from "blaise-api-node-client";
 import {
     Collapsible,
     Footer,
@@ -7,15 +7,15 @@ import {
     LoadingPanel,
     Panel
 } from "blaise-design-system-react-components";
-import "./style.css";
 import {getQuestionnaires} from "./api/questionnaires";
 import QuestionnaireCaseReportTable from "./components/questionnaireCaseReportTable";
-import {refreshInterval} from "./utils/refreshInterval";
 import { getMonitoring } from "./api/monitoring";
 import { MonitoringDataModel } from "./types/monitoringDataModel";
 import MonitoringUptimeChecksTable from "./components/monitoringUptimeChecksTable";
 import BlaiseStatusPanel from "./components/blaiseStatus";
 import QuestionnaireInstallStatusPanel from "./components/questionnaireInstallStatus";
+import ErrorLogsTable from "./components/errorLogsTable";
+import CawiLoginSuccessChart from "./components/cawiLoginSuccessChart";
 
 const divStyle = {
     minHeight: "calc(67vh)",
@@ -32,8 +32,6 @@ type AppState = {
 }
 
 export default class App extends Component<unknown, AppState> {
-    interval!: ReturnType<typeof setInterval>;
-
     constructor(props: unknown) {
         super(props);
         this.state = {
@@ -51,16 +49,6 @@ export default class App extends Component<unknown, AppState> {
         console.log("Getting questionnaires list for mount");
         this.loadQuestionnaires();
         this.loadMonitoringData();
-        this.interval = setInterval(() => {
-            this.loadQuestionnaires();
-            if (!this.state.uptimeChecksErrored) {
-                this.loadMonitoringData();
-            }
-        }, refreshInterval);
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.interval);
     }
 
     loadMonitoringData(): void {
@@ -198,19 +186,31 @@ export default class App extends Component<unknown, AppState> {
                 <Header title={"Dashboard"}/>
                 <div style={divStyle} className="ons-page__container ons-container">
                     <main id="main-content" className="ons-page__main ons-u-mt-no">
-                        <h2 className="ons-u-mt-m">Completed case information</h2>
+                        <h2 className="ons-u-mt-m">Service uptime status</h2>
+                        {this.uptimeChecksloadingPanel()}
+                        {this.uptimeChecksErrorPanel()}
+                        {this.ServiceHealthCheck()}
+                        <h2 className="ons-u-mt-m">Blase health check status</h2>
+                        <BlaiseStatusPanel />
+                        <h2 className="ons-u-mt-m">Questionnaire install status</h2>
+                        <QuestionnaireInstallStatusPanel />
+                        <h2 className="ons-u-mt-m">Case completion status</h2>
                         {this.questionnaireErrorPanel()}
                         {this.questionnaireLoadingPanel()}
                         {this.questionnaireReportTable()}
                         {this.completedCaseDefinition()}
-                        <h2 className="ons-u-mt-m">Questionnaire install status on Blaise nodes</h2>
-                        <QuestionnaireInstallStatusPanel />
-                        <h2 className="ons-u-mt-m">Blaise status information</h2>
-                        <BlaiseStatusPanel />
-                        <h2 className="ons-u-mt-m">Service health check information</h2>
-                        {this.uptimeChecksloadingPanel()}
-                        {this.uptimeChecksErrorPanel()}
-                        {this.ServiceHealthCheck()}
+                        <h2 className="ons-u-mt-m">Successful CAWI logins (last 24 hours)</h2>
+                        <CawiLoginSuccessChart />
+                        <h2 className="ons-u-mt-m">BTS logs (last 24 hours)</h2>
+                        <ErrorLogsTable scope="bts" />
+                        <h2 className="ons-u-mt-m">NISRA logs (last 24 hours)</h2>
+                        <ErrorLogsTable scope="nisra" />
+                        <h2 className="ons-u-mt-m">REST API logs (last 24 hours)</h2>
+                        <ErrorLogsTable scope="restapi" />
+                        <h2 className="ons-u-mt-m">Blaise error logs (last 24 hours)</h2>
+                        <ErrorLogsTable scope="blaise" />
+                        <h2 className="ons-u-mt-m">Non-Blaise error logs (last 24 hours)</h2>
+                        <ErrorLogsTable scope="non-blaise" />
                     </main>
                 </div>
                 <Footer/>

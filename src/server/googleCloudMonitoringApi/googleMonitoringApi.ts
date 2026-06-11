@@ -1,5 +1,5 @@
 import { MetricServiceClient, UptimeCheckServiceClient } from "@google-cloud/monitoring";
-import { GetUptimeChecksConfigResult, GoogleMonitoring, ListTimeSeriesResult } from "./monitoring";
+import { GetUptimeChecksConfigResult, GoogleMonitoring, ListTimeSeriesResult } from "./monitoring.js";
 
 export class GoogleMonitoringApi implements GoogleMonitoring {
     private uptimeClient: UptimeCheckServiceClient;

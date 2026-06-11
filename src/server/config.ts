@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import path from "path";
 export interface Config {
     BlaiseApiUrl: string,
     ServerPark: string
@@ -6,7 +7,9 @@ export interface Config {
 
 export function GetConfigFromEnv(): Config {
     if (process.env.NODE_ENV !== "production") {
-        dotenv.config({ path: __dirname + "/../.env" });
+        // Support both historical root .env and newer src/.env local layouts.
+        dotenv.config({ path: path.resolve(process.cwd(), "src/.env") });
+        dotenv.config({ path: path.resolve(process.cwd(), ".env") });
     }
 
     let { BLAISE_API_URL, SERVER_PARK } = process.env;

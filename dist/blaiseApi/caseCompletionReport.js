@@ -12,3 +12,4 @@ function buildCaseCompletionReport(cases) {
         CompletePercentage: caseCompletePercentage
     };
 }
+//# sourceMappingURL=caseCompletionReport.js.map

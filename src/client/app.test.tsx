@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import App from "./app";
 import { mockQuestionnaireList } from "../server/blaiseApi/testFixtures";
@@ -18,11 +17,19 @@ import { getBlaiseStatus } from "./api/blaiseStatus";
 vi.mock("./api/questionnaireInstallStatus");
 import { getQuestionnaireInstallStatus } from "./api/questionnaireInstallStatus";
 
+vi.mock("./api/errorLogs");
+import { getErrorLogs } from "./api/errorLogs";
+
+vi.mock("./api/cawiLoginCounts");
+import { getCawiLoginSuccessCounts } from "./api/cawiLoginCounts";
+
 const getCaseCompletionReportMock = vi.mocked(getCaseCompletionReport);
 const getQuestionnairesMock = vi.mocked(getQuestionnaires);
 const getMonitoringMock = vi.mocked(getMonitoring);
 const getBlaiseStatusMock = vi.mocked(getBlaiseStatus);
 const getQuestionnaireInstallStatusMock = vi.mocked(getQuestionnaireInstallStatus);
+const getErrorLogsMock = vi.mocked(getErrorLogs);
+const getCawiLoginSuccessCountsMock = vi.mocked(getCawiLoginSuccessCounts);
 
 describe("App", () => {
   const caseCompletionReport = {
@@ -34,6 +41,7 @@ describe("App", () => {
 
   afterEach(() => {
     vi.resetAllMocks();
+    vi.useRealTimers();
   });
 
   it("renders correctly", async () => {
@@ -51,6 +59,13 @@ describe("App", () => {
         activeOnAllNodes: true
       }
     ]));
+    getErrorLogsMock.mockImplementation(() => Promise.resolve([
+      { timestamp: "2026-06-11T10:00:00.000Z", log: "Example error" }
+    ]));
+    getCawiLoginSuccessCountsMock.mockImplementation(() => Promise.resolve([
+      { timestamp: "2026-06-11T10:00:00.000Z", count: 2 },
+      { timestamp: "2026-06-11T11:00:00.000Z", count: 3 }
+    ]));
 
     const app = render(
       <App />
@@ -59,9 +74,20 @@ describe("App", () => {
     expect(screen.getByText("Getting questionnaires for report")).toBeVisible();
     expect(screen.getByText("Getting uptime checks for services")).toBeVisible();
     expect(await screen.findByText("What is a completed case?")).toBeVisible();
-    expect(await screen.findByText("Questionnaire install status on Blaise nodes")).toBeVisible();
-    expect(await screen.findByText("Blaise status information")).toBeVisible();
-    expect(await screen.findByText("Service health check information")).toBeVisible();
+    expect(await screen.findByText("Questionnaire install status")).toBeVisible();
+    expect(await screen.findByText("Blase health check status")).toBeVisible();
+    expect(await screen.findByText("Service uptime status")).toBeVisible();
+    expect(await screen.findByText("Successful CAWI logins (last 24 hours)")).toBeVisible();
+    expect(await screen.findByText("BTS logs (last 24 hours)")).toBeVisible();
+    expect(await screen.findByText("NISRA logs (last 24 hours)")).toBeVisible();
+    expect(await screen.findByText("REST API logs (last 24 hours)")).toBeVisible();
+    expect(await screen.findByText("Blaise error logs (last 24 hours)")).toBeVisible();
+    expect(await screen.findByText("Non-Blaise error logs (last 24 hours)")).toBeVisible();
+    expect(getErrorLogsMock).toHaveBeenCalledWith("bts");
+    expect(getErrorLogsMock).toHaveBeenCalledWith("nisra");
+    expect(getErrorLogsMock).toHaveBeenCalledWith("restapi");
+    expect(getErrorLogsMock).toHaveBeenCalledWith("blaise");
+    expect(getErrorLogsMock).toHaveBeenCalledWith("non-blaise");
     expect(screen.queryByText("Getting questionnaires for report")).not.toBeInTheDocument();
     expect(screen.queryByText("Getting uptime checks for services")).not.toBeInTheDocument();
     expect(app).toMatchSnapshot();
@@ -74,6 +100,8 @@ describe("App", () => {
       getMonitoringMock.mockImplementation(() => Promise.resolve([]));
       getBlaiseStatusMock.mockImplementation(() => Promise.resolve([]));
       getQuestionnaireInstallStatusMock.mockImplementation(() => Promise.resolve([]));
+      getErrorLogsMock.mockImplementation(() => Promise.resolve([]));
+      getCawiLoginSuccessCountsMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -91,6 +119,8 @@ describe("App", () => {
       getMonitoringMock.mockImplementation(() => Promise.resolve([]));
       getBlaiseStatusMock.mockImplementation(() => Promise.resolve([]));
       getQuestionnaireInstallStatusMock.mockImplementation(() => Promise.resolve([]));
+      getErrorLogsMock.mockImplementation(() => Promise.resolve([]));
+      getCawiLoginSuccessCountsMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -126,6 +156,8 @@ describe("App", () => {
       getMonitoringMock.mockImplementation(() => Promise.resolve([]));
       getBlaiseStatusMock.mockImplementation(() => Promise.resolve([]));
       getQuestionnaireInstallStatusMock.mockImplementation(() => Promise.resolve([]));
+      getErrorLogsMock.mockImplementation(() => Promise.resolve([]));
+      getCawiLoginSuccessCountsMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -146,6 +178,8 @@ describe("App", () => {
       getMonitoringMock.mockImplementation(() => Promise.resolve([]));
       getBlaiseStatusMock.mockImplementation(() => Promise.resolve([]));
       getQuestionnaireInstallStatusMock.mockImplementation(() => Promise.resolve([]));
+      getErrorLogsMock.mockImplementation(() => Promise.resolve([]));
+      getCawiLoginSuccessCountsMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -162,6 +196,8 @@ describe("App", () => {
       getMonitoringMock.mockImplementation(() => Promise.resolve([]));
       getBlaiseStatusMock.mockImplementation(() => Promise.reject("Cannot get Blaise status"));
       getQuestionnaireInstallStatusMock.mockImplementation(() => Promise.resolve([]));
+      getErrorLogsMock.mockImplementation(() => Promise.resolve([]));
+      getCawiLoginSuccessCountsMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -178,6 +214,8 @@ describe("App", () => {
       getMonitoringMock.mockImplementation(() => Promise.reject("Cannot get uptime checks"));
       getBlaiseStatusMock.mockImplementation(() => Promise.resolve([]));
       getQuestionnaireInstallStatusMock.mockImplementation(() => Promise.resolve([]));
+      getErrorLogsMock.mockImplementation(() => Promise.resolve([]));
+      getCawiLoginSuccessCountsMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -197,6 +235,8 @@ describe("App", () => {
       }));
       getBlaiseStatusMock.mockImplementation(() => Promise.resolve([]));
       getQuestionnaireInstallStatusMock.mockImplementation(() => Promise.resolve([]));
+      getErrorLogsMock.mockImplementation(() => Promise.resolve([]));
+      getCawiLoginSuccessCountsMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -204,6 +244,24 @@ describe("App", () => {
 
       expect(await screen.findByText("Failed to get monitoring uptimeChecks config data: PERMISSION_DENIED")).toBeVisible();
       expect(screen.queryByText("No uptime checks data.")).not.toBeInTheDocument();
+    });
+
+    it("falls back to default error message when API error payload is blank", async () => {
+      getCaseCompletionReportMock.mockImplementation(() => Promise.resolve(caseCompletionReport));
+      getQuestionnairesMock.mockImplementation(() => Promise.resolve([]));
+      getMonitoringMock.mockImplementation(() => Promise.reject({
+        response: {
+          data: "   "
+        }
+      }));
+      getBlaiseStatusMock.mockImplementation(() => Promise.resolve([]));
+      getQuestionnaireInstallStatusMock.mockImplementation(() => Promise.resolve([]));
+      getErrorLogsMock.mockImplementation(() => Promise.resolve([]));
+      getCawiLoginSuccessCountsMock.mockImplementation(() => Promise.resolve([]));
+
+      render(<App />);
+
+      expect(await screen.findByText("Failed to get uptime checks.")).toBeVisible();
     });
   });
 

@@ -79,3 +79,4 @@ class BlaiseApiClient {
 }
 exports.BlaiseApiClient = BlaiseApiClient;
 exports.default = BlaiseApiClient;
+//# sourceMappingURL=blaiseApiNodeClientMock.js.map

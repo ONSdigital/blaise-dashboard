@@ -1,5 +1,5 @@
 import { BlaiseApiClient, Questionnaire } from "blaise-api-node-client";
-import { Config } from "../config";
+import { Config } from "../config.js";
 import NodeCache from "node-cache";
 
 

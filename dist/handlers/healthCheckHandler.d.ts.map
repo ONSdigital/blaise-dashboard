@@ -1,0 +1,1 @@
+{"version":3,"file":"healthCheckHandler.d.ts","sourceRoot":"","sources":["../../src/server/handlers/healthCheckHandler.ts"],"names":[],"mappings":"AAAA,OAAgB,EAAC,OAAO,EAAE,QAAQ,EAAE,MAAM,EAAC,MAAM,SAAS,CAAC;AAE3D,MAAM,CAAC,OAAO,UAAU,kBAAkB,IAAI,MAAM,CAInD;AAED,wBAAsB,WAAW,CAAC,GAAG,EAAE,OAAO,EAAE,GAAG,EAAE,QAAQ,GAAG,OAAO,CAAC,QAAQ,CAAC,CAEhF"}

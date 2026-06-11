@@ -1,5 +1,9 @@
 import { CaseStatus } from "blaise-api-node-client";
-import { isNotCompleted } from "./outcomes";
+import { isNotCompleted } from "./outcomes.js";
+
+type CaseStatusLike = Pick<CaseStatus, "primaryKey"> & {
+    outcome: CaseStatus["outcome"] | number;
+};
 
 export type CaseTotals = {
     Total: number,
@@ -11,7 +15,7 @@ export type CaseCalculations = {
     CompletePercentage: number
 }
 
-export function calculateCaseTotals(cases: readonly CaseStatus[]): CaseTotals {
+export function calculateCaseTotals(cases: readonly CaseStatusLike[]): CaseTotals {
     const caseTotals: CaseTotals = {
         Total: 0,
         Complete: 0,

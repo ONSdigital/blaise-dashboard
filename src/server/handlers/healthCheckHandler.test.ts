@@ -1,8 +1,8 @@
-import NewServer from "../server";
+import NewServer from "../server.js";
 import supertest from "supertest";
 
 import { BlaiseApiClient } from "blaise-api-node-client";
-import { GetConfigFromEnv } from "../config";
+import { GetConfigFromEnv } from "../config.js";
 import NodeCache from "node-cache";
 
 const config = GetConfigFromEnv();

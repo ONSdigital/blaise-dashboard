@@ -14,3 +14,4 @@ function isCompleted(outcome) {
 function isNotCompleted(outcome) {
     return notCompletedOutcomes.includes(outcome);
 }
+//# sourceMappingURL=outcomes.js.map

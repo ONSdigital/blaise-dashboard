@@ -1,25 +1,14 @@
 {
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "noImplicitAny": false,
-    "allowJs": true,
-    "target": "es2022",
-    "lib": [
-      "es2022"
-    ],
-    "module": "commonjs",
-    "outDir": "./dist",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "build/server",
     "rootDir": "./src/server",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "types": [
+      "node",
+      "vitest/globals"
+    ]
   },
-  "include": [
-    "src/server"
-  ],
-  "exclude": [
-    "node_modules",
-    "src/server/**/*.test.js",
-    "**/*.test.ts"
-  ]
+  "include": ["src/server"]
 }

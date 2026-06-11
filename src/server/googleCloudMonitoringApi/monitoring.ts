@@ -1,7 +1,8 @@
-import {MonitoringDataModel, Region} from "../monitoringDataModel";
-import * as protos from "@google-cloud/monitoring/build/protos/protos";
+import {MonitoringDataModel, Region} from "../monitoringDataModel.js";
+import * as protos from "@google-cloud/monitoring/build/protos/protos.js";
 
 const regionsMonitored: string [] = ["eur-belgium", "apac-singapore", "usa-oregon", "sa-brazil-sao_paulo"];
+const LOOKBACK_SECONDS = 10 * 60;
 
 export type GetUptimeChecksConfigResult = protos.google.monitoring.v3.IUptimeCheckConfig[];
 export type ListTimeSeriesResult = protos.google.monitoring.v3.ITimeSeries[];
@@ -12,10 +13,9 @@ export interface GoogleMonitoring {
 }
 
 export async function getMonitoringUptimeCheckTimeSeries(googleMonitoring: GoogleMonitoring): Promise<MonitoringDataModel[]> {
-    
-    const nowInSeconds = Date.now() / 1000;
-    // Limit results to the last 30 seconds
-    const startTime = nowInSeconds - 30; 
+    const nowInSeconds = Math.floor(Date.now() / 1000);
+    // Uptime checks can run every few minutes, so query a wider interval.
+    const startTime = nowInSeconds - LOOKBACK_SECONDS;
     const endTime = nowInSeconds;
 
     try {
@@ -54,7 +54,27 @@ export async function getMonitoringUptimeCheckTimeSeries(googleMonitoring: Googl
         async function listTimeSeries(filter: string): Promise<string> {
             try {
                 const timeSeries = await googleMonitoring.listTimeSeries(filter, startTime, endTime);
-                return timeSeries[0].points?.at(0)?.value?.boolValue == true ? "success" : "error";
+                const points = timeSeries.flatMap((series) => series.points ?? []);
+                if (points.length === 0) {
+                    return "requestFailed";
+                }
+
+                const latestPoint = points.at(-1);
+                const value = latestPoint?.value;
+
+                if (typeof value?.boolValue === "boolean") {
+                    return value.boolValue ? "success" : "error";
+                }
+
+                if (typeof value?.doubleValue === "number") {
+                    return value.doubleValue >= 1 ? "success" : "error";
+                }
+
+                if (value?.int64Value !== undefined && value.int64Value !== null) {
+                    return Number(value.int64Value) >= 1 ? "success" : "error";
+                }
+
+                return "requestFailed";
             } catch {
                 console.log("Failed to get timeSeries points data");
                 return "requestFailed";

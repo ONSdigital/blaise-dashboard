@@ -1,5 +1,5 @@
 import {CaseOutcome} from "blaise-api-node-client";
-import {isCompleted} from "./outcomes";
+import {isCompleted} from "./outcomes.js";
 
 describe("Test the outcome codes are completed codes", () => {
     it.each([

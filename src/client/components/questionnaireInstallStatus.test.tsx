@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import QuestionnaireInstallStatusPanel from "./questionnaireInstallStatus";
 import * as installStatusApi from "../api/questionnaireInstallStatus";
@@ -8,6 +7,10 @@ const getQuestionnaireInstallStatusSpy = vi.spyOn(installStatusApi, "getQuestion
 describe("Questionnaire Install Status Panel", () => {
     beforeEach(() => {
         vi.resetAllMocks();
+    });
+
+    afterEach(() => {
+        vi.useRealTimers();
     });
 
     it("shows active only when active on all nodes", async () => {
@@ -37,6 +40,11 @@ describe("Questionnaire Install Status Panel", () => {
             expect(screen.getByTestId("questionnaire-install-status-LMS2101A").className).toContain("ons-status--error");
             expect(screen.getByText("Not active on all nodes")).toBeInTheDocument();
         });
+
+        const rows = screen.getAllByTestId("questionnaire-install-status-row");
+        rows.forEach((row) => {
+            expect(row.querySelectorAll("td")).toHaveLength(3);
+        });
     });
 
     it("shows an error panel when API request fails", async () => {
@@ -58,4 +66,5 @@ describe("Questionnaire Install Status Panel", () => {
             expect(screen.getByText("No questionnaire install status data.")).toBeInTheDocument();
         });
     });
+
 });

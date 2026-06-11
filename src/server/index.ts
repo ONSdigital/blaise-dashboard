@@ -1,6 +1,6 @@
 import type { BlaiseApiClient } from "blaise-api-node-client";
-import { GetConfigFromEnv } from "./config";
-import NewServer from "./server";
+import { GetConfigFromEnv } from "./config.js";
+import NewServer from "./server.js";
 import NodeCache from "node-cache";
 
 type BlaiseApiModule = {
@@ -8,8 +8,7 @@ type BlaiseApiModule = {
 };
 
 function loadEsmModule<T>(specifier: string): Promise<T> {
-	const dynamicImport = new Function("s", "return import(s)") as (s: string) => Promise<T>;
-	return dynamicImport(specifier);
+	return import(specifier) as Promise<T>;
 }
 
 async function bootstrap(): Promise<void> {
@@ -26,7 +25,21 @@ async function bootstrap(): Promise<void> {
 	console.log("App is listening on port " + port);
 }
 
-bootstrap().catch((error: unknown) => {
-	console.error("Failed to start app", error);
-	process.exit(1);
-});
+async function startApp(): Promise<void> {
+	try {
+		await bootstrap();
+	} catch (error: unknown) {
+		console.error("Failed to start app", error);
+		process.exit(1);
+	}
+}
+
+async function maybeAutoStart(): Promise<void> {
+	if (process.env["NODE_ENV"] !== "test") {
+		await startApp();
+	}
+}
+
+export { loadEsmModule, bootstrap, startApp, maybeAutoStart };
+
+void maybeAutoStart();

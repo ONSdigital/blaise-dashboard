@@ -1,6 +1,6 @@
 import express, { Request, Response, Router } from "express";
 import { BlaiseApiClient, Questionnaire } from "blaise-api-node-client";
-import { Config } from "../config";
+import { Config } from "../config.js";
 
 export type QuestionnaireInstallStatus = {
     questionnaireName: string;

@@ -1,4 +1,4 @@
-import {calculateCaseTotals, calculatePercentComplete} from "./calculations";
+import {calculateCaseTotals, calculatePercentComplete} from "./calculations.js";
 import {CaseOutcome} from "blaise-api-node-client";
 
 describe("Test that the backend calculations are correct", () => {

@@ -1,7 +1,7 @@
-import { filterQuestionnaires, getQuestionnaires } from "./questionnaires";
+import { filterQuestionnaires, getQuestionnaires } from "./questionnaires.js";
 import { BlaiseApiClient } from "blaise-api-node-client";
-import { GetConfigFromEnv } from "../config";
-import { mockQuestionnaireList } from "./testFixtures";
+import { GetConfigFromEnv } from "../config.js";
+import { mockQuestionnaireList } from "./testFixtures.js";
 import NodeCache from "node-cache";
 
 vi.mock("blaise-api-node-client");
@@ -73,6 +73,16 @@ describe("getQuestionnaires", () => {
             expect(questionnaires).toHaveLength(3);
             expect(cache.get("questionnaires")).toHaveLength(3);
             expect(getQuestionnairesMock).toHaveBeenCalledTimes(0);
+        });
+    });
+
+    describe("when blaise returns undefined questionnaires", () => {
+        it("returns an empty array", async () => {
+            getQuestionnairesMock.mockResolvedValueOnce(undefined as unknown as never);
+
+            const questionnaires = await getQuestionnaires(blaiseApiClient, cache, config);
+
+            expect(questionnaires).toEqual([]);
         });
     });
 });

@@ -5,9 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetConfigFromEnv = GetConfigFromEnv;
 const dotenv_1 = __importDefault(require("dotenv"));
+const path_1 = __importDefault(require("path"));
 function GetConfigFromEnv() {
     if (process.env.NODE_ENV !== "production") {
-        dotenv_1.default.config({ path: __dirname + "/../.env" });
+        // Support both historical root .env and newer src/.env local layouts.
+        dotenv_1.default.config({ path: path_1.default.resolve(process.cwd(), "src/.env") });
+        dotenv_1.default.config({ path: path_1.default.resolve(process.cwd(), ".env") });
     }
     let { BLAISE_API_URL, SERVER_PARK } = process.env;
     if (BLAISE_API_URL === undefined) {
@@ -29,3 +32,4 @@ function fixProtocol(blaiseApiUrl) {
     }
     return blaiseApiUrl;
 }
+//# sourceMappingURL=config.js.map

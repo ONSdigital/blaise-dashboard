@@ -1,0 +1,1 @@
+{"version":3,"file":"caseCompletionReport.d.ts","sourceRoot":"","sources":["../../src/server/blaiseApi/caseCompletionReport.ts"],"names":[],"mappings":"AAAA,OAAO,EAAgD,gBAAgB,EAAE,UAAU,EAAC,MAAM,gBAAgB,CAAC;AAC3G,OAAO,EAAE,UAAU,EAAE,MAAM,wBAAwB,CAAC;AAGpD,MAAM,MAAM,oBAAoB,GAAG,UAAU,GAAG,gBAAgB,CAAA;AAEhE,wBAAgB,yBAAyB,CAAC,KAAK,EAAE,SAAS,UAAU,EAAE,GAAG,oBAAoB,CAS5F"}

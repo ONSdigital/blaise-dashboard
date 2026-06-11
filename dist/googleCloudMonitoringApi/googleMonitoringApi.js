@@ -44,3 +44,4 @@ class GoogleMonitoringApi {
     }
 }
 exports.GoogleMonitoringApi = GoogleMonitoringApi;
+//# sourceMappingURL=googleMonitoringApi.js.map

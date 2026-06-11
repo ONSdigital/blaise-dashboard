@@ -1,6 +1,6 @@
 import { BlaiseApiClient } from "blaise-api-node-client";
-import { Config } from "../config";
-import { buildCaseCompletionReport, CaseCompletionReport } from "../blaiseApi/caseCompletionReport";
+import { Config } from "../config.js";
+import { buildCaseCompletionReport, CaseCompletionReport } from "../blaiseApi/caseCompletionReport.js";
 import express, { Request, Response, Router } from "express";
 import NodeCache from "node-cache";
 
@@ -11,7 +11,7 @@ export default function caseReportHandler(blaiseApiClient: BlaiseApiClient, cach
     return router.get("/api/reports/cases/completions/:questionnaireName", caseReportHandler.GetCaseReport);
 }
 
-export class CaseReportHandler {
+class CaseReportHandler {
     blaiseApiClient: BlaiseApiClient;
     cache: NodeCache;
     config: Config;
@@ -23,7 +23,7 @@ export class CaseReportHandler {
         this.GetCaseReport = this.GetCaseReport.bind(this);
     }
 
-    async GetCaseReport(req: Request, res: Response): Promise<Response> {
+    async GetCaseReport(req: Request<{ questionnaireName: string }>, res: Response): Promise<Response> {
         try {
             const cacheKey = `caseStatus:${req.params.questionnaireName}`;
             let caseCompletionReport: CaseCompletionReport | undefined = this.cache.get(cacheKey);

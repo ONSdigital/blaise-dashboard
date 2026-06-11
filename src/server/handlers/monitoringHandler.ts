@@ -1,9 +1,9 @@
 import express, { Request, Response, Router } from "express";
-import { GoogleMonitoringApi } from "../googleCloudMonitoringApi/googleMonitoringApi";
+import { GoogleMonitoringApi } from "../googleCloudMonitoringApi/googleMonitoringApi.js";
 import {
     getMonitoringUptimeCheckTimeSeries,
     GoogleMonitoring
-} from "../googleCloudMonitoringApi/monitoring";
+} from "../googleCloudMonitoringApi/monitoring.js";
 
 function getProjectIdFromEnv(): string | undefined {
     return process.env.PROJECT_ID || process.env.GOOGLE_CLOUD_PROJECT || process.env.GCLOUD_PROJECT;
@@ -25,7 +25,7 @@ export default function NewMonitoringListHandler(): Router {
     return router.get("/api/monitoring", monitoringHandler.GetMonitoringData);
 }
 
-export class MonitoringHandler {
+class MonitoringHandler {
     private readonly googleMonitoring: GoogleMonitoring;
 
     constructor(googleMonitoring: GoogleMonitoring) {

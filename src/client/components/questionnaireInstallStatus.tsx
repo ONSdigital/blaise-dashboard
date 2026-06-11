@@ -1,4 +1,4 @@
-import React, { Component, ReactElement } from "react";
+import { Component, ReactElement } from "react";
 import { LoadingPanel, Panel, Table } from "blaise-design-system-react-components";
 import {
     getQuestionnaireInstallStatus,
@@ -19,9 +19,15 @@ export default class QuestionnaireInstallStatusPanel extends Component<Record<st
             installStatuses: [],
             errored: false
         };
+
+        this.loadInstallStatuses = this.loadInstallStatuses.bind(this);
     }
 
-    async componentDidMount(): Promise<void> {
+    componentDidMount(): void {
+        void this.loadInstallStatuses();
+    }
+
+    async loadInstallStatuses(): Promise<void> {
         try {
             const installStatuses = await getQuestionnaireInstallStatus();
             this.setState({ loading: false, installStatuses, errored: false });
@@ -36,10 +42,10 @@ export default class QuestionnaireInstallStatusPanel extends Component<Record<st
             const statusClass = status.activeOnAllNodes ? "success" : "error";
 
             return (
-                <tr key={status.questionnaireName}>
-                    <td>{status.questionnaireName}</td>
-                    <td>{`${status.activeNodes}/${status.totalNodes}`}</td>
-                    <td>
+                <tr className="ons-table__row" key={status.questionnaireName} data-testid="questionnaire-install-status-row">
+                    <td className="ons-table__cell">{status.questionnaireName}</td>
+                    <td className="ons-table__cell">{`${status.activeNodes}/${status.totalNodes}`}</td>
+                    <td className="ons-table__cell">
                         <span
                             className={`ons-status ons-status--${statusClass}`}
                             data-testid={`questionnaire-install-status-${status.questionnaireName}`}
@@ -67,7 +73,7 @@ export default class QuestionnaireInstallStatusPanel extends Component<Record<st
 
         return (
             <Table columns={["Questionnaire", "Active nodes", "Install status"]} id="questionnaire-install-status-table">
-                <tbody>{this.renderRows()}</tbody>
+                <>{this.renderRows()}</>
             </Table>
         );
     }

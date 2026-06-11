@@ -1,4 +1,4 @@
-import React, {Component, ReactElement} from "react";
+import {Component, ReactElement} from "react";
 import { CaseCompletionReport } from "../types/caseCompletionReport";
 import {LoadingPanel} from "blaise-design-system-react-components";
 

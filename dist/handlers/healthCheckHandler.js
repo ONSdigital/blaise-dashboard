@@ -13,3 +13,4 @@ function HealthCheckHandler() {
 async function healthCheck(req, res) {
     return res.status(200).json({ healthy: true });
 }
+//# sourceMappingURL=healthCheckHandler.js.map

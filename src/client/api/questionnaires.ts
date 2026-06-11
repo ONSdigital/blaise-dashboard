@@ -1,4 +1,4 @@
-import { Questionnaire } from "blaise-api-node-client";
+import type { Questionnaire } from "blaise-api-node-client";
 import axios from "axios";
 
 export async function getQuestionnaires(): Promise<Questionnaire[]> {

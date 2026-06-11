@@ -1,5 +1,5 @@
-import {buildCaseCompletionReport} from "./caseCompletionReport";
-import {mockCaseList} from "./testFixtures";
+import {buildCaseCompletionReport} from "./caseCompletionReport.js";
+import {mockCaseList} from "./testFixtures.js";
 
 describe("build a case report", () => {
     it("should return a case report with information from all cases in that questionnaire", () => {

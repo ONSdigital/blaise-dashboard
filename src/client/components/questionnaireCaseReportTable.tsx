@@ -1,10 +1,9 @@
-import React, { Component, ReactElement } from "react";
+import { Component, ReactElement } from "react";
 import { CaseCompletionReport } from "../types/caseCompletionReport";
 import { getCaseCompletionReport } from "../api/caseCompletionReport";
-import { Questionnaire } from "blaise-api-node-client";
+import type { Questionnaire } from "blaise-api-node-client";
 import { LoadingPanel, Panel, Table } from "blaise-design-system-react-components";
 import QuestionnaireCaseReport from "./questionnaireCaseReport";
-import { refreshInterval } from "../utils/refreshInterval";
 
 type QuestionnaireCaseReportTableProps = {
     questionnaires: Questionnaire[]
@@ -17,8 +16,6 @@ type QuestionnaireCaseReportTableState = {
 }
 
 export default class QuestionnaireCaseReportTable extends Component<QuestionnaireCaseReportTableProps, QuestionnaireCaseReportTableState> {
-    interval!: ReturnType<typeof setInterval>;
-
     constructor(props: QuestionnaireCaseReportTableProps) {
         super(props);
         this.state = {
@@ -31,14 +28,7 @@ export default class QuestionnaireCaseReportTable extends Component<Questionnair
     componentDidMount() {
         console.log("Getting case completion reports for mount");
         this.loadReports();
-        this.interval = setInterval(() => {
-            this.loadReports();
-        }, refreshInterval);
         console.log("Got case completion reports for mount");
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.interval);
     }
 
     loadReports(): void {

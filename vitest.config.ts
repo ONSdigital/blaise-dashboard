@@ -14,7 +14,7 @@ export default defineConfig({
                     name: "client",
                     globals: true,
                     clearMocks: true,
-                    environment: "happy-dom",
+                    environment: "jsdom",
                     setupFiles: ["./src/client/setupTests.ts"],
                     include: ["src/client/**/*.test.{ts,tsx}"]
                 }
@@ -35,10 +35,12 @@ export default defineConfig({
             reporter: ["text", "json", "html"],
             include: ["src/**/*.{ts,tsx}"],
             exclude: [
+                "src/**/*.mock.{ts,tsx}",
                 "src/**/*.test.{ts,tsx}",
+                "src/**/*.types.ts",
                 "src/**/__snapshots__/**",
-                "src/server/test-utils/**",
-                "src/**/setupTests.ts"
+                "src/**/setupTests.ts",
+                "src/server/test-utils/**"
             ]
         }
     }

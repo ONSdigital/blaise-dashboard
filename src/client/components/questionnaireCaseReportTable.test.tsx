@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import QuestionnaireCaseReportTable from "./questionnaireCaseReportTable";
 import { mockQuestionnaireList } from "../../server/blaiseApi/testFixtures";
@@ -19,6 +18,7 @@ describe("QuestionnaireCaseReportTable", () => {
 
     afterEach(() => {
         vi.resetAllMocks();
+        vi.useRealTimers();
     });
 
     it("renders a table row for the questionnaire case status", async () => {
@@ -52,4 +52,5 @@ describe("QuestionnaireCaseReportTable", () => {
             });
         });
     });
+
 });

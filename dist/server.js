@@ -12,6 +12,7 @@ const reportHandler_1 = __importDefault(require("./handlers/reportHandler"));
 const monitoringHandler_1 = __importDefault(require("./handlers/monitoringHandler"));
 const blaiseStatusHandler_1 = __importDefault(require("./handlers/blaiseStatusHandler"));
 const questionnaireInstallStatusHandler_1 = __importDefault(require("./handlers/questionnaireInstallStatusHandler"));
+const errorLogsHandler_1 = __importDefault(require("./handlers/errorLogsHandler"));
 function NewServer(blaiseApiClient, cache, config) {
     const server = (0, express_1.default)();
     const buildFolder = "../build";
@@ -27,13 +28,16 @@ function NewServer(blaiseApiClient, cache, config) {
     server.use("/", (0, monitoringHandler_1.default)());
     server.use("/", (0, blaiseStatusHandler_1.default)(blaiseApiClient));
     server.use("/", (0, questionnaireInstallStatusHandler_1.default)(blaiseApiClient, config));
+    server.use("/", (0, errorLogsHandler_1.default)());
     //define entry point
-    server.get("/{*splat}", function (req, res) {
+    server.use(function (_req, res) {
         res.render("index.html");
     });
-    server.use(function (err, req, res) {
-        res.render("../src/server/views/500.html", {});
+    server.use(function (_err, _req, res, _next) {
+        void _next;
+        res.status(500).sendFile(path_1.default.join(__dirname, "../views/500.html"));
     });
     return server;
 }
 exports.default = NewServer;
+//# sourceMappingURL=server.js.map

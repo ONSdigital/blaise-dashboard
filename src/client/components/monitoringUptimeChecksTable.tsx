@@ -1,4 +1,4 @@
-import React, { Component, ReactElement } from "react";
+import { Component, ReactElement } from "react";
 import { Panel, Table } from "blaise-design-system-react-components";
 import { MonitoringDataModel } from "../types/monitoringDataModel";
 import MonitoringUptimeChecks from "./monitoringUptimeChecks";
@@ -21,7 +21,8 @@ export default class MonitoringUptimeChecksTable extends Component<MonitoringUpt
     }
 
     getRegionStatus(obj: MonitoringDataModel, regionCodes: string[]): string {
-        return obj.regions.find((region) => regionCodes.includes(region.region))?.status ?? "requestFailed";
+        const status = obj.regions.find((region) => regionCodes.includes(region.region))?.status;
+        return status ?? "requestFailed";
     }
 
     render(): ReactElement {
@@ -31,7 +32,7 @@ export default class MonitoringUptimeChecksTable extends Component<MonitoringUpt
                 hostname={obj.hostname}
                 eurBelgium={this.getRegionStatus(obj, ["eur-belgium", "europe"])}
                 apacSingapore={this.getRegionStatus(obj, ["apac-singapore"])}
-                northAmerica={this.getRegionStatus(obj, ["usa-oregon"])}
+                northAmerica={this.getRegionStatus(obj, ["usa-oregon", "usa-iowa", "usa-virginia"])}
                 southAmerica={this.getRegionStatus(obj, ["sa-brazil-sao_paulo"])}
             />
         ));
@@ -39,7 +40,7 @@ export default class MonitoringUptimeChecksTable extends Component<MonitoringUpt
         return (<>
             {this.errorPanel()}
             <Table columns={["Service", "Eur-Belgium","Asia Pacific","North America", "South America"]} id="healthCheck-table">
-                <tbody>{uptimeChecksRows}</tbody>
+                <>{uptimeChecksRows}</>
             </Table>
         </>);
     }

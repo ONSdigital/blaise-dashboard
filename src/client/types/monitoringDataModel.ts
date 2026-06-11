@@ -3,15 +3,9 @@ export type MonitoringDataModel = {
     regions: Region[];
 };
 
-export type Region = {
+type Region = {
     region: string;
     status: string;
 };
 
-export type UptimeCheck = {
-    hostname: string;
-    eurBelgium: string;
-    apacSingapore: string;
-    northAmerica: string;
-    southAmerica: string;
-};
+export const monitoringDataModelTypeModuleLoaded = true;

@@ -1,8 +1,9 @@
 import axios from "axios";
 
 export type BlaiseStatus = {
-    "health check type": string;
-    status: string;
+    "health check type"?: string;
+    healthCheckType?: string;
+    status?: string;
 };
 
 export async function getBlaiseStatus(): Promise<BlaiseStatus[]> {

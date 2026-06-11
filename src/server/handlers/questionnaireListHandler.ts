@@ -1,7 +1,7 @@
 import express, { Request, Response, Router } from "express";
 import { BlaiseApiClient } from "blaise-api-node-client";
-import { Config } from "../config";
-import { getQuestionnaires } from "../blaiseApi/questionnaires";
+import { Config } from "../config.js";
+import { getQuestionnaires } from "../blaiseApi/questionnaires.js";
 import NodeCache from "node-cache";
 
 export default function NewQuestionnaireListHandler(blaiseApiClient: BlaiseApiClient, cache: NodeCache, config: Config): Router {
@@ -11,7 +11,7 @@ export default function NewQuestionnaireListHandler(blaiseApiClient: BlaiseApiCl
     return router.get("/api/questionnaires", questionnaireHandler.GetListOfQuestionnaires);
 }
 
-export class QuestionnaireListHandler {
+class QuestionnaireListHandler {
     blaiseApiClient: BlaiseApiClient;
     cache: NodeCache;
     config: Config;

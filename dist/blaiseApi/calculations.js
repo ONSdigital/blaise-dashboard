@@ -30,3 +30,4 @@ function calculatePercentComplete(caseTotals) {
 function round2DP(numberToRound) {
     return Math.round((numberToRound + Number.EPSILON) * 100) / 100;
 }
+//# sourceMappingURL=calculations.js.map

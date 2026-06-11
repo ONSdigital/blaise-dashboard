@@ -4,3 +4,5 @@ export type CaseCompletionReport = {
     NotComplete: number;
     CompletePercentage: number;
 };
+
+export const caseCompletionReportTypeModuleLoaded = true;
