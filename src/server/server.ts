@@ -9,6 +9,7 @@ import caseReportHandler from "./handlers/reportHandler";
 import NodeCache from "node-cache";
 import monitoringHandler from "./handlers/monitoringHandler";
 import blaiseStatusHandler from "./handlers/blaiseStatusHandler";
+import questionnaireInstallStatusHandler from "./handlers/questionnaireInstallStatusHandler";
 
 function NewServer(blaiseApiClient: BlaiseApiClient, cache: NodeCache, config: Config): Express {
     const server = express();
@@ -26,6 +27,7 @@ function NewServer(blaiseApiClient: BlaiseApiClient, cache: NodeCache, config: C
     server.use("/", caseReportHandler(blaiseApiClient, cache, config));
     server.use("/", monitoringHandler());
     server.use("/", blaiseStatusHandler(blaiseApiClient));
+    server.use("/", questionnaireInstallStatusHandler(blaiseApiClient, config));
 
     //define entry point
     server.get("/{*splat}", function (req: Request, res: Response) {

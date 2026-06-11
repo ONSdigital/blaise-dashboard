@@ -12,7 +12,7 @@ export default function BlaiseStatusHandler(blaiseApiClient: BlaiseApiClient): R
     return router.get("/api/health", (req: Request, res: Response) => getBlaiseStatus(req, res, blaiseApiClient));
 }
 
-function mapDiagnosticsToDqsStatus(diagnostics: Diagnostic[]): DqsBlaiseStatus[] {
+function mapDiagnosticsToDqsStatus(diagnostics: readonly Diagnostic[]): DqsBlaiseStatus[] {
     return diagnostics.map((diagnostic) => ({
         "health check type": diagnostic.healthCheckType,
         status: diagnostic.status

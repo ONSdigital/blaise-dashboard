@@ -15,10 +15,14 @@ import { getMonitoring } from "./api/monitoring";
 vi.mock("./api/blaiseStatus");
 import { getBlaiseStatus } from "./api/blaiseStatus";
 
+vi.mock("./api/questionnaireInstallStatus");
+import { getQuestionnaireInstallStatus } from "./api/questionnaireInstallStatus";
+
 const getCaseCompletionReportMock = vi.mocked(getCaseCompletionReport);
 const getQuestionnairesMock = vi.mocked(getQuestionnaires);
 const getMonitoringMock = vi.mocked(getMonitoring);
 const getBlaiseStatusMock = vi.mocked(getBlaiseStatus);
+const getQuestionnaireInstallStatusMock = vi.mocked(getQuestionnaireInstallStatus);
 
 describe("App", () => {
   const caseCompletionReport = {
@@ -39,6 +43,14 @@ describe("App", () => {
     getBlaiseStatusMock.mockImplementation(() => Promise.resolve([
       { "health check type": "Connection model", status: "OK" }
     ]));
+    getQuestionnaireInstallStatusMock.mockImplementation(() => Promise.resolve([
+      {
+        questionnaireName: "OPN2101A",
+        totalNodes: 2,
+        activeNodes: 2,
+        activeOnAllNodes: true
+      }
+    ]));
 
     const app = render(
       <App />
@@ -47,6 +59,7 @@ describe("App", () => {
     expect(screen.getByText("Getting questionnaires for report")).toBeVisible();
     expect(screen.getByText("Getting uptime checks for services")).toBeVisible();
     expect(await screen.findByText("What is a completed case?")).toBeVisible();
+    expect(await screen.findByText("Questionnaire install status on Blaise nodes")).toBeVisible();
     expect(await screen.findByText("Blaise status information")).toBeVisible();
     expect(await screen.findByText("Service health check information")).toBeVisible();
     expect(screen.queryByText("Getting questionnaires for report")).not.toBeInTheDocument();
@@ -60,6 +73,7 @@ describe("App", () => {
       getQuestionnairesMock.mockImplementation(() => Promise.reject("Cannot get questionnaires"));
       getMonitoringMock.mockImplementation(() => Promise.resolve([]));
       getBlaiseStatusMock.mockImplementation(() => Promise.resolve([]));
+      getQuestionnaireInstallStatusMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -76,6 +90,7 @@ describe("App", () => {
       getQuestionnairesMock.mockImplementation(() => Promise.resolve([]));
       getMonitoringMock.mockImplementation(() => Promise.resolve([]));
       getBlaiseStatusMock.mockImplementation(() => Promise.resolve([]));
+      getQuestionnaireInstallStatusMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -110,6 +125,7 @@ describe("App", () => {
       ]));
       getMonitoringMock.mockImplementation(() => Promise.resolve([]));
       getBlaiseStatusMock.mockImplementation(() => Promise.resolve([]));
+      getQuestionnaireInstallStatusMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -129,6 +145,7 @@ describe("App", () => {
       getQuestionnairesMock.mockImplementation(() => Promise.resolve([]));
       getMonitoringMock.mockImplementation(() => Promise.resolve([]));
       getBlaiseStatusMock.mockImplementation(() => Promise.resolve([]));
+      getQuestionnaireInstallStatusMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -144,6 +161,7 @@ describe("App", () => {
       getQuestionnairesMock.mockImplementation(() => Promise.resolve([]));
       getMonitoringMock.mockImplementation(() => Promise.resolve([]));
       getBlaiseStatusMock.mockImplementation(() => Promise.reject("Cannot get Blaise status"));
+      getQuestionnaireInstallStatusMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -159,6 +177,7 @@ describe("App", () => {
       getQuestionnairesMock.mockImplementation(() => Promise.resolve([]));
       getMonitoringMock.mockImplementation(() => Promise.reject("Cannot get uptime checks"));
       getBlaiseStatusMock.mockImplementation(() => Promise.resolve([]));
+      getQuestionnaireInstallStatusMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -177,6 +196,7 @@ describe("App", () => {
         }
       }));
       getBlaiseStatusMock.mockImplementation(() => Promise.resolve([]));
+      getQuestionnaireInstallStatusMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />

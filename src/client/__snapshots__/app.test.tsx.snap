@@ -196,6 +196,34 @@ exports[`App > renders correctly 1`] = `
           <h2
             class="ons-u-mt-m"
           >
+            Questionnaire install status on Blaise nodes
+          </h2>
+          <table
+            columns="Questionnaire,Active nodes,Install status"
+            data-testid="questionnaire-install-status-table"
+          >
+            <tbody>
+              <tr>
+                <td>
+                  OPN2101A
+                </td>
+                <td>
+                  2/2
+                </td>
+                <td>
+                  <span
+                    class="ons-status ons-status--success"
+                    data-testid="questionnaire-install-status-OPN2101A"
+                  >
+                    Active
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h2
+            class="ons-u-mt-m"
+          >
             Blaise status information
           </h2>
           <table
@@ -419,6 +447,34 @@ exports[`App > renders correctly 1`] = `
             </li>
           </ul>
         </section>
+        <h2
+          class="ons-u-mt-m"
+        >
+          Questionnaire install status on Blaise nodes
+        </h2>
+        <table
+          columns="Questionnaire,Active nodes,Install status"
+          data-testid="questionnaire-install-status-table"
+        >
+          <tbody>
+            <tr>
+              <td>
+                OPN2101A
+              </td>
+              <td>
+                2/2
+              </td>
+              <td>
+                <span
+                  class="ons-status ons-status--success"
+                  data-testid="questionnaire-install-status-OPN2101A"
+                >
+                  Active
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
         <h2
           class="ons-u-mt-m"
         >
