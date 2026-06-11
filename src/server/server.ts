@@ -25,7 +25,7 @@ function NewServer(blaiseApiClient: BlaiseApiClient, cache: NodeCache, config: C
     server.use("/", QuestionnaireListHandler(blaiseApiClient, cache, config));
     server.use("/", caseReportHandler(blaiseApiClient, cache, config));
     server.use("/", monitoringHandler());
-    server.use("/", blaiseStatusHandler(config));
+    server.use("/", blaiseStatusHandler(blaiseApiClient));
 
     //define entry point
     server.get("/{*splat}", function (req: Request, res: Response) {

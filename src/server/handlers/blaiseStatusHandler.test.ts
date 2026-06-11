@@ -1,21 +1,14 @@
 import express from "express";
 import supertest from "supertest";
-import axios from "axios";
 import { getBlaiseStatus } from "./blaiseStatusHandler";
-import { Config } from "../config";
+import { BlaiseApiClient, Diagnostic } from "blaise-api-node-client";
 
-vi.mock("axios");
-
-const mockedAxios = vi.mocked(axios, true);
-
-const config: Config = {
-    BlaiseApiUrl: "http://blaise-api.local",
-    ServerPark: "gusty"
-};
+const mockGetDiagnostics = vi.fn();
+const blaiseApiClient = { getDiagnostics: mockGetDiagnostics } as unknown as BlaiseApiClient;
 
 function buildApp() {
     const app = express();
-    app.get("/api/health", async (req, res) => getBlaiseStatus(req, res, config));
+    app.get("/api/health", async (req, res) => getBlaiseStatus(req, res, blaiseApiClient));
     return app;
 }
 
@@ -25,23 +18,26 @@ describe("Blaise Status Handler", () => {
     });
 
     it("returns Blaise status list from Blaise API", async () => {
-        const responseBody = [
-            { "health check type": "Connection model", status: "OK" },
-            { "health check type": "Blaise connection", status: "OK" }
+        const diagnostics: Diagnostic[] = [
+            { healthCheckType: "Connection model", status: "OK" },
+            { healthCheckType: "Blaise connection", status: "OK" }
         ];
 
-        mockedAxios.get.mockResolvedValue({ status: 200, data: responseBody } as never);
+        mockGetDiagnostics.mockResolvedValue(diagnostics);
         const request = supertest(buildApp());
 
         const response = await request.get("/api/health");
 
         expect(response.statusCode).toEqual(200);
-        expect(response.body).toEqual(responseBody);
-        expect(mockedAxios.get).toHaveBeenCalledWith("http://blaise-api.local/api/v1/health");
+        expect(response.body).toEqual([
+            { "health check type": "Connection model", status: "OK" },
+            { "health check type": "Blaise connection", status: "OK" }
+        ]);
+        expect(mockGetDiagnostics).toHaveBeenCalled();
     });
 
     it("returns a 500 response when the request fails", async () => {
-        mockedAxios.get.mockRejectedValue(new Error("timeout"));
+        mockGetDiagnostics.mockRejectedValue(new Error("timeout"));
         const request = supertest(buildApp());
 
         const response = await request.get("/api/health");

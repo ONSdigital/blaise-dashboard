@@ -34,6 +34,7 @@ describe("Blaise Status Panel", () => {
         render(<BlaiseStatusPanel />);
 
         await waitFor(() => {
+            expect(screen.getByTestId("blaise-status-info-panel")).toBeInTheDocument();
             expect(screen.getByText("Unable to get Blaise status")).toBeInTheDocument();
         });
     });

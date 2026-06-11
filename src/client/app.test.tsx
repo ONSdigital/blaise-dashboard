@@ -138,6 +138,21 @@ describe("App", () => {
     });
   });
 
+  describe("when getting Blaise status errors", () => {
+    it("renders an info panel with Unable to get Blaise status", async () => {
+      getCaseCompletionReportMock.mockImplementation(() => Promise.resolve(caseCompletionReport));
+      getQuestionnairesMock.mockImplementation(() => Promise.resolve([]));
+      getMonitoringMock.mockImplementation(() => Promise.resolve([]));
+      getBlaiseStatusMock.mockImplementation(() => Promise.reject("Cannot get Blaise status"));
+
+      render(
+        <App />
+      );
+
+      expect(await screen.findByText("Unable to get Blaise status")).toBeVisible();
+    });
+  });
+
   describe("when error occurs retreiving uptime checks", () => {
     it("renders an error panel", async () => {
       getCaseCompletionReportMock.mockImplementation(() => Promise.resolve(caseCompletionReport));

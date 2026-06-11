@@ -64,7 +64,7 @@ export default class BlaiseStatusPanel extends Component<Record<string, never>, 
         }
 
         if (this.state.listError !== "") {
-            return <Panel>{this.state.listError}</Panel>;
+            return <Panel data-testid="blaise-status-info-panel">{this.state.listError}</Panel>;
         }
 
         return <Table columns={["Health check type", "Status"]}>{this.renderStatusRows()}</Table>;

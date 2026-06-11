@@ -1,24 +1,30 @@
 import express, { Request, Response, Router } from "express";
-import axios from "axios";
-import { Config } from "../config";
+import { BlaiseApiClient, Diagnostic } from "blaise-api-node-client";
 
-export default function BlaiseStatusHandler(config: Config): Router {
+type DqsBlaiseStatus = {
+    "health check type": string;
+    status: string;
+};
+
+export default function BlaiseStatusHandler(blaiseApiClient: BlaiseApiClient): Router {
     const router = express.Router();
 
-    return router.get("/api/health", (req: Request, res: Response) => getBlaiseStatus(req, res, config));
+    return router.get("/api/health", (req: Request, res: Response) => getBlaiseStatus(req, res, blaiseApiClient));
 }
 
-export async function getBlaiseStatus(_req: Request, res: Response, config: Config): Promise<Response> {
+function mapDiagnosticsToDqsStatus(diagnostics: Diagnostic[]): DqsBlaiseStatus[] {
+    return diagnostics.map((diagnostic) => ({
+        "health check type": diagnostic.healthCheckType,
+        status: diagnostic.status
+    }));
+}
+
+export async function getBlaiseStatus(_req: Request, res: Response, blaiseApiClient: BlaiseApiClient): Promise<Response> {
     try {
-        const response = await axios.get(`${config.BlaiseApiUrl}/api/v1/health`);
-        return res.status(response.status).json(response.data);
+        const diagnostics = await blaiseApiClient.getDiagnostics();
+        return res.status(200).json(mapDiagnosticsToDqsStatus(diagnostics));
     } catch (error: unknown) {
         console.error("Failed to retrieve Blaise status", error);
-
-        if (axios.isAxiosError(error) && error.response !== undefined) {
-            return res.status(error.response.status).json(error.response.data);
-        }
-
         return res.status(500).json({ message: "Unable to get Blaise status" });
     }
 }
