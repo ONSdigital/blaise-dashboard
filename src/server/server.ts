@@ -51,7 +51,6 @@ function newServer(
   server.disable("x-powered-by");
   server.use(
     helmet({
-      contentSecurityPolicy: false,
       crossOriginEmbedderPolicy: false,
     }),
   );
