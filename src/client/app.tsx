@@ -14,6 +14,7 @@ import {refreshInterval} from "./utils/refreshInterval";
 import { getMonitoring } from "./api/monitoring";
 import { MonitoringDataModel } from "./types/monitoringDataModel";
 import MonitoringUptimeChecksTable from "./components/monitoringUptimeChecksTable";
+import BlaiseStatusPanel from "./components/blaiseStatus";
 
 const divStyle = {
     minHeight: "calc(67vh)",
@@ -201,6 +202,8 @@ export default class App extends Component<unknown, AppState> {
                         {this.questionnaireLoadingPanel()}
                         {this.questionnaireReportTable()}
                         {this.completedCaseDefinition()}
+                        <h2 className="ons-u-mt-m">Blaise status information</h2>
+                        <BlaiseStatusPanel />
                         <h2 className="ons-u-mt-m">Service health check information</h2>
                         {this.uptimeChecksloadingPanel()}
                         {this.uptimeChecksErrorPanel()}

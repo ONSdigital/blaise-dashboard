@@ -196,6 +196,30 @@ exports[`App > renders correctly 1`] = `
           <h2
             class="ons-u-mt-m"
           >
+            Blaise status information
+          </h2>
+          <table
+            columns="Health check type,Status"
+          >
+            <tbody>
+              <tr>
+                <td>
+                  Connection model
+                </td>
+                <td>
+                  <span
+                    class="ons-status ons-status--success"
+                    data-testid="blaise-status-connection-model"
+                  >
+                    OK
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h2
+            class="ons-u-mt-m"
+          >
             Service health check information
           </h2>
           <div>
@@ -395,6 +419,30 @@ exports[`App > renders correctly 1`] = `
             </li>
           </ul>
         </section>
+        <h2
+          class="ons-u-mt-m"
+        >
+          Blaise status information
+        </h2>
+        <table
+          columns="Health check type,Status"
+        >
+          <tbody>
+            <tr>
+              <td>
+                Connection model
+              </td>
+              <td>
+                <span
+                  class="ons-status ons-status--success"
+                  data-testid="blaise-status-connection-model"
+                >
+                  OK
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
         <h2
           class="ons-u-mt-m"
         >

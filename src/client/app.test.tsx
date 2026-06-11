@@ -12,9 +12,13 @@ import { getQuestionnaires } from "./api/questionnaires";
 vi.mock("./api/monitoring");
 import { getMonitoring } from "./api/monitoring";
 
+vi.mock("./api/blaiseStatus");
+import { getBlaiseStatus } from "./api/blaiseStatus";
+
 const getCaseCompletionReportMock = vi.mocked(getCaseCompletionReport);
 const getQuestionnairesMock = vi.mocked(getQuestionnaires);
 const getMonitoringMock = vi.mocked(getMonitoring);
+const getBlaiseStatusMock = vi.mocked(getBlaiseStatus);
 
 describe("App", () => {
   const caseCompletionReport = {
@@ -32,6 +36,9 @@ describe("App", () => {
     getCaseCompletionReportMock.mockImplementation(() => Promise.resolve(caseCompletionReport));
     getQuestionnairesMock.mockImplementation(() => Promise.resolve(mockQuestionnaireList));
     getMonitoringMock.mockImplementation(() => Promise.resolve([]));
+    getBlaiseStatusMock.mockImplementation(() => Promise.resolve([
+      { "health check type": "Connection model", status: "OK" }
+    ]));
 
     const app = render(
       <App />
@@ -40,6 +47,7 @@ describe("App", () => {
     expect(screen.getByText("Getting questionnaires for report")).toBeVisible();
     expect(screen.getByText("Getting uptime checks for services")).toBeVisible();
     expect(await screen.findByText("What is a completed case?")).toBeVisible();
+    expect(await screen.findByText("Blaise status information")).toBeVisible();
     expect(await screen.findByText("Service health check information")).toBeVisible();
     expect(screen.queryByText("Getting questionnaires for report")).not.toBeInTheDocument();
     expect(screen.queryByText("Getting uptime checks for services")).not.toBeInTheDocument();
@@ -51,6 +59,7 @@ describe("App", () => {
     it("renders an error panel", async () => {
       getQuestionnairesMock.mockImplementation(() => Promise.reject("Cannot get questionnaires"));
       getMonitoringMock.mockImplementation(() => Promise.resolve([]));
+      getBlaiseStatusMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -66,6 +75,7 @@ describe("App", () => {
       getCaseCompletionReportMock.mockImplementation(() => Promise.resolve(caseCompletionReport));
       getQuestionnairesMock.mockImplementation(() => Promise.resolve([]));
       getMonitoringMock.mockImplementation(() => Promise.resolve([]));
+      getBlaiseStatusMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -99,6 +109,7 @@ describe("App", () => {
         }
       ]));
       getMonitoringMock.mockImplementation(() => Promise.resolve([]));
+      getBlaiseStatusMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -117,6 +128,7 @@ describe("App", () => {
       getCaseCompletionReportMock.mockImplementation(() => Promise.resolve(caseCompletionReport));
       getQuestionnairesMock.mockImplementation(() => Promise.resolve([]));
       getMonitoringMock.mockImplementation(() => Promise.resolve([]));
+      getBlaiseStatusMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -131,6 +143,7 @@ describe("App", () => {
       getCaseCompletionReportMock.mockImplementation(() => Promise.resolve(caseCompletionReport));
       getQuestionnairesMock.mockImplementation(() => Promise.resolve([]));
       getMonitoringMock.mockImplementation(() => Promise.reject("Cannot get uptime checks"));
+      getBlaiseStatusMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
@@ -148,6 +161,7 @@ describe("App", () => {
           data: "Failed to get monitoring uptimeChecks config data: PERMISSION_DENIED"
         }
       }));
+      getBlaiseStatusMock.mockImplementation(() => Promise.resolve([]));
 
       render(
         <App />
