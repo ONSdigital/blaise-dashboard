@@ -5,8 +5,8 @@ import fs from "fs";
 import ejs from "ejs";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
-import HealthCheckHandler from "./handlers/healthCheckHandler.js";
-import QuestionnaireListHandler from "./handlers/questionnaireListHandler.js";
+import healthCheckHandler from "./handlers/healthCheckHandler.js";
+import questionnaireListHandler from "./handlers/questionnaireListHandler.js";
 import { Config } from "./config.js";
 import { BlaiseApiClient } from "blaise-api-node-client";
 import caseReportHandler from "./handlers/reportHandler.js";
@@ -35,7 +35,7 @@ const pageRateLimiter = rateLimit({
   message: { error: "Too many requests, please try again later" },
 });
 
-function NewServer(
+function newServer(
   blaiseApiClient: BlaiseApiClient,
   cache: NodeCache,
   config: Config,
@@ -67,16 +67,14 @@ function NewServer(
   server.use(express.urlencoded({ extended: true }));
   server.use("/api", apiRateLimiter);
 
-  //define handlers
-  server.use("/", HealthCheckHandler());
-  server.use("/", QuestionnaireListHandler(blaiseApiClient, cache, config));
+  server.use("/", healthCheckHandler());
+  server.use("/", questionnaireListHandler(blaiseApiClient, cache, config));
   server.use("/", caseReportHandler(blaiseApiClient, cache, config));
   server.use("/", monitoringHandler());
   server.use("/", blaiseStatusHandler(blaiseApiClient));
   server.use("/", questionnaireInstallStatusHandler(blaiseApiClient, config));
   server.use("/", errorLogsHandler());
 
-  //define entry point
   server.use(pageRateLimiter, function (_req: Request, res: Response) {
     res.render("index.html");
   });
@@ -93,4 +91,4 @@ function NewServer(
   return server;
 }
 
-export default NewServer;
+export default newServer;

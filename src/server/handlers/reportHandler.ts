@@ -15,14 +15,14 @@ export default function caseReportHandler(
 ): Router {
   const router = express.Router();
 
-  const caseReportHandler = new CaseReportHandler(
+  const caseReportRouteHandler = new CaseReportHandler(
     blaiseApiClient,
     cache,
     config,
   );
   return router.get(
     "/api/reports/cases/completions/:questionnaireName",
-    caseReportHandler.GetCaseReport,
+    caseReportRouteHandler.getCaseReport,
   );
 }
 
@@ -39,10 +39,10 @@ class CaseReportHandler {
     this.blaiseApiClient = blaiseApiClient;
     this.cache = cache;
     this.config = config;
-    this.GetCaseReport = this.GetCaseReport.bind(this);
+    this.getCaseReport = this.getCaseReport.bind(this);
   }
 
-  async GetCaseReport(
+  async getCaseReport(
     req: Request<{ questionnaireName: string }>,
     res: Response,
   ): Promise<Response> {

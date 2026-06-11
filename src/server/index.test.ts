@@ -17,7 +17,7 @@ describe("server bootstrap", () => {
     const loggerInfoMock = vi.fn();
 
     vi.doMock("./config", () => ({
-      GetConfigFromEnv: () => ({
+      getConfigFromEnv: () => ({
         BlaiseApiUrl: "http://blaise-api.local",
         ServerPark: "gusty",
       }),
@@ -64,7 +64,7 @@ describe("server bootstrap", () => {
     const loggerErrorMock = vi.fn();
 
     vi.doMock("./config", () => ({
-      GetConfigFromEnv: () => ({
+      getConfigFromEnv: () => ({
         BlaiseApiUrl: "http://blaise-api.local",
         ServerPark: "gusty",
       }),
@@ -109,7 +109,7 @@ describe("server bootstrap", () => {
     const loggerInfoMock = vi.fn();
 
     vi.doMock("./config", () => ({
-      GetConfigFromEnv: () => ({
+      getConfigFromEnv: () => ({
         BlaiseApiUrl: "http://blaise-api.local",
         ServerPark: "gusty",
       }),

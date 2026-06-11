@@ -19,6 +19,11 @@ type QuestionnaireCaseReportTableState = {
   erroredQuestionnaires: string[];
 };
 
+type CaseCompletionReportsResult = {
+  caseCompletionReports: Record<string, CaseCompletionReport>;
+  erroredQuestionnaires: string[];
+};
+
 export default class QuestionnaireCaseReportTable extends Component<
   QuestionnaireCaseReportTableProps,
   QuestionnaireCaseReportTableState
@@ -33,38 +38,66 @@ export default class QuestionnaireCaseReportTable extends Component<
   }
 
   componentDidMount() {
-    this.loadReports();
+    void this.loadReports();
   }
 
-  loadReports(): void {
-    this.getCaseCompletionReports().then(
-      (caseCompletionReports: Record<string, CaseCompletionReport>) => {
-        this.setState({
-          loaded: true,
-          caseCompletionReports: caseCompletionReports,
-        });
+  async loadReports(): Promise<void> {
+    const { caseCompletionReports, erroredQuestionnaires } =
+      await this.getCaseCompletionReports();
+
+    this.setState({
+      loaded: true,
+      caseCompletionReports,
+      erroredQuestionnaires,
+    });
+  }
+
+  async getCaseCompletionReports(): Promise<CaseCompletionReportsResult> {
+    const caseCompletionReports: Record<string, CaseCompletionReport> = {};
+
+    const reportRequests = this.props.questionnaires.map(
+      async (questionnaire) => {
+        try {
+          const report = await getCaseCompletionReport(questionnaire.name);
+          return { questionnaireName: questionnaire.name, report };
+        } catch {
+          return { questionnaireName: questionnaire.name, report: undefined };
+        }
       },
     );
+
+    const reportResults = await Promise.all(reportRequests);
+    const erroredQuestionnaires: string[] = [];
+
+    reportResults.forEach(({ questionnaireName, report }) => {
+      if (report === undefined) {
+        erroredQuestionnaires.push(questionnaireName);
+        return;
+      }
+
+      caseCompletionReports[questionnaireName] = report;
+    });
+
+    return {
+      caseCompletionReports,
+      erroredQuestionnaires,
+    };
   }
 
-  async getCaseCompletionReports(): Promise<
-    Record<string, CaseCompletionReport>
-  > {
-    const caseCompletionReports: Record<string, CaseCompletionReport> = {};
-    for (const questionnaire of this.props.questionnaires) {
-      try {
-        caseCompletionReports[questionnaire.name] =
-          await getCaseCompletionReport(questionnaire.name);
-      } catch (reason: unknown) {
-        void reason;
-        const erroredQuestionnaires = this.state.erroredQuestionnaires;
-        erroredQuestionnaires.push(questionnaire.name);
-        this.setState({
-          erroredQuestionnaires: [...new Set(erroredQuestionnaires)],
-        });
-      }
+  renderCaseReportRows(): ReactElement[] {
+    const caseReportRows: ReactElement[] = [];
+    for (const questionnaireName in this.state.caseCompletionReports) {
+      caseReportRows.push(
+        <QuestionnaireCaseReport
+          questionnaireName={questionnaireName}
+          caseCompletionReport={
+            this.state.caseCompletionReports[questionnaireName]
+          }
+          key={questionnaireName}
+        />,
+      );
     }
-    return caseCompletionReports;
+    return caseReportRows;
   }
 
   errorPanel(): ReactElement | undefined {
@@ -84,19 +117,6 @@ export default class QuestionnaireCaseReportTable extends Component<
       return <LoadingPanel message={"Getting case completion reports"} />;
     }
 
-    const caseReportRows: ReactElement[] = [];
-    for (const questionnaireName in this.state.caseCompletionReports) {
-      caseReportRows.push(
-        <QuestionnaireCaseReport
-          questionnaireName={questionnaireName}
-          caseCompletionReport={
-            this.state.caseCompletionReports[questionnaireName]
-          }
-          key={questionnaireName}
-        />,
-      );
-    }
-
     return (
       <>
         {this.errorPanel()}
@@ -104,7 +124,7 @@ export default class QuestionnaireCaseReportTable extends Component<
           columns={["Questionnaire", "Cases", "Completed", "Progress"]}
           id="case-report-table"
         >
-          <>{caseReportRows}</>
+          <>{this.renderCaseReportRows()}</>
         </Table>
       </>
     );

@@ -18,7 +18,7 @@ function getProjectIdFromEnv(): string | undefined {
   );
 }
 
-export default function NewMonitoringListHandler(): Router {
+export default function monitoringHandler(): Router {
   const router = express.Router();
   const projectId = getProjectIdFromEnv();
 
@@ -30,19 +30,22 @@ export default function NewMonitoringListHandler(): Router {
   }
 
   const googleMonitoringApi = new GoogleMonitoringApi(projectId);
-  const monitoringHandler = new MonitoringHandler(googleMonitoringApi);
-  return router.get("/api/monitoring", monitoringHandler.GetMonitoringData);
+  const monitoringRouteHandler = new MonitoringHandler(googleMonitoringApi);
+  return router.get(
+    "/api/monitoring",
+    monitoringRouteHandler.getMonitoringData,
+  );
 }
 
 class MonitoringHandler {
   private readonly googleMonitoring: GoogleMonitoring;
 
   constructor(googleMonitoring: GoogleMonitoring) {
-    this.GetMonitoringData = this.GetMonitoringData.bind(this);
+    this.getMonitoringData = this.getMonitoringData.bind(this);
     this.googleMonitoring = googleMonitoring;
   }
 
-  async GetMonitoringData(req: Request, res: Response): Promise<Response> {
+  async getMonitoringData(req: Request, res: Response): Promise<Response> {
     try {
       return res
         .status(200)

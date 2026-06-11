@@ -1,7 +1,7 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 import ErrorLogsTable from "./errorLogsTable";
 import * as errorLogsApi from "../api/errorLogs";
-import { renderWithQueryClient } from "../testUtils/renderWithQueryClient";
+import { renderWithQueryClient } from "../test-utils/renderWithQueryClient";
 
 const getErrorLogsSpy = vi.spyOn(errorLogsApi, "getErrorLogs");
 

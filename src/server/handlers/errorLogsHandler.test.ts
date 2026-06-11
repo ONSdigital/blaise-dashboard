@@ -15,7 +15,7 @@ describe("Error Logs Handler", () => {
 
     const app = express();
     const handler = new ErrorLogsHandler(loggingApi);
-    app.get("/api/logs/errors", handler.GetErrorLogs);
+    app.get("/api/logs/errors", handler.getErrorLogs);
 
     const response = await supertest(app).get("/api/logs/errors");
 
@@ -40,7 +40,7 @@ describe("Error Logs Handler", () => {
 
     const app = express();
     const handler = new ErrorLogsHandler(loggingApi);
-    app.get("/api/logs/errors", handler.GetErrorLogs);
+    app.get("/api/logs/errors", handler.getErrorLogs);
 
     const response = await supertest(app)
       .get("/api/logs/errors")
@@ -65,7 +65,7 @@ describe("Error Logs Handler", () => {
 
     const app = express();
     const handler = new ErrorLogsHandler(loggingApi);
-    app.get("/api/logs/errors", handler.GetErrorLogs);
+    app.get("/api/logs/errors", handler.getErrorLogs);
 
     const response = await supertest(app)
       .get("/api/logs/errors")
@@ -90,7 +90,7 @@ describe("Error Logs Handler", () => {
 
     const app = express();
     const handler = new ErrorLogsHandler(loggingApi);
-    app.get("/api/logs/errors", handler.GetErrorLogs);
+    app.get("/api/logs/errors", handler.getErrorLogs);
 
     const response = await supertest(app)
       .get("/api/logs/errors")
@@ -115,7 +115,7 @@ describe("Error Logs Handler", () => {
 
     const app = express();
     const handler = new ErrorLogsHandler(loggingApi);
-    app.get("/api/logs/errors", handler.GetErrorLogs);
+    app.get("/api/logs/errors", handler.getErrorLogs);
 
     const response = await supertest(app)
       .get("/api/logs/errors")
@@ -138,7 +138,7 @@ describe("Error Logs Handler", () => {
 
     const app = express();
     const handler = new ErrorLogsHandler(loggingApi);
-    app.get("/api/logs/errors", handler.GetErrorLogs);
+    app.get("/api/logs/errors", handler.getErrorLogs);
 
     const response = await supertest(app).get("/api/logs/errors");
 
@@ -154,7 +154,7 @@ describe("Error Logs Handler", () => {
 
     const app = express();
     const handler = new ErrorLogsHandler(loggingApi);
-    app.get("/api/logs/errors", handler.GetErrorLogs);
+    app.get("/api/logs/errors", handler.getErrorLogs);
 
     const response = await supertest(app).get("/api/logs/errors");
 
@@ -175,7 +175,7 @@ describe("Error Logs Handler", () => {
     const handler = new ErrorLogsHandler(loggingApi);
     app.get(
       "/api/logs/cawi-logins/success-counts",
-      handler.GetCawiLoginSuccessCounts,
+      handler.getCawiLoginSuccessCounts,
     );
 
     const response = await supertest(app).get(
@@ -201,7 +201,7 @@ describe("Error Logs Handler", () => {
     const handler = new ErrorLogsHandler(loggingApi);
     app.get(
       "/api/logs/cawi-logins/success-counts",
-      handler.GetCawiLoginSuccessCounts,
+      handler.getCawiLoginSuccessCounts,
     );
 
     const response = await supertest(app).get(
@@ -257,7 +257,7 @@ describe("Error Logs Handler", () => {
     const handler = new ErrorLogsHandler(loggingApi);
     app.get(
       "/api/logs/cawi-logins/success-counts",
-      handler.GetCawiLoginSuccessCounts,
+      handler.getCawiLoginSuccessCounts,
     );
 
     const response = await supertest(app).get(

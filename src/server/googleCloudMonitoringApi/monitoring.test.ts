@@ -207,6 +207,20 @@ describe("Get all uptime checks from API", () => {
     expect(mockGoogleMonitoring.listTimeSeries).toHaveBeenCalledTimes(0);
   });
 
+  it("escapes hostname values used in monitoring filters", async () => {
+    mockGoogleMonitoring.getUptimeChecksConfigs.mockResolvedValue([
+      { monitoredResource: { labels: { host: 'bad"host\\name' } } },
+    ]);
+    mockGoogleMonitoring.listTimeSeries.mockResolvedValue([
+      { points: [{ value: { boolValue: true } }] },
+    ]);
+
+    await getMonitoringUptimeCheckTimeSeries(mockGoogleMonitoring);
+
+    const firstFilter = mockGoogleMonitoring.listTimeSeries.mock.calls[0]?.[0];
+    expect(firstFilter).toContain('resource.label."host"="bad\\"host\\\\name"');
+  });
+
   it("should return requestFailed statuses if coudnt get time series points for any other reason", async () => {
     mockGoogleMonitoring.getUptimeChecksConfigs.mockResolvedValue([
       { monitoredResource: { labels: { host: "example-host" } } },

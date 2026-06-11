@@ -41,10 +41,10 @@ export default function errorLogsHandler(): Router {
 
   const loggingApi = new GoogleLoggingApi(projectId);
   const handler = new ErrorLogsHandler(loggingApi);
-  router.get("/api/logs/errors", handler.GetErrorLogs);
+  router.get("/api/logs/errors", handler.getErrorLogs);
   router.get(
     "/api/logs/cawi-logins/success-counts",
-    handler.GetCawiLoginSuccessCounts,
+    handler.getCawiLoginSuccessCounts,
   );
   return router;
 }
@@ -53,8 +53,8 @@ export class ErrorLogsHandler {
   private readonly loggingApi: GoogleErrorLogging;
 
   constructor(loggingApi: GoogleErrorLogging) {
-    this.GetErrorLogs = this.GetErrorLogs.bind(this);
-    this.GetCawiLoginSuccessCounts = this.GetCawiLoginSuccessCounts.bind(this);
+    this.getErrorLogs = this.getErrorLogs.bind(this);
+    this.getCawiLoginSuccessCounts = this.getCawiLoginSuccessCounts.bind(this);
     this.loggingApi = loggingApi;
   }
 
@@ -78,7 +78,7 @@ export class ErrorLogsHandler {
     return "non-blaise";
   }
 
-  async GetErrorLogs(req: Request, res: Response): Promise<Response> {
+  async getErrorLogs(req: Request, res: Response): Promise<Response> {
     const scope = this.getScope(req.query.scope);
 
     try {
@@ -91,7 +91,7 @@ export class ErrorLogsHandler {
     }
   }
 
-  async GetCawiLoginSuccessCounts(
+  async getCawiLoginSuccessCounts(
     _req: Request,
     res: Response,
   ): Promise<Response> {

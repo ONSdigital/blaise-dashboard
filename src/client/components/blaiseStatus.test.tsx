@@ -1,7 +1,7 @@
 import { screen, waitFor } from "@testing-library/react";
 import BlaiseStatusPanel from "./blaiseStatus";
 import * as blaiseStatusApi from "../api/blaiseStatus";
-import { renderWithQueryClient } from "../testUtils/renderWithQueryClient";
+import { renderWithQueryClient } from "../test-utils/renderWithQueryClient";
 
 const getBlaiseStatusSpy = vi.spyOn(blaiseStatusApi, "getBlaiseStatus");
 

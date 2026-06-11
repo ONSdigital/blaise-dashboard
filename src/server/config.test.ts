@@ -6,10 +6,10 @@ vi.mock("dotenv", () => ({
   },
 }));
 
-import { GetConfigFromEnv } from "./config.js";
+import { getConfigFromEnv } from "./config.js";
 import logger from "./logger.js";
 
-describe("GetConfigFromEnv", () => {
+describe("getConfigFromEnv", () => {
   const originalEnv = { ...process.env };
 
   afterEach(() => {
@@ -23,7 +23,7 @@ describe("GetConfigFromEnv", () => {
     process.env.BLAISE_API_URL = "localhost:8080";
     process.env.SERVER_PARK = "gusty";
 
-    const config = GetConfigFromEnv();
+    const config = getConfigFromEnv();
 
     expect(dotenvConfigMock).toHaveBeenCalledTimes(1);
     expect(config).toEqual({
@@ -37,7 +37,7 @@ describe("GetConfigFromEnv", () => {
     process.env.BLAISE_API_URL = "https://blaise-api.local";
     process.env.SERVER_PARK = "gusty";
 
-    const config = GetConfigFromEnv();
+    const config = getConfigFromEnv();
 
     expect(dotenvConfigMock).not.toHaveBeenCalled();
     expect(config).toEqual({
@@ -55,7 +55,7 @@ describe("GetConfigFromEnv", () => {
       .spyOn(logger, "error")
       .mockImplementation(() => logger);
 
-    expect(() => GetConfigFromEnv()).toThrow(
+    expect(() => getConfigFromEnv()).toThrow(
       "Missing required environment variables: BLAISE_API_URL, SERVER_PARK",
     );
 

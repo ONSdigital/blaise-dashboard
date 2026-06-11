@@ -34,9 +34,9 @@ async function buildServerWithHealthRouter(healthRouter: express.Router) {
     default: () => express.Router(),
   }));
 
-  const { default: NewServer } = await import("./server.js");
+  const { default: newServer } = await import("./server.js");
 
-  return NewServer(
+  return newServer(
     {} as unknown as BlaiseApiClient,
     new NodeCache({ stdTTL: 60 }),
     config,
@@ -77,9 +77,9 @@ async function buildServerWithHealthRouterAndMissingErrorPage(
     default: () => express.Router(),
   }));
 
-  const { default: NewServer } = await import("./server.js");
+  const { default: newServer } = await import("./server.js");
 
-  return NewServer(
+  return newServer(
     {} as unknown as BlaiseApiClient,
     new NodeCache({ stdTTL: 60 }),
     config,
@@ -121,16 +121,16 @@ async function buildServerWithHealthRouterAndCustomErrorPage(
     default: () => express.Router(),
   }));
 
-  const { default: NewServer } = await import("./server.js");
+  const { default: newServer } = await import("./server.js");
 
-  return NewServer(
+  return newServer(
     {} as unknown as BlaiseApiClient,
     new NodeCache({ stdTTL: 60 }),
     config,
   );
 }
 
-describe("NewServer", () => {
+describe("newServer", () => {
   afterEach(() => {
     vi.resetModules();
     vi.restoreAllMocks();

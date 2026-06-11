@@ -55,7 +55,7 @@ export default tseslint.config(
             "src/**/*.mock.{ts,tsx}",
             "src/**/*.test.{ts,tsx}",
             "src/client/setupTests.ts",
-            "src/client/testUtils/**/*.{ts,tsx}",
+            "src/client/test-utils/**/*.{ts,tsx}",
             "*.config.ts",
           ],
         },

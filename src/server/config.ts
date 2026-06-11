@@ -6,7 +6,7 @@ export interface Config {
   ServerPark: string;
 }
 
-export function GetConfigFromEnv(): Config {
+export function getConfigFromEnv(): Config {
   if (process.env.NODE_ENV !== "production") {
     dotenv.config({ path: path.resolve(process.cwd(), ".env") });
   }

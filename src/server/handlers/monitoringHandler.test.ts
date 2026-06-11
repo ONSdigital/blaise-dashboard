@@ -1,13 +1,13 @@
-import NewServer from "../server.js";
+import newServer from "../server.js";
 import supertest from "supertest";
 import { BlaiseApiClient } from "blaise-api-node-client";
-import { GetConfigFromEnv } from "../config.js";
+import { getConfigFromEnv } from "../config.js";
 import NodeCache from "node-cache";
 import { getMonitoringUptimeCheckTimeSeries } from "../googleCloudMonitoringApi/monitoring.js";
 import { GoogleMonitoringApi } from "../googleCloudMonitoringApi/googleMonitoringApi.js";
 import { mockHealthCheckList } from "../blaiseApi/testFixtures.js";
 
-const config = GetConfigFromEnv();
+const config = getConfigFromEnv();
 const cache = new NodeCache({ stdTTL: 60 });
 const blaiseApiClient = new BlaiseApiClient(config.BlaiseApiUrl);
 vi.mock("../googleCloudMonitoringApi/monitoring", async (importOriginal) => {
@@ -32,7 +32,7 @@ describe("Get all uptime checks from API", () => {
       Promise.resolve(mockHealthCheckList),
     );
 
-    const server = NewServer(blaiseApiClient, cache, config);
+    const server = newServer(blaiseApiClient, cache, config);
     const request = supertest(server);
     const response = await request.get("/api/monitoring");
 
@@ -52,7 +52,7 @@ describe("Get all uptime checks from API", () => {
       Promise.reject("Error getting uptime checks"),
     );
 
-    const server = NewServer(blaiseApiClient, cache, config);
+    const server = newServer(blaiseApiClient, cache, config);
     const request = supertest(server);
     const response = await request.get("/api/monitoring");
     expect(response.status).toEqual(500);
@@ -66,7 +66,7 @@ describe("Get all uptime checks from API", () => {
       Promise.reject(new Error("monitoring down")),
     );
 
-    const server = NewServer(blaiseApiClient, cache, config);
+    const server = newServer(blaiseApiClient, cache, config);
     const request = supertest(server);
     const response = await request.get("/api/monitoring");
 
@@ -83,7 +83,7 @@ describe("Get all uptime checks from API", () => {
       Promise.resolve(mockHealthCheckList),
     );
 
-    const server = NewServer(blaiseApiClient, cache, config);
+    const server = newServer(blaiseApiClient, cache, config);
     const request = supertest(server);
     const response = await request.get("/api/monitoring");
 
@@ -102,7 +102,7 @@ describe("Get all uptime checks from API", () => {
     delete process.env.GOOGLE_CLOUD_PROJECT;
     delete process.env.GCLOUD_PROJECT;
 
-    const server = NewServer(blaiseApiClient, cache, config);
+    const server = newServer(blaiseApiClient, cache, config);
     const request = supertest(server);
     const response = await request.get("/api/monitoring");
 
@@ -119,7 +119,7 @@ describe("Get all uptime checks from API", () => {
       Promise.resolve(mockHealthCheckList),
     );
 
-    const server = NewServer(blaiseApiClient, cache, config);
+    const server = newServer(blaiseApiClient, cache, config);
     const request = supertest(server);
     const response = await request.get("/api/monitoring");
 

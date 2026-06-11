@@ -14,7 +14,7 @@ const defaultHealthCheckTypes = [
   "Remote Cati management connection",
 ];
 
-export default function BlaiseStatusHandler(
+export default function blaiseStatusHandler(
   blaiseApiClient: BlaiseApiClient,
 ): Router {
   const router = express.Router();

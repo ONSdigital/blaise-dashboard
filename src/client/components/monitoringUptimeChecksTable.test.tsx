@@ -32,12 +32,13 @@ describe("Monitoring Uptime Checks Table", () => {
     expect(screen.getByTestId("healthCheck-table")).toMatchSnapshot();
   });
 
-  it("shows an error panel if uptime checks array passed is empty", async () => {
+  it("renders an empty table when uptime checks array is empty", () => {
     render(<MonitoringUptimeChecksTable monitoringData={[]} />);
 
     expect(
-      await screen.findByText("Failed uptime checks data fetch...."),
-    ).toBeDefined();
+      screen.queryByText("Failed uptime checks data fetch...."),
+    ).not.toBeInTheDocument();
+    expect(screen.queryAllByTestId("monitoring-table-row")).toHaveLength(0);
   });
 
   it("shows dead status when region data is incomplete", async () => {

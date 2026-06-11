@@ -1,7 +1,7 @@
 import express from "express";
 import supertest from "supertest";
 import { getBlaiseStatus } from "./blaiseStatusHandler.js";
-import BlaiseStatusHandler from "./blaiseStatusHandler.js";
+import blaiseStatusHandler from "./blaiseStatusHandler.js";
 import { BlaiseApiClient, Diagnostic } from "blaise-api-node-client";
 
 const mockGetDiagnostics = vi.fn();
@@ -100,7 +100,7 @@ describe("Blaise Status Handler", () => {
     mockGetDiagnostics.mockResolvedValue([]);
 
     const app = express();
-    app.use("/", BlaiseStatusHandler(blaiseApiClient));
+    app.use("/", blaiseStatusHandler(blaiseApiClient));
 
     const response = await supertest(app).get("/api/health");
 

@@ -1,5 +1,5 @@
 import { Component, ReactElement } from "react";
-import { Panel, Table } from "blaise-design-system-react-components";
+import { Table } from "blaise-design-system-react-components";
 import { MonitoringDataModel } from "../types/monitoringDataModel";
 import MonitoringUptimeChecks from "./monitoringUptimeChecks";
 
@@ -8,16 +8,6 @@ type MonitoringUptimeChecksTableProps = {
 };
 
 export default class MonitoringUptimeChecksTable extends Component<MonitoringUptimeChecksTableProps> {
-  constructor(props: MonitoringUptimeChecksTableProps) {
-    super(props);
-  }
-
-  errorPanel(): ReactElement | undefined {
-    if (this.props.monitoringData.length === 0) {
-      return <Panel status="error"> Failed uptime checks data fetch....</Panel>;
-    }
-  }
-
   getRegionStatus(obj: MonitoringDataModel, regionCodes: string[]): string {
     const status = obj.regions.find((region) =>
       regionCodes.includes(region.region),
@@ -45,7 +35,6 @@ export default class MonitoringUptimeChecksTable extends Component<MonitoringUpt
 
     return (
       <>
-        {this.errorPanel()}
         <Table
           columns={[
             "Service",

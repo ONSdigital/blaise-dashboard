@@ -1,6 +1,6 @@
 import express, { Request, Response, Router } from "express";
 
-export default function HealthCheckHandler(): Router {
+export default function healthCheckHandler(): Router {
   const router = express.Router();
 
   return router.get("/dashboard-ui/:version/health", healthCheck);

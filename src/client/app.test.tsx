@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import App from "./app";
 import { mockQuestionnaireList } from "../server/blaiseApi/testFixtures";
-import { renderWithQueryClient } from "./testUtils/renderWithQueryClient";
+import { renderWithQueryClient } from "./test-utils/renderWithQueryClient";
 
 vi.mock("./api/caseCompletionReport");
 import { getCaseCompletionReport } from "./api/caseCompletionReport";

@@ -26,4 +26,22 @@ describe("getCaseCompletionReport tests", () => {
       CompletePercentage: 100,
     });
   });
+
+  it("encodes questionnaire names used in request URLs", async () => {
+    mock.onGet("/api/reports/cases/completions/OPN%202101A%2F1").reply(200, {
+      Total: 2,
+      Complete: 1,
+      NotComplete: 1,
+      CompletePercentage: 50,
+    });
+
+    const result = await getCaseCompletionReport("OPN 2101A/1");
+
+    expect(result).toStrictEqual({
+      Total: 2,
+      Complete: 1,
+      NotComplete: 1,
+      CompletePercentage: 50,
+    });
+  });
 });

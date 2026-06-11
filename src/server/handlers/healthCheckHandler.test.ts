@@ -1,16 +1,16 @@
-import NewServer from "../server.js";
+import newServer from "../server.js";
 import supertest from "supertest";
 
 import { BlaiseApiClient } from "blaise-api-node-client";
-import { GetConfigFromEnv } from "../config.js";
+import { getConfigFromEnv } from "../config.js";
 import NodeCache from "node-cache";
 
-const config = GetConfigFromEnv();
+const config = getConfigFromEnv();
 const cache = new NodeCache({ stdTTL: 60 });
 
 const blaiseApiClient = new BlaiseApiClient(config.BlaiseApiUrl);
 
-const server = NewServer(blaiseApiClient, cache, config);
+const server = newServer(blaiseApiClient, cache, config);
 const request = supertest(server);
 
 describe("Test Health Endpoint", () => {

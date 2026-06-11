@@ -10,6 +10,10 @@ const regionsMonitored: string[] = [
 ];
 const LOOKBACK_SECONDS = 10 * 60;
 
+function escapeFilterStringValue(value: string): string {
+  return value.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+}
+
 export type GetUptimeChecksConfigResult =
   protos.google.monitoring.v3.IUptimeCheckConfig[];
 export type ListTimeSeriesResult = protos.google.monitoring.v3.ITimeSeries[];
@@ -66,9 +70,11 @@ export async function getMonitoringUptimeCheckTimeSeries(
     regionMonitored: string,
     hostname: string,
   ): Promise<Region> {
+    const escapedHostname = escapeFilterStringValue(hostname);
+    const escapedRegionMonitored = escapeFilterStringValue(regionMonitored);
     const filter =
       'metric.type="monitoring.googleapis.com/uptime_check/check_passed" resource.type="uptime_url" ' +
-      `resource.label."host"="${hostname}" metric.label."checker_location"="${regionMonitored}"`;
+      `resource.label."host"="${escapedHostname}" metric.label."checker_location"="${escapedRegionMonitored}"`;
     const status = await listTimeSeries(filter);
 
     return {

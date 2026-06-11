@@ -1,11 +1,11 @@
 import { filterQuestionnaires, getQuestionnaires } from "./questionnaires.js";
 import { BlaiseApiClient } from "blaise-api-node-client";
-import { GetConfigFromEnv } from "../config.js";
+import { getConfigFromEnv } from "../config.js";
 import { mockQuestionnaireList } from "./testFixtures.js";
 import NodeCache from "node-cache";
 
 vi.mock("blaise-api-node-client");
-const config = GetConfigFromEnv();
+const config = getConfigFromEnv();
 const cache = new NodeCache({ stdTTL: 60 });
 
 const getQuestionnairesMock = vi.fn();
