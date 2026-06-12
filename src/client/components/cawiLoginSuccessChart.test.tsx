@@ -1,6 +1,7 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import CawiLoginSuccessChart from "./cawiLoginSuccessChart";
 import * as cawiLoginCountsApi from "../api/cawiLoginCounts";
+import { renderWithQueryClient } from "../test-utils/renderWithQueryClient";
 
 const getCawiLoginSuccessCountsSpy = vi.spyOn(
   cawiLoginCountsApi,
@@ -23,7 +24,7 @@ describe("CawiLoginSuccessChart", () => {
       { timestamp: "2026-06-11T12:00:00.000Z", count: 4 },
     ]);
 
-    render(<CawiLoginSuccessChart />);
+    renderWithQueryClient(<CawiLoginSuccessChart />);
 
     await waitFor(() => {
       expect(screen.getByTestId("cawi-login-total").textContent).toContain("9");
@@ -34,7 +35,7 @@ describe("CawiLoginSuccessChart", () => {
   it("renders error panel when request fails", async () => {
     getCawiLoginSuccessCountsSpy.mockRejectedValue(new Error("boom"));
 
-    render(<CawiLoginSuccessChart />);
+    renderWithQueryClient(<CawiLoginSuccessChart />);
 
     await waitFor(() => {
       expect(
@@ -50,7 +51,7 @@ describe("CawiLoginSuccessChart", () => {
       },
     });
 
-    render(<CawiLoginSuccessChart />);
+    renderWithQueryClient(<CawiLoginSuccessChart />);
 
     await waitFor(() => {
       expect(screen.getByText("Denied")).toBeInTheDocument();
@@ -64,7 +65,7 @@ describe("CawiLoginSuccessChart", () => {
       },
     });
 
-    render(<CawiLoginSuccessChart />);
+    renderWithQueryClient(<CawiLoginSuccessChart />);
 
     await waitFor(() => {
       expect(
@@ -76,7 +77,7 @@ describe("CawiLoginSuccessChart", () => {
   it("renders empty message when no data", async () => {
     getCawiLoginSuccessCountsSpy.mockResolvedValue([]);
 
-    render(<CawiLoginSuccessChart />);
+    renderWithQueryClient(<CawiLoginSuccessChart />);
 
     await waitFor(() => {
       expect(
@@ -92,7 +93,7 @@ describe("CawiLoginSuccessChart", () => {
       { timestamp: "invalid", count: 1 },
     ]);
 
-    render(<CawiLoginSuccessChart />);
+    renderWithQueryClient(<CawiLoginSuccessChart />);
 
     await waitFor(() => {
       expect(screen.getByTestId("cawi-login-line-chart").textContent).toContain(

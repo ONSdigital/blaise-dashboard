@@ -1,6 +1,7 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import QuestionnaireInstallStatusPanel from "./questionnaireInstallStatus";
 import * as installStatusApi from "../api/questionnaireInstallStatus";
+import { renderWithQueryClient } from "../test-utils/renderWithQueryClient";
 
 const getQuestionnaireInstallStatusSpy = vi.spyOn(
   installStatusApi,
@@ -32,7 +33,7 @@ describe("Questionnaire Install Status Panel", () => {
       },
     ]);
 
-    render(<QuestionnaireInstallStatusPanel />);
+    renderWithQueryClient(<QuestionnaireInstallStatusPanel />);
 
     await waitFor(() => {
       expect(screen.getByText("OPN2101A")).toBeInTheDocument();
@@ -57,7 +58,7 @@ describe("Questionnaire Install Status Panel", () => {
   it("shows an error panel when API request fails", async () => {
     getQuestionnaireInstallStatusSpy.mockRejectedValue(new Error("failed"));
 
-    render(<QuestionnaireInstallStatusPanel />);
+    renderWithQueryClient(<QuestionnaireInstallStatusPanel />);
 
     await waitFor(() => {
       expect(
@@ -69,7 +70,7 @@ describe("Questionnaire Install Status Panel", () => {
   it("shows an info panel when no install status data is returned", async () => {
     getQuestionnaireInstallStatusSpy.mockResolvedValue([]);
 
-    render(<QuestionnaireInstallStatusPanel />);
+    renderWithQueryClient(<QuestionnaireInstallStatusPanel />);
 
     await waitFor(() => {
       expect(

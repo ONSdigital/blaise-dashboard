@@ -189,7 +189,7 @@ export class GoogleLoggingApi implements GoogleErrorLogging {
       return this.cawiCountsCache.data;
     }
 
-    const now = new Date();
+    const now = new Date(Date.now());
     const currentHour = floorToUtcHour(now);
     const firstHour = new Date(currentHour.getTime() - 23 * 60 * 60 * 1000);
     const filter = [
