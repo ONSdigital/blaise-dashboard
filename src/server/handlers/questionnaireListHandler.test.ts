@@ -1,50 +1,52 @@
-import NewServer from "../server";
+import newServer from "../server.js";
 import supertest, { Response } from "supertest";
-import BlaiseApiClient from "blaise-api-node-client";
-import { GetConfigFromEnv } from "../config";
+import { BlaiseApiClient } from "blaise-api-node-client";
+import { getConfigFromEnv } from "../config.js";
+import { mockQuestionnaireList } from "../blaiseApi/testFixtures.js";
 import NodeCache from "node-cache";
 
-const config = GetConfigFromEnv();
+const config = getConfigFromEnv();
 const cache = new NodeCache({ stdTTL: 60 });
 
 const blaiseApiClient = new BlaiseApiClient(config.BlaiseApiUrl);
-
-const { QuestionnaireListMockObject } = jest.requireActual("blaise-api-node-client");
-const server = NewServer(blaiseApiClient, cache, config);
+const server = newServer(blaiseApiClient, cache, config);
 const request = supertest(server);
 
-
-import { getQuestionnaires } from "../blaiseApi/questionnaires";
-jest.mock("../blaiseApi/questionnaires");
-const getQuestionnairesMock = getQuestionnaires as jest.MockedFunction<typeof getQuestionnaires>;
-
+import { getQuestionnaires } from "../blaiseApi/questionnaires.js";
+vi.mock("../blaiseApi/questionnaires");
+const getQuestionnairesMock = vi.mocked(getQuestionnaires);
 
 describe("BlaiseAPI Get all questionnaires from API", () => {
-    afterEach(() => {
-        getQuestionnairesMock.mockClear();
-        cache.flushAll();
-    });
+  afterEach(() => {
+    getQuestionnairesMock.mockClear();
+    cache.flushAll();
+  });
 
-    it("should return a 200 status and a json list of 3 items when API returns a 3 item list", async () => {
-        getQuestionnairesMock.mockReturnValue(QuestionnaireListMockObject);
+  it("should return a 200 status and a json list of 3 items when API returns a 3 item list", async () => {
+    getQuestionnairesMock.mockResolvedValue(mockQuestionnaireList);
 
-        const response: Response = await request.get("/api/questionnaires");
+    const response: Response = await request.get("/api/questionnaires");
 
-        expect(response.status).toEqual(200);
-        expect(response.body).toStrictEqual(QuestionnaireListMockObject);
-        expect(response.body.length).toStrictEqual(3);
-    });
+    expect(response.status).toEqual(200);
+    expect(response.body).toStrictEqual(mockQuestionnaireList);
+    expect(response.body.length).toStrictEqual(3);
+    expect(getQuestionnairesMock).toHaveBeenCalledWith(
+      expect.any(Object),
+      expect.any(Object),
+      expect.any(Object),
+    );
+  });
 
-    it("should return a 500 status direct from the API", async () => {
-        getQuestionnairesMock.mockRejectedValue(null);
+  it("should return a 500 status direct from the API", async () => {
+    getQuestionnairesMock.mockRejectedValue(null);
 
-        const response: Response = await request.get("/api/questionnaires");
+    const response: Response = await request.get("/api/questionnaires");
 
-        expect(response.status).toEqual(500);
-    });
+    expect(response.status).toEqual(500);
+  });
 
-    afterEach(() => {
-        jest.clearAllMocks();
-        jest.resetModules();
-    });
+  afterEach(() => {
+    vi.clearAllMocks();
+    vi.resetModules();
+  });
 });
