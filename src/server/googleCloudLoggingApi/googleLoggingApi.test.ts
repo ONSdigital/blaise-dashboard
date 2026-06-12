@@ -151,7 +151,7 @@ describe("GoogleLoggingApi", () => {
           metadata: { timestamp: { seconds: Math.floor(t2.getTime() / 1000) } },
         },
         { metadata: { timestamp: "invalid" } },
-        { metadata: { timestamp: "2026-06-12T00:00:00.000Z" } },
+        { metadata: { timestamp: "3026-06-12T00:00:00.000Z" } },
       ],
       undefined,
     ]);

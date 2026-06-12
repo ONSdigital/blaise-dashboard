@@ -51,6 +51,12 @@ function newServer(
   server.disable("x-powered-by");
   server.use(
     helmet({
+      contentSecurityPolicy: {
+        directives: {
+          ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+          "img-src": ["'self'", "data:", "https://cdn.ons.gov.uk"],
+        },
+      },
       crossOriginEmbedderPolicy: false,
     }),
   );
