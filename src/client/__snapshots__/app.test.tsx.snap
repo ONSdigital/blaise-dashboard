@@ -1,0 +1,2202 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`App > renders correctly 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <header>
+        Dashboard
+      </header>
+      <div
+        class="ons-page__container ons-container"
+        style="min-height: calc(67vh);"
+      >
+        <main
+          class="ons-page__main ons-u-mt-no"
+          id="main-content"
+        >
+          <h2
+            class="ons-u-mt-m"
+          >
+            Service uptime status
+          </h2>
+          <div>
+            No uptime checks data.
+          </div>
+          <h2
+            class="ons-u-mt-m"
+          >
+            Blaise health check status
+          </h2>
+          <table
+            columns="Health check type,Status"
+          >
+            <tbody>
+              <tr
+                class="ons-table__row"
+              >
+                <td
+                  class="ons-table__cell"
+                >
+                  Connection model
+                </td>
+                <td
+                  class="ons-table__cell"
+                >
+                  <span
+                    class="ons-status ons-status--success"
+                    data-testid="blaise-status-connection-model"
+                  >
+                    OK
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h2
+            class="ons-u-mt-m"
+          >
+            Questionnaire install status
+          </h2>
+          <table
+            columns="Questionnaire,Active nodes,Install status"
+            data-testid="questionnaire-install-status-table"
+          >
+            <tbody>
+              <tr
+                class="ons-table__row"
+                data-testid="questionnaire-install-status-row"
+              >
+                <td
+                  class="ons-table__cell"
+                >
+                  OPN2101A
+                </td>
+                <td
+                  class="ons-table__cell"
+                >
+                  2/2
+                </td>
+                <td
+                  class="ons-table__cell"
+                >
+                  <span
+                    class="ons-status ons-status--success"
+                    data-testid="questionnaire-install-status-OPN2101A"
+                  >
+                    Active
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h2
+            class="ons-u-mt-m"
+          >
+            Case completion status
+          </h2>
+          <table
+            columns="Questionnaire,Cases,Completed,Progress"
+            data-testid="case-report-table"
+          >
+            <tbody>
+              <tr
+                class="ons-table__row"
+                data-testid="questionnaire-table-row"
+              >
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-questionnaire-LMS2101_CC1"
+                >
+                  LMS2101_CC1
+                </td>
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-total-LMS2101_CC1"
+                >
+                  7
+                </td>
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-complete-LMS2101_CC1"
+                >
+                  5
+                   (
+                  71.43
+                  %)
+                </td>
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-complete-percentage-LMS2101_CC1"
+                >
+                  <progress
+                    aria-valuemax="100"
+                    aria-valuemin="0"
+                    aria-valuenow="71.43"
+                    id="file"
+                    max="100"
+                    role="progressbar"
+                    value="71.43"
+                  >
+                    71.43
+                    %
+                  </progress>
+                </td>
+              </tr>
+              <tr
+                class="ons-table__row"
+                data-testid="questionnaire-table-row"
+              >
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-questionnaire-OPN2101A"
+                >
+                  OPN2101A
+                </td>
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-total-OPN2101A"
+                >
+                  7
+                </td>
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-complete-OPN2101A"
+                >
+                  5
+                   (
+                  71.43
+                  %)
+                </td>
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-complete-percentage-OPN2101A"
+                >
+                  <progress
+                    aria-valuemax="100"
+                    aria-valuemin="0"
+                    aria-valuenow="71.43"
+                    id="file"
+                    max="100"
+                    role="progressbar"
+                    value="71.43"
+                  >
+                    71.43
+                    %
+                  </progress>
+                </td>
+              </tr>
+              <tr
+                class="ons-table__row"
+                data-testid="questionnaire-table-row"
+              >
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-questionnaire-OPN2007T"
+                >
+                  OPN2007T
+                </td>
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-total-OPN2007T"
+                >
+                  7
+                </td>
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-complete-OPN2007T"
+                >
+                  5
+                   (
+                  71.43
+                  %)
+                </td>
+                <td
+                  class="ons-table__cell"
+                  data-testid="questionnaire-case-report-complete-percentage-OPN2007T"
+                >
+                  <progress
+                    aria-valuemax="100"
+                    aria-valuemin="0"
+                    aria-valuenow="71.43"
+                    id="file"
+                    max="100"
+                    role="progressbar"
+                    value="71.43"
+                  >
+                    71.43
+                    %
+                  </progress>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <section>
+            <h3>
+              What is a completed case?
+            </h3>
+            <p>
+              Completed cases are cases that do 
+              <strong>
+                NOT
+              </strong>
+               have any of the following outcome codes:
+            </p>
+            <ul
+              class="ons-list"
+            >
+              <li
+                class="ons-list__item"
+              >
+                0 - Not actioned
+              </li>
+              <li
+                class="ons-list__item"
+              >
+                210 - Partial
+              </li>
+              <li
+                class="ons-list__item"
+              >
+                300 - Appointment made
+              </li>
+              <li
+                class="ons-list__item"
+              >
+                310 - Non-contact
+              </li>
+            </ul>
+          </section>
+          <h2
+            class="ons-u-mt-m"
+          >
+            Successful CAWI logins (last 24 hours)
+          </h2>
+          <p
+            class="ons-u-mt-s ons-u-mb-s"
+            data-testid="cawi-login-total"
+          >
+            Total successful CAWI logins (24h):
+             
+            <strong>
+              5
+            </strong>
+          </p>
+          <svg
+            aria-label="CAWI successful login count line chart"
+            data-testid="cawi-login-line-chart"
+            height="260"
+            role="img"
+            viewBox="0 0 900 260"
+            width="100%"
+          >
+            <line
+              stroke="#b1b4b6"
+              x1="50"
+              x2="50"
+              y1="20"
+              y2="220"
+            />
+            <line
+              stroke="#b1b4b6"
+              x1="50"
+              x2="880"
+              y1="220"
+              y2="220"
+            />
+            <g>
+              <line
+                stroke="#e0e0e0"
+                stroke-dasharray="3 3"
+                x1="50"
+                x2="880"
+                y1="20"
+                y2="20"
+              />
+              <text
+                fill="#3d3d3d"
+                font-size="10"
+                text-anchor="end"
+                x="44"
+                y="24"
+              >
+                3
+              </text>
+            </g>
+            <g>
+              <line
+                stroke="#e0e0e0"
+                stroke-dasharray="3 3"
+                x1="50"
+                x2="880"
+                y1="70"
+                y2="70"
+              />
+              <text
+                fill="#3d3d3d"
+                font-size="10"
+                text-anchor="end"
+                x="44"
+                y="74"
+              >
+                2
+              </text>
+            </g>
+            <g>
+              <line
+                stroke="#e0e0e0"
+                stroke-dasharray="3 3"
+                x1="50"
+                x2="880"
+                y1="120"
+                y2="120"
+              />
+              <text
+                fill="#3d3d3d"
+                font-size="10"
+                text-anchor="end"
+                x="44"
+                y="124"
+              >
+                2
+              </text>
+            </g>
+            <g>
+              <line
+                stroke="#e0e0e0"
+                stroke-dasharray="3 3"
+                x1="50"
+                x2="880"
+                y1="170"
+                y2="170"
+              />
+              <text
+                fill="#3d3d3d"
+                font-size="10"
+                text-anchor="end"
+                x="44"
+                y="174"
+              >
+                1
+              </text>
+            </g>
+            <g>
+              <line
+                stroke="#e0e0e0"
+                stroke-dasharray="3 3"
+                x1="50"
+                x2="880"
+                y1="220"
+                y2="220"
+              />
+              <text
+                fill="#3d3d3d"
+                font-size="10"
+                text-anchor="end"
+                x="44"
+                y="224"
+              >
+                0
+              </text>
+            </g>
+            <polyline
+              fill="none"
+              points="50,86.66666666666666 880,20"
+              stroke="#005ea5"
+              stroke-width="2"
+            />
+            <circle
+              cx="50"
+              cy="86.66666666666666"
+              fill="#005ea5"
+              r="2.5"
+            />
+            <circle
+              cx="880"
+              cy="20"
+              fill="#005ea5"
+              r="2.5"
+            />
+            <text
+              fill="#3d3d3d"
+              font-size="10"
+              text-anchor="middle"
+              x="50"
+              y="238"
+            >
+              10:00
+            </text>
+            <text
+              fill="#3d3d3d"
+              font-size="10"
+              text-anchor="middle"
+              x="880"
+              y="238"
+            >
+              11:00
+            </text>
+            <text
+              fill="#3d3d3d"
+              font-size="10"
+              text-anchor="middle"
+              x="880"
+              y="238"
+            >
+              11:00
+            </text>
+          </svg>
+          <h2
+            class="ons-u-mt-m"
+          >
+            BTS logs (last 24 hours)
+          </h2>
+          <table
+            columns="Timestamp,Log"
+            data-testid="bts-gcp-error-logs-table"
+          >
+            <tbody>
+              <tr
+                class="ons-table__row"
+                data-testid="error-log-row"
+              >
+                <td
+                  class="ons-table__cell"
+                >
+                  11/06/2026 10:00:00
+                </td>
+                <td
+                  class="ons-table__cell"
+                >
+                  Example error
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div
+            class="ons-u-mt-s"
+            data-testid="error-logs-pagination"
+          >
+            <span
+              class="ons-u-mr-s"
+            >
+              Rows:
+            </span>
+            <span
+              class="ons-u-mr-s"
+            >
+              <button
+                class="ons-u-fs-s"
+                data-testid="error-logs-rows-per-page-option-20"
+                disabled=""
+                style="background: none; border: medium; color: rgb(0, 94, 165); cursor: default; padding: 0px; text-decoration: none;"
+                type="button"
+              >
+                20
+              </button>
+              <span
+                class="ons-u-ml-xs"
+              >
+                |
+              </span>
+            </span>
+            <span
+              class="ons-u-mr-s"
+            >
+              <button
+                class="ons-u-fs-s"
+                data-testid="error-logs-rows-per-page-option-50"
+                style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+                type="button"
+              >
+                50
+              </button>
+              <span
+                class="ons-u-ml-xs"
+              >
+                |
+              </span>
+            </span>
+            <span
+              class="ons-u-mr-s"
+            >
+              <button
+                class="ons-u-fs-s"
+                data-testid="error-logs-rows-per-page-option-100"
+                style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+                type="button"
+              >
+                100
+              </button>
+            </span>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-first"
+              disabled=""
+              type="button"
+            >
+              First
+            </button>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-prev"
+              disabled=""
+              type="button"
+            >
+              Previous
+            </button>
+            <span
+              class="ons-u-ml-s ons-u-mr-s"
+              data-testid="error-logs-page-indicator"
+            >
+              Page 
+              1
+               of 
+              1
+            </span>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-next"
+              disabled=""
+              type="button"
+            >
+              Next
+            </button>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-last"
+              disabled=""
+              type="button"
+            >
+              Last
+            </button>
+          </div>
+          <h2
+            class="ons-u-mt-m"
+          >
+            NISRA logs (last 24 hours)
+          </h2>
+          <table
+            columns="Timestamp,Log"
+            data-testid="nisra-gcp-error-logs-table"
+          >
+            <tbody>
+              <tr
+                class="ons-table__row"
+                data-testid="error-log-row"
+              >
+                <td
+                  class="ons-table__cell"
+                >
+                  11/06/2026 10:00:00
+                </td>
+                <td
+                  class="ons-table__cell"
+                >
+                  Example error
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div
+            class="ons-u-mt-s"
+            data-testid="error-logs-pagination"
+          >
+            <span
+              class="ons-u-mr-s"
+            >
+              Rows:
+            </span>
+            <span
+              class="ons-u-mr-s"
+            >
+              <button
+                class="ons-u-fs-s"
+                data-testid="error-logs-rows-per-page-option-20"
+                disabled=""
+                style="background: none; border: medium; color: rgb(0, 94, 165); cursor: default; padding: 0px; text-decoration: none;"
+                type="button"
+              >
+                20
+              </button>
+              <span
+                class="ons-u-ml-xs"
+              >
+                |
+              </span>
+            </span>
+            <span
+              class="ons-u-mr-s"
+            >
+              <button
+                class="ons-u-fs-s"
+                data-testid="error-logs-rows-per-page-option-50"
+                style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+                type="button"
+              >
+                50
+              </button>
+              <span
+                class="ons-u-ml-xs"
+              >
+                |
+              </span>
+            </span>
+            <span
+              class="ons-u-mr-s"
+            >
+              <button
+                class="ons-u-fs-s"
+                data-testid="error-logs-rows-per-page-option-100"
+                style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+                type="button"
+              >
+                100
+              </button>
+            </span>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-first"
+              disabled=""
+              type="button"
+            >
+              First
+            </button>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-prev"
+              disabled=""
+              type="button"
+            >
+              Previous
+            </button>
+            <span
+              class="ons-u-ml-s ons-u-mr-s"
+              data-testid="error-logs-page-indicator"
+            >
+              Page 
+              1
+               of 
+              1
+            </span>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-next"
+              disabled=""
+              type="button"
+            >
+              Next
+            </button>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-last"
+              disabled=""
+              type="button"
+            >
+              Last
+            </button>
+          </div>
+          <h2
+            class="ons-u-mt-m"
+          >
+            REST API logs (last 24 hours)
+          </h2>
+          <table
+            columns="Timestamp,Log"
+            data-testid="restapi-gcp-error-logs-table"
+          >
+            <tbody>
+              <tr
+                class="ons-table__row"
+                data-testid="error-log-row"
+              >
+                <td
+                  class="ons-table__cell"
+                >
+                  11/06/2026 10:00:00
+                </td>
+                <td
+                  class="ons-table__cell"
+                >
+                  Example error
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div
+            class="ons-u-mt-s"
+            data-testid="error-logs-pagination"
+          >
+            <span
+              class="ons-u-mr-s"
+            >
+              Rows:
+            </span>
+            <span
+              class="ons-u-mr-s"
+            >
+              <button
+                class="ons-u-fs-s"
+                data-testid="error-logs-rows-per-page-option-20"
+                disabled=""
+                style="background: none; border: medium; color: rgb(0, 94, 165); cursor: default; padding: 0px; text-decoration: none;"
+                type="button"
+              >
+                20
+              </button>
+              <span
+                class="ons-u-ml-xs"
+              >
+                |
+              </span>
+            </span>
+            <span
+              class="ons-u-mr-s"
+            >
+              <button
+                class="ons-u-fs-s"
+                data-testid="error-logs-rows-per-page-option-50"
+                style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+                type="button"
+              >
+                50
+              </button>
+              <span
+                class="ons-u-ml-xs"
+              >
+                |
+              </span>
+            </span>
+            <span
+              class="ons-u-mr-s"
+            >
+              <button
+                class="ons-u-fs-s"
+                data-testid="error-logs-rows-per-page-option-100"
+                style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+                type="button"
+              >
+                100
+              </button>
+            </span>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-first"
+              disabled=""
+              type="button"
+            >
+              First
+            </button>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-prev"
+              disabled=""
+              type="button"
+            >
+              Previous
+            </button>
+            <span
+              class="ons-u-ml-s ons-u-mr-s"
+              data-testid="error-logs-page-indicator"
+            >
+              Page 
+              1
+               of 
+              1
+            </span>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-next"
+              disabled=""
+              type="button"
+            >
+              Next
+            </button>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-last"
+              disabled=""
+              type="button"
+            >
+              Last
+            </button>
+          </div>
+          <h2
+            class="ons-u-mt-m"
+          >
+            Blaise error logs (last 24 hours)
+          </h2>
+          <table
+            columns="Timestamp,Log"
+            data-testid="blaise-gcp-error-logs-table"
+          >
+            <tbody>
+              <tr
+                class="ons-table__row"
+                data-testid="error-log-row"
+              >
+                <td
+                  class="ons-table__cell"
+                >
+                  11/06/2026 10:00:00
+                </td>
+                <td
+                  class="ons-table__cell"
+                >
+                  Example error
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div
+            class="ons-u-mt-s"
+            data-testid="error-logs-pagination"
+          >
+            <span
+              class="ons-u-mr-s"
+            >
+              Rows:
+            </span>
+            <span
+              class="ons-u-mr-s"
+            >
+              <button
+                class="ons-u-fs-s"
+                data-testid="error-logs-rows-per-page-option-20"
+                disabled=""
+                style="background: none; border: medium; color: rgb(0, 94, 165); cursor: default; padding: 0px; text-decoration: none;"
+                type="button"
+              >
+                20
+              </button>
+              <span
+                class="ons-u-ml-xs"
+              >
+                |
+              </span>
+            </span>
+            <span
+              class="ons-u-mr-s"
+            >
+              <button
+                class="ons-u-fs-s"
+                data-testid="error-logs-rows-per-page-option-50"
+                style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+                type="button"
+              >
+                50
+              </button>
+              <span
+                class="ons-u-ml-xs"
+              >
+                |
+              </span>
+            </span>
+            <span
+              class="ons-u-mr-s"
+            >
+              <button
+                class="ons-u-fs-s"
+                data-testid="error-logs-rows-per-page-option-100"
+                style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+                type="button"
+              >
+                100
+              </button>
+            </span>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-first"
+              disabled=""
+              type="button"
+            >
+              First
+            </button>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-prev"
+              disabled=""
+              type="button"
+            >
+              Previous
+            </button>
+            <span
+              class="ons-u-ml-s ons-u-mr-s"
+              data-testid="error-logs-page-indicator"
+            >
+              Page 
+              1
+               of 
+              1
+            </span>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-next"
+              disabled=""
+              type="button"
+            >
+              Next
+            </button>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-last"
+              disabled=""
+              type="button"
+            >
+              Last
+            </button>
+          </div>
+          <h2
+            class="ons-u-mt-m"
+          >
+            Non-Blaise error logs (last 24 hours)
+          </h2>
+          <table
+            columns="Timestamp,Log"
+            data-testid="non-blaise-gcp-error-logs-table"
+          >
+            <tbody>
+              <tr
+                class="ons-table__row"
+                data-testid="error-log-row"
+              >
+                <td
+                  class="ons-table__cell"
+                >
+                  11/06/2026 10:00:00
+                </td>
+                <td
+                  class="ons-table__cell"
+                >
+                  Example error
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div
+            class="ons-u-mt-s"
+            data-testid="error-logs-pagination"
+          >
+            <span
+              class="ons-u-mr-s"
+            >
+              Rows:
+            </span>
+            <span
+              class="ons-u-mr-s"
+            >
+              <button
+                class="ons-u-fs-s"
+                data-testid="error-logs-rows-per-page-option-20"
+                disabled=""
+                style="background: none; border: medium; color: rgb(0, 94, 165); cursor: default; padding: 0px; text-decoration: none;"
+                type="button"
+              >
+                20
+              </button>
+              <span
+                class="ons-u-ml-xs"
+              >
+                |
+              </span>
+            </span>
+            <span
+              class="ons-u-mr-s"
+            >
+              <button
+                class="ons-u-fs-s"
+                data-testid="error-logs-rows-per-page-option-50"
+                style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+                type="button"
+              >
+                50
+              </button>
+              <span
+                class="ons-u-ml-xs"
+              >
+                |
+              </span>
+            </span>
+            <span
+              class="ons-u-mr-s"
+            >
+              <button
+                class="ons-u-fs-s"
+                data-testid="error-logs-rows-per-page-option-100"
+                style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+                type="button"
+              >
+                100
+              </button>
+            </span>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-first"
+              disabled=""
+              type="button"
+            >
+              First
+            </button>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-prev"
+              disabled=""
+              type="button"
+            >
+              Previous
+            </button>
+            <span
+              class="ons-u-ml-s ons-u-mr-s"
+              data-testid="error-logs-page-indicator"
+            >
+              Page 
+              1
+               of 
+              1
+            </span>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-next"
+              disabled=""
+              type="button"
+            >
+              Next
+            </button>
+            <button
+              class="ons-btn ons-btn--secondary"
+              data-testid="error-logs-last"
+              disabled=""
+              type="button"
+            >
+              Last
+            </button>
+          </div>
+        </main>
+      </div>
+      <footer />
+    </div>
+  </body>,
+  "container": <div>
+    <header>
+      Dashboard
+    </header>
+    <div
+      class="ons-page__container ons-container"
+      style="min-height: calc(67vh);"
+    >
+      <main
+        class="ons-page__main ons-u-mt-no"
+        id="main-content"
+      >
+        <h2
+          class="ons-u-mt-m"
+        >
+          Service uptime status
+        </h2>
+        <div>
+          No uptime checks data.
+        </div>
+        <h2
+          class="ons-u-mt-m"
+        >
+          Blaise health check status
+        </h2>
+        <table
+          columns="Health check type,Status"
+        >
+          <tbody>
+            <tr
+              class="ons-table__row"
+            >
+              <td
+                class="ons-table__cell"
+              >
+                Connection model
+              </td>
+              <td
+                class="ons-table__cell"
+              >
+                <span
+                  class="ons-status ons-status--success"
+                  data-testid="blaise-status-connection-model"
+                >
+                  OK
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h2
+          class="ons-u-mt-m"
+        >
+          Questionnaire install status
+        </h2>
+        <table
+          columns="Questionnaire,Active nodes,Install status"
+          data-testid="questionnaire-install-status-table"
+        >
+          <tbody>
+            <tr
+              class="ons-table__row"
+              data-testid="questionnaire-install-status-row"
+            >
+              <td
+                class="ons-table__cell"
+              >
+                OPN2101A
+              </td>
+              <td
+                class="ons-table__cell"
+              >
+                2/2
+              </td>
+              <td
+                class="ons-table__cell"
+              >
+                <span
+                  class="ons-status ons-status--success"
+                  data-testid="questionnaire-install-status-OPN2101A"
+                >
+                  Active
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h2
+          class="ons-u-mt-m"
+        >
+          Case completion status
+        </h2>
+        <table
+          columns="Questionnaire,Cases,Completed,Progress"
+          data-testid="case-report-table"
+        >
+          <tbody>
+            <tr
+              class="ons-table__row"
+              data-testid="questionnaire-table-row"
+            >
+              <td
+                class="ons-table__cell"
+                data-testid="questionnaire-case-report-questionnaire-LMS2101_CC1"
+              >
+                LMS2101_CC1
+              </td>
+              <td
+                class="ons-table__cell"
+                data-testid="questionnaire-case-report-total-LMS2101_CC1"
+              >
+                7
+              </td>
+              <td
+                class="ons-table__cell"
+                data-testid="questionnaire-case-report-complete-LMS2101_CC1"
+              >
+                5
+                 (
+                71.43
+                %)
+              </td>
+              <td
+                class="ons-table__cell"
+                data-testid="questionnaire-case-report-complete-percentage-LMS2101_CC1"
+              >
+                <progress
+                  aria-valuemax="100"
+                  aria-valuemin="0"
+                  aria-valuenow="71.43"
+                  id="file"
+                  max="100"
+                  role="progressbar"
+                  value="71.43"
+                >
+                  71.43
+                  %
+                </progress>
+              </td>
+            </tr>
+            <tr
+              class="ons-table__row"
+              data-testid="questionnaire-table-row"
+            >
+              <td
+                class="ons-table__cell"
+                data-testid="questionnaire-case-report-questionnaire-OPN2101A"
+              >
+                OPN2101A
+              </td>
+              <td
+                class="ons-table__cell"
+                data-testid="questionnaire-case-report-total-OPN2101A"
+              >
+                7
+              </td>
+              <td
+                class="ons-table__cell"
+                data-testid="questionnaire-case-report-complete-OPN2101A"
+              >
+                5
+                 (
+                71.43
+                %)
+              </td>
+              <td
+                class="ons-table__cell"
+                data-testid="questionnaire-case-report-complete-percentage-OPN2101A"
+              >
+                <progress
+                  aria-valuemax="100"
+                  aria-valuemin="0"
+                  aria-valuenow="71.43"
+                  id="file"
+                  max="100"
+                  role="progressbar"
+                  value="71.43"
+                >
+                  71.43
+                  %
+                </progress>
+              </td>
+            </tr>
+            <tr
+              class="ons-table__row"
+              data-testid="questionnaire-table-row"
+            >
+              <td
+                class="ons-table__cell"
+                data-testid="questionnaire-case-report-questionnaire-OPN2007T"
+              >
+                OPN2007T
+              </td>
+              <td
+                class="ons-table__cell"
+                data-testid="questionnaire-case-report-total-OPN2007T"
+              >
+                7
+              </td>
+              <td
+                class="ons-table__cell"
+                data-testid="questionnaire-case-report-complete-OPN2007T"
+              >
+                5
+                 (
+                71.43
+                %)
+              </td>
+              <td
+                class="ons-table__cell"
+                data-testid="questionnaire-case-report-complete-percentage-OPN2007T"
+              >
+                <progress
+                  aria-valuemax="100"
+                  aria-valuemin="0"
+                  aria-valuenow="71.43"
+                  id="file"
+                  max="100"
+                  role="progressbar"
+                  value="71.43"
+                >
+                  71.43
+                  %
+                </progress>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <section>
+          <h3>
+            What is a completed case?
+          </h3>
+          <p>
+            Completed cases are cases that do 
+            <strong>
+              NOT
+            </strong>
+             have any of the following outcome codes:
+          </p>
+          <ul
+            class="ons-list"
+          >
+            <li
+              class="ons-list__item"
+            >
+              0 - Not actioned
+            </li>
+            <li
+              class="ons-list__item"
+            >
+              210 - Partial
+            </li>
+            <li
+              class="ons-list__item"
+            >
+              300 - Appointment made
+            </li>
+            <li
+              class="ons-list__item"
+            >
+              310 - Non-contact
+            </li>
+          </ul>
+        </section>
+        <h2
+          class="ons-u-mt-m"
+        >
+          Successful CAWI logins (last 24 hours)
+        </h2>
+        <p
+          class="ons-u-mt-s ons-u-mb-s"
+          data-testid="cawi-login-total"
+        >
+          Total successful CAWI logins (24h):
+           
+          <strong>
+            5
+          </strong>
+        </p>
+        <svg
+          aria-label="CAWI successful login count line chart"
+          data-testid="cawi-login-line-chart"
+          height="260"
+          role="img"
+          viewBox="0 0 900 260"
+          width="100%"
+        >
+          <line
+            stroke="#b1b4b6"
+            x1="50"
+            x2="50"
+            y1="20"
+            y2="220"
+          />
+          <line
+            stroke="#b1b4b6"
+            x1="50"
+            x2="880"
+            y1="220"
+            y2="220"
+          />
+          <g>
+            <line
+              stroke="#e0e0e0"
+              stroke-dasharray="3 3"
+              x1="50"
+              x2="880"
+              y1="20"
+              y2="20"
+            />
+            <text
+              fill="#3d3d3d"
+              font-size="10"
+              text-anchor="end"
+              x="44"
+              y="24"
+            >
+              3
+            </text>
+          </g>
+          <g>
+            <line
+              stroke="#e0e0e0"
+              stroke-dasharray="3 3"
+              x1="50"
+              x2="880"
+              y1="70"
+              y2="70"
+            />
+            <text
+              fill="#3d3d3d"
+              font-size="10"
+              text-anchor="end"
+              x="44"
+              y="74"
+            >
+              2
+            </text>
+          </g>
+          <g>
+            <line
+              stroke="#e0e0e0"
+              stroke-dasharray="3 3"
+              x1="50"
+              x2="880"
+              y1="120"
+              y2="120"
+            />
+            <text
+              fill="#3d3d3d"
+              font-size="10"
+              text-anchor="end"
+              x="44"
+              y="124"
+            >
+              2
+            </text>
+          </g>
+          <g>
+            <line
+              stroke="#e0e0e0"
+              stroke-dasharray="3 3"
+              x1="50"
+              x2="880"
+              y1="170"
+              y2="170"
+            />
+            <text
+              fill="#3d3d3d"
+              font-size="10"
+              text-anchor="end"
+              x="44"
+              y="174"
+            >
+              1
+            </text>
+          </g>
+          <g>
+            <line
+              stroke="#e0e0e0"
+              stroke-dasharray="3 3"
+              x1="50"
+              x2="880"
+              y1="220"
+              y2="220"
+            />
+            <text
+              fill="#3d3d3d"
+              font-size="10"
+              text-anchor="end"
+              x="44"
+              y="224"
+            >
+              0
+            </text>
+          </g>
+          <polyline
+            fill="none"
+            points="50,86.66666666666666 880,20"
+            stroke="#005ea5"
+            stroke-width="2"
+          />
+          <circle
+            cx="50"
+            cy="86.66666666666666"
+            fill="#005ea5"
+            r="2.5"
+          />
+          <circle
+            cx="880"
+            cy="20"
+            fill="#005ea5"
+            r="2.5"
+          />
+          <text
+            fill="#3d3d3d"
+            font-size="10"
+            text-anchor="middle"
+            x="50"
+            y="238"
+          >
+            10:00
+          </text>
+          <text
+            fill="#3d3d3d"
+            font-size="10"
+            text-anchor="middle"
+            x="880"
+            y="238"
+          >
+            11:00
+          </text>
+          <text
+            fill="#3d3d3d"
+            font-size="10"
+            text-anchor="middle"
+            x="880"
+            y="238"
+          >
+            11:00
+          </text>
+        </svg>
+        <h2
+          class="ons-u-mt-m"
+        >
+          BTS logs (last 24 hours)
+        </h2>
+        <table
+          columns="Timestamp,Log"
+          data-testid="bts-gcp-error-logs-table"
+        >
+          <tbody>
+            <tr
+              class="ons-table__row"
+              data-testid="error-log-row"
+            >
+              <td
+                class="ons-table__cell"
+              >
+                11/06/2026 10:00:00
+              </td>
+              <td
+                class="ons-table__cell"
+              >
+                Example error
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          class="ons-u-mt-s"
+          data-testid="error-logs-pagination"
+        >
+          <span
+            class="ons-u-mr-s"
+          >
+            Rows:
+          </span>
+          <span
+            class="ons-u-mr-s"
+          >
+            <button
+              class="ons-u-fs-s"
+              data-testid="error-logs-rows-per-page-option-20"
+              disabled=""
+              style="background: none; border: medium; color: rgb(0, 94, 165); cursor: default; padding: 0px; text-decoration: none;"
+              type="button"
+            >
+              20
+            </button>
+            <span
+              class="ons-u-ml-xs"
+            >
+              |
+            </span>
+          </span>
+          <span
+            class="ons-u-mr-s"
+          >
+            <button
+              class="ons-u-fs-s"
+              data-testid="error-logs-rows-per-page-option-50"
+              style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+              type="button"
+            >
+              50
+            </button>
+            <span
+              class="ons-u-ml-xs"
+            >
+              |
+            </span>
+          </span>
+          <span
+            class="ons-u-mr-s"
+          >
+            <button
+              class="ons-u-fs-s"
+              data-testid="error-logs-rows-per-page-option-100"
+              style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+              type="button"
+            >
+              100
+            </button>
+          </span>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-first"
+            disabled=""
+            type="button"
+          >
+            First
+          </button>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-prev"
+            disabled=""
+            type="button"
+          >
+            Previous
+          </button>
+          <span
+            class="ons-u-ml-s ons-u-mr-s"
+            data-testid="error-logs-page-indicator"
+          >
+            Page 
+            1
+             of 
+            1
+          </span>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-next"
+            disabled=""
+            type="button"
+          >
+            Next
+          </button>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-last"
+            disabled=""
+            type="button"
+          >
+            Last
+          </button>
+        </div>
+        <h2
+          class="ons-u-mt-m"
+        >
+          NISRA logs (last 24 hours)
+        </h2>
+        <table
+          columns="Timestamp,Log"
+          data-testid="nisra-gcp-error-logs-table"
+        >
+          <tbody>
+            <tr
+              class="ons-table__row"
+              data-testid="error-log-row"
+            >
+              <td
+                class="ons-table__cell"
+              >
+                11/06/2026 10:00:00
+              </td>
+              <td
+                class="ons-table__cell"
+              >
+                Example error
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          class="ons-u-mt-s"
+          data-testid="error-logs-pagination"
+        >
+          <span
+            class="ons-u-mr-s"
+          >
+            Rows:
+          </span>
+          <span
+            class="ons-u-mr-s"
+          >
+            <button
+              class="ons-u-fs-s"
+              data-testid="error-logs-rows-per-page-option-20"
+              disabled=""
+              style="background: none; border: medium; color: rgb(0, 94, 165); cursor: default; padding: 0px; text-decoration: none;"
+              type="button"
+            >
+              20
+            </button>
+            <span
+              class="ons-u-ml-xs"
+            >
+              |
+            </span>
+          </span>
+          <span
+            class="ons-u-mr-s"
+          >
+            <button
+              class="ons-u-fs-s"
+              data-testid="error-logs-rows-per-page-option-50"
+              style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+              type="button"
+            >
+              50
+            </button>
+            <span
+              class="ons-u-ml-xs"
+            >
+              |
+            </span>
+          </span>
+          <span
+            class="ons-u-mr-s"
+          >
+            <button
+              class="ons-u-fs-s"
+              data-testid="error-logs-rows-per-page-option-100"
+              style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+              type="button"
+            >
+              100
+            </button>
+          </span>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-first"
+            disabled=""
+            type="button"
+          >
+            First
+          </button>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-prev"
+            disabled=""
+            type="button"
+          >
+            Previous
+          </button>
+          <span
+            class="ons-u-ml-s ons-u-mr-s"
+            data-testid="error-logs-page-indicator"
+          >
+            Page 
+            1
+             of 
+            1
+          </span>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-next"
+            disabled=""
+            type="button"
+          >
+            Next
+          </button>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-last"
+            disabled=""
+            type="button"
+          >
+            Last
+          </button>
+        </div>
+        <h2
+          class="ons-u-mt-m"
+        >
+          REST API logs (last 24 hours)
+        </h2>
+        <table
+          columns="Timestamp,Log"
+          data-testid="restapi-gcp-error-logs-table"
+        >
+          <tbody>
+            <tr
+              class="ons-table__row"
+              data-testid="error-log-row"
+            >
+              <td
+                class="ons-table__cell"
+              >
+                11/06/2026 10:00:00
+              </td>
+              <td
+                class="ons-table__cell"
+              >
+                Example error
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          class="ons-u-mt-s"
+          data-testid="error-logs-pagination"
+        >
+          <span
+            class="ons-u-mr-s"
+          >
+            Rows:
+          </span>
+          <span
+            class="ons-u-mr-s"
+          >
+            <button
+              class="ons-u-fs-s"
+              data-testid="error-logs-rows-per-page-option-20"
+              disabled=""
+              style="background: none; border: medium; color: rgb(0, 94, 165); cursor: default; padding: 0px; text-decoration: none;"
+              type="button"
+            >
+              20
+            </button>
+            <span
+              class="ons-u-ml-xs"
+            >
+              |
+            </span>
+          </span>
+          <span
+            class="ons-u-mr-s"
+          >
+            <button
+              class="ons-u-fs-s"
+              data-testid="error-logs-rows-per-page-option-50"
+              style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+              type="button"
+            >
+              50
+            </button>
+            <span
+              class="ons-u-ml-xs"
+            >
+              |
+            </span>
+          </span>
+          <span
+            class="ons-u-mr-s"
+          >
+            <button
+              class="ons-u-fs-s"
+              data-testid="error-logs-rows-per-page-option-100"
+              style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+              type="button"
+            >
+              100
+            </button>
+          </span>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-first"
+            disabled=""
+            type="button"
+          >
+            First
+          </button>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-prev"
+            disabled=""
+            type="button"
+          >
+            Previous
+          </button>
+          <span
+            class="ons-u-ml-s ons-u-mr-s"
+            data-testid="error-logs-page-indicator"
+          >
+            Page 
+            1
+             of 
+            1
+          </span>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-next"
+            disabled=""
+            type="button"
+          >
+            Next
+          </button>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-last"
+            disabled=""
+            type="button"
+          >
+            Last
+          </button>
+        </div>
+        <h2
+          class="ons-u-mt-m"
+        >
+          Blaise error logs (last 24 hours)
+        </h2>
+        <table
+          columns="Timestamp,Log"
+          data-testid="blaise-gcp-error-logs-table"
+        >
+          <tbody>
+            <tr
+              class="ons-table__row"
+              data-testid="error-log-row"
+            >
+              <td
+                class="ons-table__cell"
+              >
+                11/06/2026 10:00:00
+              </td>
+              <td
+                class="ons-table__cell"
+              >
+                Example error
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          class="ons-u-mt-s"
+          data-testid="error-logs-pagination"
+        >
+          <span
+            class="ons-u-mr-s"
+          >
+            Rows:
+          </span>
+          <span
+            class="ons-u-mr-s"
+          >
+            <button
+              class="ons-u-fs-s"
+              data-testid="error-logs-rows-per-page-option-20"
+              disabled=""
+              style="background: none; border: medium; color: rgb(0, 94, 165); cursor: default; padding: 0px; text-decoration: none;"
+              type="button"
+            >
+              20
+            </button>
+            <span
+              class="ons-u-ml-xs"
+            >
+              |
+            </span>
+          </span>
+          <span
+            class="ons-u-mr-s"
+          >
+            <button
+              class="ons-u-fs-s"
+              data-testid="error-logs-rows-per-page-option-50"
+              style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+              type="button"
+            >
+              50
+            </button>
+            <span
+              class="ons-u-ml-xs"
+            >
+              |
+            </span>
+          </span>
+          <span
+            class="ons-u-mr-s"
+          >
+            <button
+              class="ons-u-fs-s"
+              data-testid="error-logs-rows-per-page-option-100"
+              style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+              type="button"
+            >
+              100
+            </button>
+          </span>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-first"
+            disabled=""
+            type="button"
+          >
+            First
+          </button>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-prev"
+            disabled=""
+            type="button"
+          >
+            Previous
+          </button>
+          <span
+            class="ons-u-ml-s ons-u-mr-s"
+            data-testid="error-logs-page-indicator"
+          >
+            Page 
+            1
+             of 
+            1
+          </span>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-next"
+            disabled=""
+            type="button"
+          >
+            Next
+          </button>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-last"
+            disabled=""
+            type="button"
+          >
+            Last
+          </button>
+        </div>
+        <h2
+          class="ons-u-mt-m"
+        >
+          Non-Blaise error logs (last 24 hours)
+        </h2>
+        <table
+          columns="Timestamp,Log"
+          data-testid="non-blaise-gcp-error-logs-table"
+        >
+          <tbody>
+            <tr
+              class="ons-table__row"
+              data-testid="error-log-row"
+            >
+              <td
+                class="ons-table__cell"
+              >
+                11/06/2026 10:00:00
+              </td>
+              <td
+                class="ons-table__cell"
+              >
+                Example error
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          class="ons-u-mt-s"
+          data-testid="error-logs-pagination"
+        >
+          <span
+            class="ons-u-mr-s"
+          >
+            Rows:
+          </span>
+          <span
+            class="ons-u-mr-s"
+          >
+            <button
+              class="ons-u-fs-s"
+              data-testid="error-logs-rows-per-page-option-20"
+              disabled=""
+              style="background: none; border: medium; color: rgb(0, 94, 165); cursor: default; padding: 0px; text-decoration: none;"
+              type="button"
+            >
+              20
+            </button>
+            <span
+              class="ons-u-ml-xs"
+            >
+              |
+            </span>
+          </span>
+          <span
+            class="ons-u-mr-s"
+          >
+            <button
+              class="ons-u-fs-s"
+              data-testid="error-logs-rows-per-page-option-50"
+              style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+              type="button"
+            >
+              50
+            </button>
+            <span
+              class="ons-u-ml-xs"
+            >
+              |
+            </span>
+          </span>
+          <span
+            class="ons-u-mr-s"
+          >
+            <button
+              class="ons-u-fs-s"
+              data-testid="error-logs-rows-per-page-option-100"
+              style="background: none; border: medium; color: rgb(0, 94, 165); cursor: pointer; padding: 0px; text-decoration: underline;"
+              type="button"
+            >
+              100
+            </button>
+          </span>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-first"
+            disabled=""
+            type="button"
+          >
+            First
+          </button>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-prev"
+            disabled=""
+            type="button"
+          >
+            Previous
+          </button>
+          <span
+            class="ons-u-ml-s ons-u-mr-s"
+            data-testid="error-logs-page-indicator"
+          >
+            Page 
+            1
+             of 
+            1
+          </span>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-next"
+            disabled=""
+            type="button"
+          >
+            Next
+          </button>
+          <button
+            class="ons-btn ons-btn--secondary"
+            data-testid="error-logs-last"
+            disabled=""
+            type="button"
+          >
+            Last
+          </button>
+        </div>
+      </main>
+    </div>
+    <footer />
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

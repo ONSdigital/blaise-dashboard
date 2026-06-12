@@ -1,95 +1,90 @@
-# blaise-dashboard
+# Blaise Dashboard 📺
 
-Web-based dashboard to view the status of various aspects of the data within a Blaise environment.
+Blaise Dashboard provides a web UI for operational visibility of questionnaires and service health in a Blaise environment.
 
-This project is a React.js application which when built is rendered by a Node.js express server.
+The app is a React frontend served by an Express backend and deployed to Google App Engine.
 
-The application is being deployed to Google App Engine.
+## What it shows
 
-### Components
+- Completed case information for installed questionnaires
+- Questionnaire install status across Blaise nodes (active on all nodes or not)
+- Blaise connection health status
+- Service health check information from Google Cloud Monitoring
 
-#### Completed case information
+## Local Development
 
-Shows count, percentage, and progress bar of the cases completed for all installed questionnaires. It's currently filtered to OPN only until questionnaire logic is updated for all surveys.
+### Prerequisites
 
-A collapsible element shows the definition of completed cases, as this could be misconstrued depending on the context.
+- [Node.js](https://nodejs.org/) 24+
+- [Yarn](https://yarnpkg.com/) 4+
+- [Google Cloud SDK (`gcloud` CLI)](https://cloud.google.com/sdk/)
 
-The component has a configurable refresh, currently set to 10 seconds.
-
-### Local Setup
-
-Prerequisites:
-- [Node.js](https://nodejs.org/)
-- [Yarn](https://yarnpkg.com/)
-- [Cloud SDK](https://cloud.google.com/sdk/)
-
-Clone the repository:
-
-```shell script
-git clone https://github.com/ONSdigital/blaise-dashboard
-```
-Create an .env file in the root of the project and add the following variables:
-
-| Variable | Description | Example |
-| --- | --- | --- |
-| BLAISE_API_URL | The RESTful API URL the application will use to get questionnaire data. | localhost:90 |
-| SERVER_PARK | The name of the Blaise server park. | gusty |
-| PROJECT_ID | The name of the project you are running the dashboard against. | ons-blaise-v2-dev-cn5 |
-
-Example .env file:
+### Clone and install packages
 
 ```shell
-BLAISE_API_URL="localhost:8011"
-SERVER_PARK="gusty"
-PROJECT_ID="ons-blaise-v2-dev-cn5"
-````
-
-Install the project dependencies:
-
-```shell script
+git clone https://github.com/ONSdigital/blaise-dashboard.git
+cd blaise-dashboard
 yarn install
 ```
 
-Running yarn or yarn install will install the required modules specified in the yarn.lock file.
+### Authenticate with Google Cloud (keyless)
 
-The versions of these modules are fixed in the yarn.lock files, so to avoid unwanted upgrades or instability caused by incorrect modifications, DO NOT DELETE THE LOCK FILE.
+Use service account impersonation for local development in the same way as DQS.
 
-More information about yarn (https://confluence.ons.gov.uk/x/zdwACQ)
-
-Authenticate with GCP:
 ```shell
 gcloud auth login
-gcloud auth application-default login
+gcloud config set project ons-blaise-v2-dev
+gcloud auth application-default login --impersonate-service-account=ons-blaise-v2-dev@appspot.gserviceaccount.com
 ```
 
-Set your GCP project:
+### Start an IAP tunnel to Blaise REST API
+
+Run this in a separate terminal and keep it running:
+
 ```shell
-gcloud config set project ons-blaise-v2-dev-sandbox123
+gcloud compute start-iap-tunnel restapi-1 80 --local-host-port=localhost:8080 --zone europe-west2-a
 ```
 
-Open a tunnel to our Blaise RESTful API in your GCP project:
+Expected output includes `Listening on port [8080]`.
+
+### Configure environment variables
+
+Create a `.env` file in the repository root (or `src/.env`) and set the following values:
+
+```ini
+BLAISE_API_URL=localhost:8080
+SERVER_PARK=gusty
+PROJECT_ID=ons-blaise-v2-dev-sandbox123
+```
+
+Variable reference:
+
+| Variable         | Description                                       |
+| ---------------- | ------------------------------------------------- |
+| `BLAISE_API_URL` | Blaise REST API host used by the dashboard server |
+| `SERVER_PARK`    | Blaise server park name                           |
+| `PROJECT_ID`     | GCP project for Monitoring checks                 |
+
+### Run the app
+
 ```shell
-gcloud compute start-iap-tunnel restapi-1 80 --local-host-port=localhost:8011 --zone europe-west2-a
-```
-
-Run Node.js server and React.js client via the following package.json script:
-
-```shell script
 yarn dev
 ```
 
-The UI should now be accessible via:
+UI is available at http://localhost:3000/.
 
-http://localhost:3000/
+## Common Scripts
 
-Tests can be run via the following package.json script:
+- `yarn dev`: Run frontend + backend in watch mode
+- `yarn build`: Build client and server
+- `yarn build:client`: Build Vite frontend
+- `yarn build:server`: Build TypeScript backend
+- `yarn server`: Build backend and run server
+- `yarn lint`: Run ESLint
+- `yarn lint-fix`: Run ESLint autofix
+- `yarn test`: Run Vitest suite with coverage
+- `yarn test-watch`: Run Vitest in watch mode
 
-```shell script
-yarn test
-```
+## Deployment
 
-Test snapshots can be updated via:
-
-```shell script
-yarn test -u
-```
+This service is deployed to Google App Engine as `dashboard-ui`.

@@ -1,32 +1,59 @@
 import express, { Request, Response, Router } from "express";
-import { GoogleMonitoringApi } from "../googleCloudMonitoringApi/googleMonitoringApi";
+import { GoogleMonitoringApi } from "../googleCloudMonitoringApi/googleMonitoringApi.js";
 import {
-    getMonitoringUptimeCheckTimeSeries,
-    GoogleMonitoring
-} from "../googleCloudMonitoringApi/monitoring";
+  getMonitoringUptimeCheckTimeSeries,
+  GoogleMonitoring,
+} from "../googleCloudMonitoringApi/monitoring.js";
+import logger from "../logger.js";
 
-export default function NewMonitoringListHandler(): Router {
-    const router = express.Router();
-    const projectId = process.env.PROJECT_ID || "no_project_id";
-    const googleMonitoringApi = new GoogleMonitoringApi(projectId);
-    const monitoringHandler = new MonitoringHandler(googleMonitoringApi);
-    return router.get("/api/monitoring", monitoringHandler.GetMonitoringData);
+const monitoringConfigErrorMessage = "Monitoring service is not configured";
+const monitoringFetchErrorMessage =
+  "Unable to get monitoring uptime checks data";
+
+function getProjectIdFromEnv(): string | undefined {
+  return (
+    process.env.PROJECT_ID ||
+    process.env.GOOGLE_CLOUD_PROJECT ||
+    process.env.GCLOUD_PROJECT
+  );
 }
 
-export class MonitoringHandler {
-    private readonly googleMonitoring: GoogleMonitoring;
+export default function monitoringHandler(): Router {
+  const router = express.Router();
+  const projectId = getProjectIdFromEnv();
 
-    constructor(googleMonitoring: GoogleMonitoring) {
-        this.GetMonitoringData = this.GetMonitoringData.bind(this);
-        this.googleMonitoring = googleMonitoring;
-    }
+  if (!projectId) {
+    logger.error("Monitoring project ID is not configured");
+    return router.get("/api/monitoring", (_req: Request, res: Response) => {
+      return res.status(500).json(monitoringConfigErrorMessage);
+    });
+  }
 
-    async GetMonitoringData(req: Request, res: Response): Promise<Response> {
-        try {
-            return res.status(200).json(await getMonitoringUptimeCheckTimeSeries(this.googleMonitoring));
-        } catch (error: unknown) {
-            console.error(`Response: ${error}`);
-            return res.status(500).json("Failed to get monitoring uptimeChecks config data");
-        }
+  const googleMonitoringApi = new GoogleMonitoringApi(projectId);
+  const monitoringRouteHandler = new MonitoringHandler(googleMonitoringApi);
+  return router.get(
+    "/api/monitoring",
+    monitoringRouteHandler.getMonitoringData,
+  );
+}
+
+class MonitoringHandler {
+  private readonly googleMonitoring: GoogleMonitoring;
+
+  constructor(googleMonitoring: GoogleMonitoring) {
+    this.getMonitoringData = this.getMonitoringData.bind(this);
+    this.googleMonitoring = googleMonitoring;
+  }
+
+  async getMonitoringData(req: Request, res: Response): Promise<Response> {
+    try {
+      return res
+        .status(200)
+        .json(await getMonitoringUptimeCheckTimeSeries(this.googleMonitoring));
+    } catch (error: unknown) {
+      void req;
+      logger.error({ error }, "Failed to get monitoring uptime checks data");
+      return res.status(500).json(monitoringFetchErrorMessage);
     }
+  }
 }
