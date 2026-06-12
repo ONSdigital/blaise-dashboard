@@ -1,6 +1,7 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import QuestionnaireCaseReportTable from "./questionnaireCaseReportTable";
 import { mockQuestionnaireList } from "../../server/blaiseApi/testFixtures";
+import { renderWithQueryClient } from "../test-utils/renderWithQueryClient";
 
 vi.mock("../api/caseCompletionReport");
 import { getCaseCompletionReport } from "../api/caseCompletionReport";
@@ -25,7 +26,7 @@ describe("QuestionnaireCaseReportTable", () => {
       Promise.resolve(caseCompletionReport),
     );
 
-    render(
+    renderWithQueryClient(
       <QuestionnaireCaseReportTable questionnaires={mockQuestionnaireList} />,
     );
 
@@ -59,7 +60,7 @@ describe("QuestionnaireCaseReportTable", () => {
         Promise.reject("Cannot get case completion reports"),
       );
 
-      render(
+      renderWithQueryClient(
         <QuestionnaireCaseReportTable questionnaires={mockQuestionnaireList} />,
       );
 

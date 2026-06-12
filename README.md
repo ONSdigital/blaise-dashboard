@@ -1,4 +1,4 @@
-# Blaise Dashboard
+# Blaise Dashboard 📺
 
 Blaise Dashboard provides a web UI for operational visibility of questionnaires and service health in a Blaise environment.
 
